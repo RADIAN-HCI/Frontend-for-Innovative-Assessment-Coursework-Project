@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./components/Signup";
+import TempComponent from "./components/TempComponent";
 
 function App() {
   return (
@@ -22,11 +23,11 @@ function App() {
     // </div>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Signup />}>
-          <Route index element={<Signup />} />
-          <Route path="login" element={<Signup />} />
-          <Route path="signup" element={<Signup />} />
-        </Route>
+        <Route index element={<Signup />} />
+
+        <Route path="login" element={<Signup />} />
+        <Route path="signup" element={<Signup />} />
+        <Route path="tempcomponent" element={<TempComponent />} />
       </Routes>
     </BrowserRouter>
   );

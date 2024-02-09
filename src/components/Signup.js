@@ -4,7 +4,7 @@ import {
   ProConfigProvider,
   ProFormText,
 } from "@ant-design/pro-components";
-import { Button, Divider, Tabs, theme } from "antd";
+import { Divider, Tabs, theme } from "antd";
 //   import type { CSSProperties } from 'react';
 import { useState } from "react";
 import Login from "./AccountForm";
@@ -21,6 +21,7 @@ import Login from "./AccountForm";
 const Signup = () => {
   const [loginType, setLoginType] = useState();
   const { token } = theme.useToken();
+
   return (
     <div
       style={{
@@ -49,7 +50,6 @@ const Signup = () => {
             }}
           >
             <Login />
-            <Button>Login</Button>
             <Divider plain>
               <span
                 style={{

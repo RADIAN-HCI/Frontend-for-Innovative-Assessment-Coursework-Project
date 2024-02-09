@@ -1,13 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const AccountForm = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
+  };
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const login = () => {
+    navigate("/tempcomponent", { state: { username, password } });
   };
 
   return (
@@ -30,6 +39,10 @@ const AccountForm = () => {
           ]}
         >
           <Input
+            value={username}
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
             prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Username"
           />
@@ -44,11 +57,17 @@ const AccountForm = () => {
           ]}
         >
           <Input
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
           />
         </Form.Item>
+        <Button onClick={login}>Login</Button>
+
         {/* <Form.Item>
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>

@@ -66,7 +66,15 @@ const AccountForm = () => {
             placeholder="Password"
           />
         </Form.Item>
-        <Button onClick={login}>Login</Button>
+        <Button
+          style={{
+            width: "80%",
+            marginLeft: "10%",
+          }}
+          onClick={login}
+        >
+          Login
+        </Button>
 
         {/* <Form.Item>
           <Form.Item name="remember" valuePropName="checked" noStyle>

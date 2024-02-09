@@ -5,7 +5,7 @@ import "./index.css";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
-const Login = () => {
+const AccountForm = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
@@ -74,4 +74,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AccountForm;

@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./components/Signup";
 import TempComponent from "./components/TempComponent";
+import AccountForm from "./components/AccountForm";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
     // </div>
     <BrowserRouter>
       <Routes>
-        <Route index element={<Signup />} />
+        <Route index element={<AccountForm />} />
 
         <Route path="login" element={<Signup />} />
         <Route path="signup" element={<Signup />} />

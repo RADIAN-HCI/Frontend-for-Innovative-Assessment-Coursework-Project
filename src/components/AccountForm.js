@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "./index.css";
 
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Radio } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -18,65 +18,98 @@ const AccountForm = () => {
   const login = () => {
     navigate("/tempcomponent", { state: { username, password } });
   };
+  const [placement, SetPlacement] = useState("TA");
+
+  const placementChange = (e) => {
+    SetPlacement(e.target.value);
+  };
 
   return (
-    <div className="container">
-      <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
+    <Form
+      name="normal_login"
+      initialValues={{
+        remember: true,
+      }}
+      onFinish={onFinish}
+      className="w-1/5"
+      style={{
+        // backgroundColor: "red",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Form.Item
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Username!",
+          },
+        ]}
+        className="w-4/5"
       >
-        <Form.Item
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: "Please input your Username!",
-            },
-          ]}
-        >
-          <Input
-            value={username}
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"
-          />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your Password!",
-            },
-          ]}
-        >
-          <Input
-            value={password}
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Item>
-        <Button
-          style={{
-            width: "80%",
-            marginLeft: "10%",
-          }}
-          onClick={login}
-        >
-          Login
-        </Button>
+        <span className="font-bold text-xl">Login</span>
+        <Radio.Group value={placement} onChange={placementChange}>
+          <Radio.Button value="TA">TA</Radio.Button>
+          <Radio.Button value="LeadTA">Lead TA</Radio.Button>
+          <Radio.Button value="Lecturer">Lecturer</Radio.Button>
+        </Radio.Group>
+      </Form.Item>
+      <Form.Item
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Username!",
+          },
+        ]}
+        className="w-4/5"
+      >
+        <span>Username</span>
 
-        {/* <Form.Item>
+        <Input
+          value={username}
+          onChange={(event) => {
+            setUsername(event.target.value);
+          }}
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          // placeholder="Username"
+        />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Password!",
+          },
+        ]}
+        className="w-4/5"
+      >
+        <span>Password</span>
+        <Input
+          value={password}
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          // placeholder="Password"
+        />
+      </Form.Item>
+      <Button
+        // style={{
+        //   marginLeft: "10%",
+        // }}
+        onClick={login}
+        className="w-4/5 rounded-full bg-blue-600"
+        style={{ color: "white" }}
+      >
+        Login
+      </Button>
+
+      {/* <Form.Item>
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
@@ -86,7 +119,7 @@ const AccountForm = () => {
           </a>
         </Form.Item> */}
 
-        {/* <Form.Item>
+      {/* <Form.Item>
           <Button
             type="primary"
             htmlType="submit"
@@ -96,8 +129,8 @@ const AccountForm = () => {
           </Button>
           Or <a href="">register now!</a>
         </Form.Item> */}
-      </Form>
-    </div>
+    </Form>
+    // </div>
   );
 };
 

@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import "./index.css";
-
-import { Form, Input, Button, Radio } from "antd";
+import loginIcon from "../images/Vector.png";
+import { Form, Input, Button, Radio, Image } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,7 @@ const AccountForm = () => {
   const [password, setPassword] = useState("");
 
   const login = () => {
-    navigate("/tempcomponent", { state: { username, password } });
+    navigate("/assignments", { state: { username, password } });
   };
   const [placement, SetPlacement] = useState("TA");
 
@@ -37,6 +37,8 @@ const AccountForm = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        marginLeft: "20%",
+        marginTop: "10%",
       }}
     >
       <Form.Item
@@ -47,15 +49,24 @@ const AccountForm = () => {
             message: "Please input your Username!",
           },
         ]}
-        className="w-4/5"
+        className="w-4/5 align-middle"
       >
-        <span className="font-bold text-xl">Login</span>
+        <Image src={loginIcon} height={30} className="mt-0" preview={false} />
+        <br />
+
+        <span className="font-bold text-4xl mb-12 pb-3">Login</span>
+      </Form.Item>
+
+      <Form.Item>
+        <span className="mt-8">Role</span>
+        <br />
         <Radio.Group value={placement} onChange={placementChange}>
           <Radio.Button value="TA">TA</Radio.Button>
           <Radio.Button value="LeadTA">Lead TA</Radio.Button>
           <Radio.Button value="Lecturer">Lecturer</Radio.Button>
         </Radio.Group>
       </Form.Item>
+
       <Form.Item
         name="username"
         rules={[

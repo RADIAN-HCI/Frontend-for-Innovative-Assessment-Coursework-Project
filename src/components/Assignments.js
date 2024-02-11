@@ -5,7 +5,7 @@ import "./index.css";
 import { Typography } from "antd";
 import { useLocation } from "react-router-dom";
 
-const TempComponent = () => {
+const Assignments = () => {
   const { Text } = Typography;
   const { state } = useLocation();
   const { username, password } = state;
@@ -18,4 +18,4 @@ const TempComponent = () => {
   );
 };
 
-export default TempComponent;
+export default Assignments;

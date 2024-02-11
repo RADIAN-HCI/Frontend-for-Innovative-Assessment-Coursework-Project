@@ -1,8 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Signup from "./components/Signup";
-import TempComponent from "./components/TempComponent";
 import AccountForm from "./components/AccountForm";
+import TempComponent from "./components/TempComponent";
 
 function App() {
   return (
@@ -26,8 +25,8 @@ function App() {
       <Routes>
         <Route index element={<AccountForm />} />
 
-        <Route path="login" element={<Signup />} />
-        <Route path="signup" element={<Signup />} />
+        <Route path="login" element={<AccountForm />} />
+        <Route path="signup" element={<AccountForm />} />
         <Route path="tempcomponent" element={<TempComponent />} />
       </Routes>
     </BrowserRouter>

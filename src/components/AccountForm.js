@@ -18,10 +18,12 @@ const AccountForm = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [authorized, setAuthorized] = useState(true);
 
   const login = () => {
     if (username === "" || password === "") {
       // alert.show("Please Provide Username and Password", { type: "error" });
+      setAuthorized(false);
       alert.error(
         <div style={{ textTransform: "initial" }}>
           Please Provide Username and Password!
@@ -29,6 +31,7 @@ const AccountForm = () => {
       );
       return;
     }
+    setAuthorized(true);
     navigate("/assignments", { state: { username, password } });
   };
   const [placement, SetPlacement] = useState("TA");
@@ -130,6 +133,7 @@ const AccountForm = () => {
             // placeholder="Password"
           />
         </Form.Item>
+        {authorized ? null : <UnauthorizedMessage />}
         <Button
           // style={{
           //   marginLeft: "10%",
@@ -168,6 +172,16 @@ const AccountForm = () => {
         width={"50%"}
         className="mt-32 ml-24 w-1/6"
       />
+    </div>
+  );
+};
+
+const UnauthorizedMessage = () => {
+  return (
+    <div className="mb-2 bg-red-100">
+      <span style={{ color: "red", fontSize: 12 }}>
+        Username or Password in Invalid or Wrong
+      </span>
     </div>
   );
 };

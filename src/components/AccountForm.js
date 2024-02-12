@@ -1,12 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import "./index.css";
+// import "./index.css";
 import loginIcon from "../images/Vector.png";
 import { Form, Input, Button, Radio, Image } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "react-alert";
+import Quote from "../images/Quote.png";
 
 const AccountForm = () => {
+  const alert = useAlert();
+
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
@@ -16,6 +20,15 @@ const AccountForm = () => {
   const [password, setPassword] = useState("");
 
   const login = () => {
+    if (username === "" || password === "") {
+      // alert.show("Please Provide Username and Password", { type: "error" });
+      alert.error(
+        <div style={{ textTransform: "initial" }}>
+          Please Provide Username and Password!
+        </div>
+      );
+      return;
+    }
     navigate("/assignments", { state: { username, password } });
   };
   const [placement, SetPlacement] = useState("TA");
@@ -25,102 +38,110 @@ const AccountForm = () => {
   };
 
   return (
-    <Form
-      name="normal_login"
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={onFinish}
-      className="w-1/5"
+    <div
       style={{
-        // backgroundColor: "red",
         display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        marginLeft: "20%",
-        marginTop: "10%",
+        flexDirection: "row",
+        // backgroundColor: "red",
+        width: "100%",
       }}
     >
-      <Form.Item
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Username!",
-          },
-        ]}
-        className="w-4/5 align-middle"
+      <Form
+        name="normal_login"
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={onFinish}
+        className="w-1/5"
+        style={{
+          // backgroundColor: "red",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginLeft: "20%",
+          marginTop: "10%",
+        }}
       >
-        <Image src={loginIcon} height={30} className="mt-0" preview={false} />
-        <br />
+        <Form.Item
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Username!",
+            },
+          ]}
+          className="w-4/5 align-middle"
+        >
+          <Image src={loginIcon} height={30} className="mt-0" preview={false} />
+          <br />
 
-        <span className="font-bold text-4xl mb-12 pb-3">Login</span>
-      </Form.Item>
+          <span className="font-bold text-4xl mb-12 pb-3">Login</span>
+        </Form.Item>
 
-      <Form.Item>
-        <span className="mt-8">Role</span>
-        <br />
-        <Radio.Group value={placement} onChange={placementChange}>
-          <Radio.Button value="TA">TA</Radio.Button>
-          <Radio.Button value="LeadTA">Lead TA</Radio.Button>
-          <Radio.Button value="Lecturer">Lecturer</Radio.Button>
-        </Radio.Group>
-      </Form.Item>
+        <Form.Item>
+          <span className="mt-8">Role</span>
+          <br />
+          <Radio.Group value={placement} onChange={placementChange}>
+            <Radio.Button value="TA">TA</Radio.Button>
+            <Radio.Button value="LeadTA">Lead TA</Radio.Button>
+            <Radio.Button value="Lecturer">Lecturer</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
 
-      <Form.Item
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Username!",
-          },
-        ]}
-        className="w-4/5"
-      >
-        <span>Username</span>
+        <Form.Item
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Username!",
+            },
+          ]}
+          className="w-4/5"
+        >
+          <span>Username</span>
 
-        <Input
-          value={username}
-          onChange={(event) => {
-            setUsername(event.target.value);
-          }}
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          // placeholder="Username"
-        />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Password!",
-          },
-        ]}
-        className="w-4/5"
-      >
-        <span>Password</span>
-        <Input
-          value={password}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          // placeholder="Password"
-        />
-      </Form.Item>
-      <Button
-        // style={{
-        //   marginLeft: "10%",
-        // }}
-        onClick={login}
-        className="w-4/5 rounded-full bg-blue-600"
-        style={{ color: "white" }}
-      >
-        Login
-      </Button>
+          <Input
+            value={username}
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            // placeholder="Username"
+          />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Password!",
+            },
+          ]}
+          className="w-4/5"
+        >
+          <span>Password</span>
+          <Input
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            // placeholder="Password"
+          />
+        </Form.Item>
+        <Button
+          // style={{
+          //   marginLeft: "10%",
+          // }}
+          onClick={login}
+          className="w-4/5 rounded-full bg-blue-600"
+          style={{ color: "white" }}
+        >
+          Login
+        </Button>
 
-      {/* <Form.Item>
+        {/* <Form.Item>
           <Form.Item name="remember" valuePropName="checked" noStyle>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
@@ -130,7 +151,7 @@ const AccountForm = () => {
           </a>
         </Form.Item> */}
 
-      {/* <Form.Item>
+        {/* <Form.Item>
           <Button
             type="primary"
             htmlType="submit"
@@ -140,8 +161,14 @@ const AccountForm = () => {
           </Button>
           Or <a href="">register now!</a>
         </Form.Item> */}
-    </Form>
-    // </div>
+      </Form>
+      <Image
+        src={Quote}
+        preview={false}
+        width={"50%"}
+        className="mt-32 ml-24 w-1/6"
+      />
+    </div>
   );
 };
 

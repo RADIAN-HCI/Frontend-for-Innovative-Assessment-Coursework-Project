@@ -78,7 +78,7 @@ const AccountForm = () => {
           <Image src={loginIcon} height={30} className="mt-0" preview={false} />
           <br />
 
-          <span className="font-bold text-4xl mb-12 pb-3">Login</span>
+          <span className="font-bold text-5xl mb-12 pb-3">Login</span>
         </Form.Item>
 
         <Form.Item>
@@ -109,7 +109,6 @@ const AccountForm = () => {
               setUsername(event.target.value);
             }}
             prefix={<UserOutlined className="site-form-item-icon" />}
-            // placeholder="Username"
           />
         </Form.Item>
         <Form.Item
@@ -130,14 +129,10 @@ const AccountForm = () => {
             }}
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
-            // placeholder="Password"
           />
         </Form.Item>
         {authorized ? null : <UnauthorizedMessage />}
         <Button
-          // style={{
-          //   marginLeft: "10%",
-          // }}
           onClick={login}
           className="w-4/5 rounded-full bg-blue-600"
           style={{ color: "white" }}

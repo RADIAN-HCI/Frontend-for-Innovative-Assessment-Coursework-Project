@@ -1,41 +1,34 @@
 import { Button, Image } from "antd";
-import FlatList from "flatlist-react";
 import React from "react";
 import BookIcon from "../images/BookIcon.svg";
 import ProfileIcon from "../images/ProfileIcon.svg";
 import CalendarIcon from "../images/CalendarIcon.svg";
 
-import { Card, List } from "antd";
+import { List } from "antd";
 
 const AssignmentFlatList = ({ data }) => {
   return (
     <ul>
-      {/* <FlatList
-        list={data}
-        renderItem={renderPerson}
-        renderWhenEmpty={() => <div>List is empty!</div>}
-        display={{
-          grid: true,
-        }}
-        gridGap="28%"
-        style={{ marginBottom: "2%" }}
-      /> */}
       <List
-        grid={{ gutter: 16, column: 2 }}
+        grid={{
+          column: 2,
+          gutter: 16,
+        }}
         dataSource={data}
-        renderItem={renderPerson}
+        renderItem={renderItem}
       />
     </ul>
   );
 };
 
-const renderPerson = (person, idx) => {
+const renderItem = (person, idx) => {
   return (
     <div
       key={idx}
       style={{
         backgroundColor: "#F5F5F5",
-        width: "100%",
+        width: "90%",
+        height: "90%",
         padding: "1%",
       }}
       className="rounded-l"
@@ -46,6 +39,7 @@ const renderPerson = (person, idx) => {
           flexDirection: "column",
           marginLeft: "2%",
           marginRight: "2%",
+          marginBottom: "5%",
         }}
       >
         <span style={{ fontWeight: "bolder", fontSize: 40 }}>FOP Project</span>

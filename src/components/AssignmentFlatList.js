@@ -1,6 +1,9 @@
-import { Button } from "antd";
+import { Button, Image } from "antd";
 import FlatList from "flatlist-react";
 import React from "react";
+import BookIcon from "../images/BookIcon.svg";
+import ProfileIcon from "../images/ProfileIcon.svg";
+import CalendarIcon from "../images/CalendarIcon.svg";
 
 const AssignmentFlatList = ({ data }) => {
   return (
@@ -39,8 +42,46 @@ const renderPerson = (person, idx) => {
         }}
       >
         <span style={{ fontWeight: "bolder", fontSize: 40 }}>FOP Project</span>
-        <span style={{ fontWeight: "bolder", fontSize: 40 }}>FOP Project</span>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Image src={BookIcon} width={15} />
+            <span>Course</span>
+            <span>Fundamentals of Programming</span>
+          </div>
 
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Image src={ProfileIcon} width={15} />
+            <span>Owner</span>
+            <span>Prof. Mohammad Amin Fazli</span>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Image src={CalendarIcon} width={15} />
+            <span>Deadline</span>
+            <span>26 Jan 23:59</span>
+          </div>
+        </div>
         <div
           style={{
             display: "flex",
@@ -56,7 +97,7 @@ const renderPerson = (person, idx) => {
               width: "30%",
             }}
           >
-            Login
+            Brain Storm
           </Button>
           <Button
             className="w-1/3 rounded-xl"
@@ -66,7 +107,7 @@ const renderPerson = (person, idx) => {
               width: "30%",
             }}
           >
-            Login
+            Design
           </Button>
           <Button
             className="w-1/3 rounded-xl bg-blue-600"
@@ -76,8 +117,8 @@ const renderPerson = (person, idx) => {
               width: "30%",
             }}
           >
-            Login
-          </Button>{" "}
+            Generate
+          </Button>
         </div>
       </div>
     </div>

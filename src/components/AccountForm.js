@@ -6,14 +6,10 @@ import { Form, Input, Button, Radio, Image } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
-import Quote from "../images/Quote.png";
+import Quote from "../images/Quote.svg";
 
 const AccountForm = () => {
   const alert = useAlert();
-
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -53,14 +49,14 @@ const AccountForm = () => {
         initialValues={{
           remember: true,
         }}
-        onFinish={onFinish}
         className="w-1/5"
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          marginLeft: "20%",
+          marginLeft: "15%",
           marginTop: "10%",
+          backgroundColor: "blue",
         }}
       >
         <Form.Item
@@ -162,8 +158,8 @@ const AccountForm = () => {
       <Image
         src={Quote}
         preview={false}
-        width={"50%"}
-        className="mt-32 ml-24 w-1/6"
+        // width={"50%"}
+        className="mt-32 ml-24"
       />
     </div>
   );

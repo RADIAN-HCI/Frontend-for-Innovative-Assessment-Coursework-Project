@@ -9,8 +9,6 @@ const AssignmentFlatList = ({ data }) => {
         list={data}
         renderItem={renderPerson}
         renderWhenEmpty={() => <div>List is empty!</div>}
-        // sortBy={["firstName", { key: "lastName", descending: true }]}
-        // groupBy={(person) => (person.info.age > 18 ? "Over 18" : "Under 18")}
         display={{
           grid: true,
         }}
@@ -29,8 +27,6 @@ const renderPerson = (person, idx) => {
         backgroundColor: "#F5F5F5",
         width: "100%",
         padding: "1%",
-        // marginRight: "10%",
-        // marginLeft: "10%",
       }}
       className="rounded-l"
     >

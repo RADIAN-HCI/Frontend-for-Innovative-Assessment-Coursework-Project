@@ -22,7 +22,6 @@ const AccountForm = () => {
 
   const login = () => {
     if (username === "" || password === "") {
-      // alert.show("Please Provide Username and Password", { type: "error" });
       setAuthorized(false);
       alert.error(
         <div style={{ textTransform: "initial" }}>
@@ -57,7 +56,6 @@ const AccountForm = () => {
         onFinish={onFinish}
         className="w-1/5"
         style={{
-          // backgroundColor: "red",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

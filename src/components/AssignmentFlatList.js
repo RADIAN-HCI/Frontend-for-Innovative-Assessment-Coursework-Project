@@ -15,6 +15,7 @@ const AssignmentFlatList = ({ data }) => {
           grid: true,
         }}
         gridGap="28%"
+        style={{ marginBottom: "2%" }}
       />
     </ul>
   );
@@ -42,6 +43,8 @@ const renderPerson = (person, idx) => {
         }}
       >
         <span style={{ fontWeight: "bolder", fontSize: 40 }}>FOP Project</span>
+        <span style={{ fontWeight: "bolder", fontSize: 40 }}>FOP Project</span>
+
         <div
           style={{
             display: "flex",

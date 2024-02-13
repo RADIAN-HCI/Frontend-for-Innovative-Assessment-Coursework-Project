@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import Logo from "../images/Logo.svg";
 import "./index.css";
 import { useLocation } from "react-router-dom";
 import AssignmentFlatList from "./AssignmentFlatList";
+import { Image } from "antd";
 const Assignments = () => {
   const { state } = useLocation();
   const { username } = state;
@@ -15,27 +17,18 @@ const Assignments = () => {
   ];
 
   return (
-    <div style={{ backgroundColor: "red", width: "100%", height: 100 }}>
-      <span>
+    <div style={{ width: "100%" }}>
+      <Image
+        src={Logo}
+        preview={false}
+        style={{ marginLeft: "10%", marginTop: "5%", marginRight: "10%" }}
+      />
+      <span style={{ marginLeft: "10%", marginTop: "12%", marginRight: "10%" }}>
         Welcome <b>{username}</b>, here is your:
       </span>
-      {/* {data.map((item, index) => (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            width: "35%",
-            marginLeft: "5%",
-            marginTop: 5,
-            flexGrow: 0,
-            backgroundColor: "blue",
-          }}
-          key={index}
-        >
-          <span>{item?.title}</span>
-        </div>
-      ))} */}
-      <AssignmentFlatList data={data} />
+      <div style={{ marginLeft: "10%", marginTop: "12%", marginRight: "10%" }}>
+        <AssignmentFlatList data={data} />
+      </div>
     </div>
   );
 };

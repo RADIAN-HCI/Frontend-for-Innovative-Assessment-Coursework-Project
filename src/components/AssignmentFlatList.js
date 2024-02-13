@@ -5,10 +5,12 @@ import BookIcon from "../images/BookIcon.svg";
 import ProfileIcon from "../images/ProfileIcon.svg";
 import CalendarIcon from "../images/CalendarIcon.svg";
 
+import { Card, List } from "antd";
+
 const AssignmentFlatList = ({ data }) => {
   return (
     <ul>
-      <FlatList
+      {/* <FlatList
         list={data}
         renderItem={renderPerson}
         renderWhenEmpty={() => <div>List is empty!</div>}
@@ -17,6 +19,11 @@ const AssignmentFlatList = ({ data }) => {
         }}
         gridGap="28%"
         style={{ marginBottom: "2%" }}
+      /> */}
+      <List
+        grid={{ gutter: 16, column: 2 }}
+        dataSource={data}
+        renderItem={renderPerson}
       />
     </ul>
   );

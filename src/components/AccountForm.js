@@ -56,7 +56,7 @@ const AccountForm = () => {
           alignItems: "center",
           marginLeft: "15%",
           marginTop: "10%",
-          backgroundColor: "blue",
+          // backgroundColor: "blue",
         }}
       >
         <Form.Item

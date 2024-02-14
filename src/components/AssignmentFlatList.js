@@ -54,6 +54,7 @@ const renderItem = (person, idx) => {
             style={{
               display: "flex",
               flexDirection: "column",
+              width: "30%",
             }}
           >
             <Image src={BookIcon} width={15} />
@@ -65,6 +66,7 @@ const renderItem = (person, idx) => {
             style={{
               display: "flex",
               flexDirection: "column",
+              width: "30%",
             }}
           >
             <Image src={ProfileIcon} width={15} />
@@ -76,6 +78,7 @@ const renderItem = (person, idx) => {
             style={{
               display: "flex",
               flexDirection: "column",
+              width: "30%",
             }}
           >
             <Image src={CalendarIcon} width={15} />

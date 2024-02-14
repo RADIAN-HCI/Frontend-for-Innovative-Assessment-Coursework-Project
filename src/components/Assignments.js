@@ -5,6 +5,7 @@ import "./index.css";
 import { useLocation } from "react-router-dom";
 import AssignmentFlatList from "./AssignmentFlatList";
 import { Image } from "antd";
+import Kites from "../images/Kites.svg";
 const Assignments = () => {
   const { state } = useLocation();
   const { username } = state;
@@ -49,17 +50,29 @@ const Assignments = () => {
       >
         Welcome <b>{username}</b>, here is your:
       </span>
-      <span
+      <div
         style={{
+          display: "flex",
+          flexDirection: "row",
           marginLeft: "10%",
           marginTop: "2%",
           marginRight: "10%",
-          fontWeight: "bolder",
-          fontSize: 64,
         }}
       >
-        Assignments
-      </span>
+        <span
+          style={{
+            fontWeight: "bolder",
+            fontSize: 64,
+          }}
+        >
+          Assignments
+        </span>
+        <Image
+          src={Kites}
+          preview={false}
+          style={{ marginLeft: "5%", marginTop: "2%" }}
+        />
+      </div>
       <div
         style={{
           marginLeft: "10%",

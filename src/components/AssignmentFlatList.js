@@ -99,6 +99,8 @@ const renderItem = (person, idx) => {
               color: "#0066CC",
               backgroundColor: "#D6E5F5",
               width: "30%",
+              fontWeight: "bolder",
+              fontSize: 16,
             }}
           >
             Brain Storm
@@ -109,6 +111,8 @@ const renderItem = (person, idx) => {
               backgroundColor: "#DDCDFF",
               color: "#7330FF",
               width: "30%",
+              fontWeight: "bolder",
+              fontSize: 16,
             }}
           >
             Design
@@ -119,6 +123,8 @@ const renderItem = (person, idx) => {
               color: "#D32EFF",
               backgroundColor: "#F4C6FF",
               width: "30%",
+              fontWeight: "bolder",
+              fontSize: 16,
             }}
           >
             Generate

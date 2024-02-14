@@ -54,33 +54,69 @@ const renderItem = (person, idx) => {
             style={{
               display: "flex",
               flexDirection: "column",
+              width: "30%",
+              height: "100%",
             }}
           >
             <Image src={BookIcon} width={15} />
             <span>Course</span>
             <span>Fundamentals of Programming</span>
+            <Button
+              className="rounded-xl bg-blue-600"
+              style={{
+                color: "#0066CC",
+                backgroundColor: "#D6E5F5",
+                width: "100%",
+              }}
+            >
+              Brain Storm
+            </Button>
           </div>
 
           <div
             style={{
               display: "flex",
               flexDirection: "column",
+              width: "30%",
+              height: "100%",
             }}
           >
             <Image src={ProfileIcon} width={15} />
             <span>Owner</span>
             <span>Prof. Mohammad Amin Fazli</span>
+            <Button
+              className="w-1/3 rounded-xl"
+              style={{
+                backgroundColor: "#DDCDFF",
+                color: "#7330FF",
+                width: "100%",
+              }}
+            >
+              Design
+            </Button>
           </div>
 
           <div
             style={{
               display: "flex",
               flexDirection: "column",
+              width: "30%",
+              height: "100%",
             }}
           >
             <Image src={CalendarIcon} width={15} />
             <span>Deadline</span>
             <span>26 Jan 23:59</span>
+            <Button
+              className="rounded-xl bg-blue-600"
+              style={{
+                color: "#D32EFF",
+                backgroundColor: "#F4C6FF",
+                width: "100%",
+              }}
+            >
+              Generate
+            </Button>
           </div>
         </div>
         <div
@@ -89,38 +125,7 @@ const renderItem = (person, idx) => {
             flexDirection: "row",
             justifyContent: "space-between",
           }}
-        >
-          <Button
-            className="rounded-xl bg-blue-600"
-            style={{
-              color: "#0066CC",
-              backgroundColor: "#D6E5F5",
-              width: "30%",
-            }}
-          >
-            Brain Storm
-          </Button>
-          <Button
-            className="w-1/3 rounded-xl"
-            style={{
-              backgroundColor: "#DDCDFF",
-              color: "#7330FF",
-              width: "30%",
-            }}
-          >
-            Design
-          </Button>
-          <Button
-            className="w-1/3 rounded-xl bg-blue-600"
-            style={{
-              color: "#D32EFF",
-              backgroundColor: "#F4C6FF",
-              width: "30%",
-            }}
-          >
-            Generate
-          </Button>
-        </div>
+        ></div>
       </div>
     </div>
   );

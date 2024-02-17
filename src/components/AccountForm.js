@@ -7,6 +7,7 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import Quote from "../images/Quote.svg";
+import leftBubble from "../images/LeftBubble.svg";
 
 const AccountForm = () => {
   const alert = useAlert();
@@ -40,10 +41,10 @@ const AccountForm = () => {
       style={{
         display: "flex",
         flexDirection: "row",
-        // backgroundColor: "red",
         width: "100%",
       }}
     >
+      <Image src={leftBubble} width={80} className="mt-48" preview={false} />
       <Form
         name="normal_login"
         initialValues={{

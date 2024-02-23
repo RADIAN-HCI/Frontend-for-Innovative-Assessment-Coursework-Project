@@ -3,7 +3,7 @@ import React from "react";
 import Logo from "../images/Logo.svg";
 import "./index.css";
 // import { useLocation } from "react-router-dom";
-import { Button, Image } from "antd";
+import { Button, Dropdown, Image } from "antd";
 import Kites from "../images/Kites.svg";
 import GeneralList from "./GeneralList";
 const Generate = () => {
@@ -77,6 +77,25 @@ const Generate = () => {
 };
 
 const RenderItem = (person, idx) => {
+  const items = [
+    {
+      key: "1",
+      label: "1st item",
+    },
+    {
+      key: "2",
+      label: "2nd item",
+    },
+    {
+      key: "3",
+      label: "3rd item",
+    },
+  ];
+
+  const onMenuClick = (e) => {
+    console.log("click", e);
+  };
+
   return (
     <div
       key={idx}
@@ -85,6 +104,9 @@ const RenderItem = (person, idx) => {
         width: "90%",
         height: "90%",
         padding: "1%",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
       }}
       className="rounded-l"
     >
@@ -95,6 +117,7 @@ const RenderItem = (person, idx) => {
           marginLeft: "2%",
           marginRight: "2%",
           marginBottom: "5%",
+          width: "90%",
         }}
       >
         <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
@@ -116,19 +139,6 @@ const RenderItem = (person, idx) => {
             <span>Course</span>
             <span>Fundamentals of Programming</span>
           </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "25%",
-            }}
-          >
-            <div>Attachment</div>
-            <div>Attachment</div>
-            <div>Attachment</div>
-            <div>Attachment</div>
-          </div>
         </div>
         <div
           style={{
@@ -142,7 +152,7 @@ const RenderItem = (person, idx) => {
             style={{
               color: "#0066CC",
               backgroundColor: "#D6E5F5",
-              width: "70%",
+              width: "90%",
               fontWeight: "bolder",
               fontSize: 16,
             }}
@@ -174,6 +184,24 @@ const RenderItem = (person, idx) => {
             Generate
           </Button> */}
         </div>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "25%",
+          justifyContent: "space-around",
+          columnGap: 2,
+          rowGap: 2,
+        }}
+      >
+        <Button type="dashed">Attachments</Button>
+        <Button>Default</Button>
+        <Button danger>Default</Button>
+        <Dropdown.Button menu={{ items, onClick: onMenuClick }}>
+          ... More
+        </Dropdown.Button>
       </div>
     </div>
   );

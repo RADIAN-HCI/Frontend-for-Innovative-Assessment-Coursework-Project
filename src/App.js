@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AccountForm from "./components/AccountForm";
 import Assignments from "./components/Assignments";
+import Generate from "./components/Generate";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Route index element={<AccountForm />} />
         <Route path="login" element={<AccountForm />} />
         <Route path="assignments" element={<Assignments />} />
+        <Route path="generate" element={<Generate />} />
       </Routes>
     </BrowserRouter>
   );

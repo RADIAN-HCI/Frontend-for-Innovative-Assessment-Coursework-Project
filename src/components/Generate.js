@@ -1,27 +1,92 @@
-import { Button, Image } from "antd";
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import BookIcon from "../images/BookIcon.svg";
-import ProfileIcon from "../images/ProfileIcon.svg";
-import CalendarIcon from "../images/CalendarIcon.svg";
+import Logo from "../images/Logo.svg";
+import "./index.css";
+// import { useLocation } from "react-router-dom";
+import { Button, Image } from "antd";
+import Kites from "../images/Kites.svg";
+import GeneralList from "./GeneralList";
+const Generate = () => {
+  // const { state } = useLocation();
+  // const { username } = state;
+  const data = [
+    { title: "salam1" },
+    { title: "salam2" },
+    { title: "salam3" },
+    { title: "salam4" },
+    { title: "salam5" },
+    { title: "salam5" },
+    { title: "salam5" },
+    { title: "salam5" },
+  ];
 
-import { List } from "antd";
-
-const AssignmentFlatList = ({ data }) => {
   return (
-    <ul>
-      <List
-        grid={{
-          column: 2,
-          gutter: 16,
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: "4%",
+      }}
+    >
+      <Image
+        src={Logo}
+        preview={false}
+        style={{
+          marginLeft: "10%",
+          marginTop: "5%",
+          marginRight: "10%",
+          width: "10%",
+          height: "10%",
         }}
-        dataSource={data}
-        renderItem={renderItem}
       />
-    </ul>
+      <span
+        style={{
+          marginLeft: "10%",
+          marginTop: "2%",
+          marginRight: "10%",
+          fontSize: 24,
+        }}
+      >
+        Welcome <b>Madar</b>, here is your:
+      </span>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          marginLeft: "10%",
+          marginTop: "2%",
+          marginRight: "10%",
+        }}
+      >
+        <span
+          style={{
+            fontWeight: "bolder",
+            fontSize: 64,
+          }}
+        >
+          Assignments
+        </span>
+        <Image
+          src={Kites}
+          preview={false}
+          style={{ marginLeft: "5%", marginTop: "2%" }}
+        />
+      </div>
+      <div
+        style={{
+          marginLeft: "10%",
+          marginTop: "3%",
+          marginRight: "10%",
+        }}
+      >
+        <GeneralList data={data} RenderItem={RenderItem} />
+      </div>
+    </div>
   );
 };
 
-const renderItem = (person, idx) => {
+const RenderItem = (person, idx) => {
   return (
     <div
       key={idx}
@@ -57,7 +122,7 @@ const renderItem = (person, idx) => {
               width: "30%",
             }}
           >
-            <Image src={BookIcon} width={15} />
+            {/* <Image src={BookIcon} width={15} /> */}
             <span>Course</span>
             <span>Fundamentals of Programming</span>
           </div>
@@ -69,7 +134,7 @@ const renderItem = (person, idx) => {
               width: "30%",
             }}
           >
-            <Image src={ProfileIcon} width={15} />
+            {/* <Image src={ProfileIcon} width={15} /> */}
             <span>Owner</span>
             <span>Prof. Mohammad Amin Fazli</span>
           </div>
@@ -81,7 +146,7 @@ const renderItem = (person, idx) => {
               width: "30%",
             }}
           >
-            <Image src={CalendarIcon} width={15} />
+            {/* <Image src={CalendarIcon} width={15} /> */}
             <span>Deadline</span>
             <span>26 Jan 23:59</span>
           </div>
@@ -105,7 +170,7 @@ const renderItem = (person, idx) => {
           >
             Brain Storm
           </Button>
-          <Button
+          {/* <Button
             className="w-1/3 rounded-xl"
             style={{
               backgroundColor: "#DDCDFF",
@@ -128,11 +193,11 @@ const renderItem = (person, idx) => {
             }}
           >
             Generate
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default AssignmentFlatList;
+export default Generate;

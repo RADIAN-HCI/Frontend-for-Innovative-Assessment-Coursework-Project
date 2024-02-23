@@ -40,16 +40,6 @@ const Generate = () => {
           height: "10%",
         }}
       />
-      <span
-        style={{
-          marginLeft: "10%",
-          marginTop: "2%",
-          marginRight: "10%",
-          fontSize: 24,
-        }}
-      >
-        Welcome <b>Madar</b>, here is your:
-      </span>
       <div
         style={{
           display: "flex",
@@ -65,7 +55,7 @@ const Generate = () => {
             fontSize: 64,
           }}
         >
-          Assignments
+          Generate
         </span>
         <Image
           src={Kites}
@@ -107,7 +97,7 @@ const RenderItem = (person, idx) => {
           marginBottom: "5%",
         }}
       >
-        <span style={{ fontWeight: "bolder", fontSize: 40 }}>FOP Project</span>
+        <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
         <div
           style={{
             display: "flex",
@@ -119,7 +109,7 @@ const RenderItem = (person, idx) => {
             style={{
               display: "flex",
               flexDirection: "column",
-              width: "30%",
+              width: "75%",
             }}
           >
             {/* <Image src={BookIcon} width={15} /> */}
@@ -131,24 +121,13 @@ const RenderItem = (person, idx) => {
             style={{
               display: "flex",
               flexDirection: "column",
-              width: "30%",
+              width: "25%",
             }}
           >
-            {/* <Image src={ProfileIcon} width={15} /> */}
-            <span>Owner</span>
-            <span>Prof. Mohammad Amin Fazli</span>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "30%",
-            }}
-          >
-            {/* <Image src={CalendarIcon} width={15} /> */}
-            <span>Deadline</span>
-            <span>26 Jan 23:59</span>
+            <div>Attachment</div>
+            <div>Attachment</div>
+            <div>Attachment</div>
+            <div>Attachment</div>
           </div>
         </div>
         <div
@@ -163,12 +142,12 @@ const RenderItem = (person, idx) => {
             style={{
               color: "#0066CC",
               backgroundColor: "#D6E5F5",
-              width: "30%",
+              width: "70%",
               fontWeight: "bolder",
               fontSize: 16,
             }}
           >
-            Brain Storm
+            + Add
           </Button>
           {/* <Button
             className="w-1/3 rounded-xl"

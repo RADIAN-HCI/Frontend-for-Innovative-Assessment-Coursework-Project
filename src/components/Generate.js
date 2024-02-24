@@ -223,9 +223,28 @@ const RenderItem = (person, idx) => {
           subtitle="Difficulty"
           imgSrc={DifficultyIcon}
         />
-        <Dropdown.Button menu={{ items, onClick: onMenuClick }}>
+        {/* <Dropdown.Button
+          menu={{ items, onClick: onMenuClick }}
+          style={{ width: "100%", back }}
+        >
           ... More
-        </Dropdown.Button>
+        </Dropdown.Button> */}
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            borderRadius: 8,
+            borderColor: "#F2F2F2",
+            backgroundColor: "#676750",
+            borderWidth: 1,
+          }}
+        >
+          <span style={{ fontSize: 24, color: "#676767", fontWeight: "bold" }}>
+            ... More
+          </span>
+        </div>
       </div>
     </div>
   );

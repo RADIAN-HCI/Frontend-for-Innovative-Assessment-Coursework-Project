@@ -1,7 +1,8 @@
 import React from "react";
 import { Image } from "antd";
 
-const GenerateInfoComponent = ({title, color, subtitle, imgSrc}) => {
+const GenerateInfoComponent = (props) => {
+  const { title, color, imgSrc } = props;
   return (
     <div
       style={{
@@ -15,9 +16,11 @@ const GenerateInfoComponent = ({title, color, subtitle, imgSrc}) => {
     >
       <div style={{ display: "flex", flexDirection: "row" }}>
         <Image preview={false} src={imgSrc} style={{ marginTop: 6 }} />
-        <span style={{ marginLeft: 4, fontSize: 12, color: color }}>
-          {subtitle}
-        </span>
+        {props.subtitle ? (
+          <span style={{ marginLeft: 4, fontSize: 12, color: color }}>
+            {props.subtitle}
+          </span>
+        ) : null}
       </div>
       <span style={{ fontSize: 24, color: color, fontWeight: "bold" }}>
         {title}

@@ -6,6 +6,11 @@ import "./index.css";
 import { Button, Dropdown, Image } from "antd";
 import Kites from "../images/Kites.svg";
 import GeneralList from "./GeneralList";
+import { DownloadOutlined } from "@ant-design/icons";
+import GenerateInfoComponent from "./GenerateInfoComponent";
+import DifficultyIcon from "../images/DifficultyIcon.svg";
+import InnovationIcon from "../images/InnovationIcon.svg";
+
 const Generate = () => {
   // const { state } = useLocation();
   // const { username } = state;
@@ -132,12 +137,16 @@ const RenderItem = (person, idx) => {
             style={{
               display: "flex",
               flexDirection: "column",
-              width: "75%",
+              width: "80%",
             }}
           >
             {/* <Image src={BookIcon} width={15} /> */}
-            <span>Course</span>
-            <span>Fundamentals of Programming</span>
+            <span>
+              English idea comes from one of Seneca’s Epistles (58), written
+              about a.d. 64 during his retirement from Emperor Nero’s court, in
+              which the Roman philosopher uses idea in the sense of “Platonic
+              idea, eternal archetype.” Seneca wrote idea in Latin letters;
+            </span>
           </div>
         </div>
         <div
@@ -145,6 +154,7 @@ const RenderItem = (person, idx) => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
+            paddingBottom: 8,
           }}
         >
           <Button
@@ -190,15 +200,29 @@ const RenderItem = (person, idx) => {
         style={{
           display: "flex",
           flexDirection: "column",
-          width: "25%",
+          width: "30%",
           justifyContent: "space-around",
           columnGap: 2,
           rowGap: 2,
         }}
       >
-        <Button type="dashed">Attachments</Button>
-        <Button>Default</Button>
-        <Button danger>Default</Button>
+        <Button type="dashed" icon={<DownloadOutlined />}>
+          Attachments
+        </Button>
+
+        <GenerateInfoComponent
+          color="#00e15A"
+          title="High"
+          subtitle="Innovation"
+          imgSrc={InnovationIcon}
+        />
+
+        <GenerateInfoComponent
+          color="#EA0054"
+          title="Easy"
+          subtitle="Difficulty"
+          imgSrc={DifficultyIcon}
+        />
         <Dropdown.Button menu={{ items, onClick: onMenuClick }}>
           ... More
         </Dropdown.Button>

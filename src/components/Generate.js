@@ -1,12 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../images/Logo.svg";
 import "./index.css";
 // import { useLocation } from "react-router-dom";
-import { Button, Dropdown, Image } from "antd";
+import { Button, Image } from "antd";
 import Kites from "../images/Kites.svg";
 import GeneralList from "./GeneralList";
-import { DownloadOutlined } from "@ant-design/icons";
+import {
+  DownloadOutlined,
+  DeleteFilled,
+  CheckOutlined,
+} from "@ant-design/icons";
 import GenerateInfoComponent from "./GenerateInfoComponent";
 import DifficultyIcon from "../images/DifficultyIcon.svg";
 import InnovationIcon from "../images/InnovationIcon.svg";
@@ -82,24 +86,26 @@ const Generate = () => {
 };
 
 const RenderItem = (person, idx) => {
-  const items = [
-    {
-      key: "1",
-      label: "1st item",
-    },
-    {
-      key: "2",
-      label: "2nd item",
-    },
-    {
-      key: "3",
-      label: "3rd item",
-    },
-  ];
+  const [add, setAdd] = useState("Add");
+  const [selected, setSelected] = useState(false);
+  // const items = [
+  //   {
+  //     key: "1",
+  //     label: "1st item",
+  //   },
+  //   {
+  //     key: "2",
+  //     label: "2nd item",
+  //   },
+  //   {
+  //     key: "3",
+  //     label: "3rd item",
+  //   },
+  // ];
 
-  const onMenuClick = (e) => {
-    console.log("click", e);
-  };
+  // const onMenuClick = (e) => {
+  //   console.log("click", e);
+  // };
 
   return (
     <div
@@ -114,6 +120,9 @@ const RenderItem = (person, idx) => {
         justifyContent: "space-between",
       }}
       className="rounded-l"
+      onClick={() => {
+        setSelected(true);
+      }}
     >
       <div
         style={{
@@ -125,7 +134,10 @@ const RenderItem = (person, idx) => {
           width: "90%",
         }}
       >
-        <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
+          {selected ? <SelectedComponent /> : null}
+        </div>
         <div
           style={{
             display: "flex",
@@ -157,18 +169,41 @@ const RenderItem = (person, idx) => {
             paddingBottom: 8,
           }}
         >
-          <Button
-            className="rounded-xl bg-blue-600"
-            style={{
-              color: "#0066CC",
-              backgroundColor: "#D6E5F5",
-              width: "90%",
-              fontWeight: "bolder",
-              fontSize: 16,
-            }}
-          >
-            + Add
-          </Button>
+          {add === "Add" ? (
+            <Button
+              className="rounded-xl bg-blue-600"
+              style={{
+                color: "#0066CC",
+                backgroundColor: "#D6E5F5",
+                width: "90%",
+                fontWeight: "bolder",
+                fontSize: 16,
+              }}
+              onClick={() => {
+                setAdd("Remove");
+              }}
+            >
+              + Add
+            </Button>
+          ) : (
+            <Button
+              className="rounded-xl bg-blue-600"
+              style={{
+                color: "#E72424",
+                backgroundColor: "#FFF2F4",
+                width: "90%",
+                fontWeight: "bolder",
+                fontSize: 16,
+              }}
+              onClick={() => {
+                setAdd("Add");
+              }}
+              icon={<DeleteFilled />}
+            >
+              Remove
+            </Button>
+          )}
+
           {/* <Button
             className="w-1/3 rounded-xl"
             style={{
@@ -237,11 +272,11 @@ const RenderItem = (person, idx) => {
             alignItems: "center",
             borderRadius: 8,
             borderColor: "#F2F2F2",
-            backgroundColor: "#676750",
+            backgroundColor: "#676767",
             borderWidth: 1,
           }}
         >
-          <span style={{ fontSize: 24, color: "#676767", fontWeight: "bold" }}>
+          <span style={{ fontSize: 24, fontWeight: "bold", color: "#Dadada" }}>
             ... More
           </span>
         </div>
@@ -250,4 +285,25 @@ const RenderItem = (person, idx) => {
   );
 };
 
+const SelectedComponent = () => {
+  return (
+    <div
+      style={{
+        borderColor: "#0066CC",
+        borderWidth: 1,
+        display: "flex",
+        flexDirection: "row",
+        borderRadius: 5,
+        height: "40%",
+        padding: 4,
+        marginTop: 18,
+        alignItems: "center",
+        marginLeft: 4,
+      }}
+    >
+      <CheckOutlined style={{ color: "#0066CC" }} />
+      <span style={{ color: "#0066CC" }}>Selected</span>
+    </div>
+  );
+};
 export default Generate;

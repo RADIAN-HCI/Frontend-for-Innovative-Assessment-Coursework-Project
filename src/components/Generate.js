@@ -36,7 +36,14 @@ const Generate = () => {
     <>
       <Image
         src={CubeIcon}
-        style={{ position: "absolute", right: 0, top: 0 }}
+        style={{
+          position: "absolute",
+          right: 0,
+          top: 0,
+          width: "30%",
+          height: "30%",
+          color: "red",
+        }}
       />
       <div
         style={{
@@ -180,7 +187,7 @@ const RenderItem = (person, idx, selected, setSelected) => {
         >
           {add ? (
             <Button
-              className="rounded-xl bg-blue-600"
+              className="rounded-xl"
               style={{
                 color: "#0066CC",
                 backgroundColor: "#D6E5F5",
@@ -203,7 +210,6 @@ const RenderItem = (person, idx, selected, setSelected) => {
                 width: "90%",
                 fontWeight: "bolder",
                 fontSize: 16,
-                alignItems: "center",
               }}
               onClick={() => {
                 setAdd(true);

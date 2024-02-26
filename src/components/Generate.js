@@ -4,7 +4,7 @@ import Logo from "../images/Logo.svg";
 import "./index.css";
 // import { useLocation } from "react-router-dom";
 import { Button, Image } from "antd";
-import Kites from "../images/Kites.svg";
+import CubeIcon from "../images/CubeIcon.svg";
 import GeneralList from "./GeneralList";
 import {
   DownloadOutlined,
@@ -14,10 +14,13 @@ import {
 import GenerateInfoComponent from "./GenerateInfoComponent";
 import DifficultyIcon from "../images/DifficultyIcon.svg";
 import InnovationIcon from "../images/InnovationIcon.svg";
+import GenerateSideIcon from "../images/GenerateSideIcon.svg";
 
 const Generate = () => {
   // const { state } = useLocation();
   // const { username } = state;
+
+  const [selected, setSelected] = useState(-1);
   const data = [
     { title: "salam1" },
     { title: "salam2" },
@@ -30,64 +33,70 @@ const Generate = () => {
   ];
 
   return (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        marginBottom: "4%",
-      }}
-    >
+    <>
       <Image
-        src={Logo}
-        preview={false}
-        style={{
-          marginLeft: "10%",
-          marginTop: "5%",
-          marginRight: "10%",
-          width: "10%",
-          height: "10%",
-        }}
+        src={CubeIcon}
+        style={{ position: "absolute", right: 0, top: 0 }}
       />
       <div
         style={{
+          width: "100%",
           display: "flex",
-          flexDirection: "row",
-          marginLeft: "10%",
-          marginTop: "2%",
-          marginRight: "10%",
+          flexDirection: "column",
+          marginBottom: "4%",
         }}
       >
-        <span
+        <Image
+          src={Logo}
+          preview={false}
           style={{
-            fontWeight: "bolder",
-            fontSize: 64,
+            marginLeft: "10%",
+            marginTop: "5%",
+            marginRight: "10%",
+            width: "10%",
+            height: "10%",
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginLeft: "10%",
+            marginTop: "2%",
+            marginRight: "10%",
           }}
         >
-          Generate
-        </span>
-        <Image
-          src={Kites}
-          preview={false}
-          style={{ marginLeft: "5%", marginTop: "2%" }}
-        />
+          <span
+            style={{
+              fontWeight: "bolder",
+              fontSize: 64,
+            }}
+          >
+            Generate
+          </span>
+          <Image
+            src={GenerateSideIcon}
+            preview={false}
+            style={{ marginLeft: "5%", marginTop: "5%" }}
+          />
+        </div>
+        <div
+          style={{
+            marginLeft: "10%",
+            marginTop: "3%",
+            marginRight: "10%",
+          }}
+        >
+          <GeneralList data={data} RenderItem={RenderItem} />
+        </div>
       </div>
-      <div
-        style={{
-          marginLeft: "10%",
-          marginTop: "3%",
-          marginRight: "10%",
-        }}
-      >
-        <GeneralList data={data} RenderItem={RenderItem} />
-      </div>
-    </div>
+    </>
   );
 };
 
-const RenderItem = (person, idx) => {
-  const [add, setAdd] = useState("Add");
-  const [selected, setSelected] = useState(false);
+const RenderItem = (person, idx, selected, setSelected) => {
+  const [add, setAdd] = useState(true);
+  // const [selected, setSelected] = useState(false);
   // const items = [
   //   {
   //     key: "1",
@@ -120,9 +129,9 @@ const RenderItem = (person, idx) => {
         justifyContent: "space-between",
       }}
       className="rounded-l"
-      onClick={() => {
-        setSelected(true);
-      }}
+      // onClick={() => {
+      //   setSelected(idx);
+      // }}
     >
       <div
         style={{
@@ -136,7 +145,7 @@ const RenderItem = (person, idx) => {
       >
         <div style={{ display: "flex", flexDirection: "row" }}>
           <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
-          {selected ? <SelectedComponent /> : null}
+          {selected === idx ? <SelectedComponent /> : null}
         </div>
         <div
           style={{
@@ -169,7 +178,7 @@ const RenderItem = (person, idx) => {
             paddingBottom: 8,
           }}
         >
-          {add === "Add" ? (
+          {add ? (
             <Button
               className="rounded-xl bg-blue-600"
               style={{
@@ -180,23 +189,24 @@ const RenderItem = (person, idx) => {
                 fontSize: 16,
               }}
               onClick={() => {
-                setAdd("Remove");
+                setAdd(false);
               }}
             >
               + Add
             </Button>
           ) : (
             <Button
-              className="rounded-xl bg-blue-600"
+              className="rounded-xl"
               style={{
                 color: "#E72424",
                 backgroundColor: "#FFF2F4",
                 width: "90%",
                 fontWeight: "bolder",
                 fontSize: 16,
+                alignItems: "center",
               }}
               onClick={() => {
-                setAdd("Add");
+                setAdd(true);
               }}
               icon={<DeleteFilled />}
             >

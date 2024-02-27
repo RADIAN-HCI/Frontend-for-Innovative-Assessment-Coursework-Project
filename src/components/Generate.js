@@ -22,28 +22,30 @@ const Generate = () => {
 
   const [selected, setSelected] = useState(-1);
   const data = [
-    { title: "salam1" },
-    { title: "salam2" },
-    { title: "salam3" },
-    { title: "salam4" },
-    { title: "salam5" },
-    { title: "salam5" },
-    { title: "salam5" },
-    { title: "salam5" },
+    { title: "salam1", selected: true },
+    { title: "salam2", selected: false },
+    { title: "salam3", selected: false },
+    { title: "salam4", selected: false },
+    { title: "salam5", selected: false },
+    { title: "salam5", selected: false },
+    { title: "salam5", selected: false },
+    { title: "salam5", selected: false },
   ];
 
   return (
     <>
-      <Image
+      <img
         src={CubeIcon}
         style={{
           position: "absolute",
           right: 0,
-          top: 0,
+          top: 50,
           width: "30%",
           height: "30%",
           color: "red",
+          zIndex: 0,
         }}
+        alt="salam"
       />
       <div
         style={{
@@ -101,7 +103,7 @@ const Generate = () => {
   );
 };
 
-const RenderItem = (person, idx, selected, setSelected) => {
+const RenderItem = (item, idx) => {
   const [add, setAdd] = useState(true);
   // const [selected, setSelected] = useState(false);
   // const items = [
@@ -134,6 +136,9 @@ const RenderItem = (person, idx, selected, setSelected) => {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
+        borderColor: item.selected ? "#0066CC" : null,
+        borderWidth: item.selected ? 3 : null,
+        borderRadius: item.selected ? 10 : null,
       }}
       className="rounded-l"
       // onClick={() => {
@@ -152,7 +157,7 @@ const RenderItem = (person, idx, selected, setSelected) => {
       >
         <div style={{ display: "flex", flexDirection: "row" }}>
           <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
-          {selected === idx ? <SelectedComponent /> : null}
+          {item.selected === true ? <SelectedComponent /> : null}
         </div>
         <div
           style={{
@@ -168,7 +173,6 @@ const RenderItem = (person, idx, selected, setSelected) => {
               width: "80%",
             }}
           >
-            {/* <Image src={BookIcon} width={15} /> */}
             <span>
               English idea comes from one of Seneca’s Epistles (58), written
               about a.d. 64 during his retirement from Emperor Nero’s court, in

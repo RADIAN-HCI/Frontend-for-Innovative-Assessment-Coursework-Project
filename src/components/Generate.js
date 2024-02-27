@@ -20,7 +20,7 @@ const Generate = () => {
   // const { state } = useLocation();
   // const { username } = state;
 
-  const [selected, setSelected] = useState(-1);
+  // const [selected, setSelected] = useState(-1);
   const data = [
     { title: "salam1", selected: true },
     { title: "salam2", selected: false },
@@ -186,7 +186,7 @@ const RenderItem = (item, idx) => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
-            paddingBottom: 8,
+            paddingBottom: 10,
           }}
         >
           {add ? (
@@ -198,6 +198,7 @@ const RenderItem = (item, idx) => {
                 width: "90%",
                 fontWeight: "bolder",
                 fontSize: 16,
+                marginTop: 28,
               }}
               onClick={() => {
                 setAdd(false);
@@ -223,31 +224,6 @@ const RenderItem = (item, idx) => {
               Remove
             </Button>
           )}
-
-          {/* <Button
-            className="w-1/3 rounded-xl"
-            style={{
-              backgroundColor: "#DDCDFF",
-              color: "#7330FF",
-              width: "30%",
-              fontWeight: "bolder",
-              fontSize: 16,
-            }}
-          >
-            Design
-          </Button>
-          <Button
-            className="w-1/3 rounded-xl bg-blue-600"
-            style={{
-              color: "#D32EFF",
-              backgroundColor: "#F4C6FF",
-              width: "30%",
-              fontWeight: "bolder",
-              fontSize: 16,
-            }}
-          >
-            Generate
-          </Button> */}
         </div>
       </div>
 

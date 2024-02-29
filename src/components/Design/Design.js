@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
 import { Button, Image } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
-import { DownloadOutlined, EditOutlined } from "@ant-design/icons";
+import { EditOutlined, UploadOutlined } from "@ant-design/icons";
 import DesignInfoComponent from "./DesignInfoComponent";
 import DifficultyIcon from "../../images/DifficultyIcon.svg";
 import InnovationIcon from "../../images/InnovationIcon.svg";
@@ -169,6 +169,18 @@ const RenderItem = (item, idx) => {
               about a.d. 64 during his retirement from Emperor Nero’s court, in
               which the Roman philosopher uses idea in the sense of “Platonic
               idea, eternal archetype.” Seneca wrote idea in Latin letters;
+              English idea comes from one of Seneca’s Epistles (58), written
+              about a.d. 64 during his retirement from Emperor Nero’s court, in
+              which the Roman philosopher uses idea in the sense of “Platonic
+              idea, eternal archetype.” Seneca wrote idea in Latin letters;
+              English idea comes from one of Seneca’s Epistles (58), written
+              about a.d. 64 during his retirement from Emperor Nero’s court, in
+              which the Roman philosopher uses idea in the sense of “Platonic
+              idea, eternal archetype.” Seneca wrote idea in Latin letters;
+              English idea comes from one of Seneca’s Epistles (58), written
+              about a.d. 64 during his retirement from Emperor Nero’s court, in
+              which the Roman philosopher uses idea in the sense of “Platonic
+              idea, eternal archetype.” Seneca wrote idea in Latin
             </span>
           </div>
         </div>
@@ -192,8 +204,18 @@ const RenderItem = (item, idx) => {
           rowGap: 2,
         }}
       >
-        <Button type="dashed" icon={<DownloadOutlined />}>
-          Attachments
+        <Button
+          type="dashed"
+          icon={<UploadOutlined />}
+          style={{ height: "20%" }}
+        >
+          Upload
+          <br />
+          Attachment
+          <br />
+          Drag and drop or
+          <br />
+          click to choose
         </Button>
 
         <Button

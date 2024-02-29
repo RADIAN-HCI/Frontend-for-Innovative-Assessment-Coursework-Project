@@ -87,7 +87,7 @@ const Assignments = () => {
           marginRight: "10%",
         }}
       >
-        <GeneralList data={data} RenderItem={RenderItem} />
+        <GeneralList data={data} RenderItem={RenderItem} numOfColumn={2} />
       </div>
     </div>
   );
@@ -186,6 +186,9 @@ const RenderItem = (person, idx) => {
               width: "30%",
               fontWeight: "bolder",
               fontSize: 16,
+            }}
+            onClick={() => {
+              navigate("/design");
             }}
           >
             Design

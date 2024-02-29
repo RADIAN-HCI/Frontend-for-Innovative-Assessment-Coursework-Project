@@ -1,12 +1,12 @@
 import { List } from "antd";
 
-const GeneralList = ({ data, RenderItem }) => {
+const GeneralList = ({ data, RenderItem, numOfColumn }) => {
   return (
     <ul>
       <List
         grid={{
-          column: 2,
-          gutter: 16,
+          column: numOfColumn,
+          gutter: numOfColumn === 2 ? 16 : 0,
         }}
         dataSource={data}
         renderItem={RenderItem}

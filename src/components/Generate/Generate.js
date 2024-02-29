@@ -1,20 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import Logo from "../images/Logo.svg";
-import "./index.css";
+import Logo from "../../images/Logo.svg";
+import "../index.css";
 // import { useLocation } from "react-router-dom";
 import { Button, Image } from "antd";
-import CubeIcon from "../images/CubeIcon.svg";
-import GeneralList from "./GeneralList";
+import CubeIcon from "../../images/CubeIcon.svg";
+import GeneralList from "../GeneralList";
 import {
   DownloadOutlined,
   DeleteFilled,
   CheckOutlined,
 } from "@ant-design/icons";
 import GenerateInfoComponent from "./GenerateInfoComponent";
-import DifficultyIcon from "../images/DifficultyIcon.svg";
-import InnovationIcon from "../images/InnovationIcon.svg";
-import GenerateSideIcon from "../images/GenerateSideIcon.svg";
+import DifficultyIcon from "../../images/DifficultyIcon.svg";
+import InnovationIcon from "../../images/InnovationIcon.svg";
+import GenerateSideIcon from "../../images/GenerateSideIcon.svg";
 
 const Generate = () => {
   // const { state } = useLocation();
@@ -96,7 +96,7 @@ const Generate = () => {
             marginRight: "10%",
           }}
         >
-          <GeneralList data={data} RenderItem={RenderItem} />
+          <GeneralList data={data} RenderItem={RenderItem} numOfColumn={2} />
         </div>
       </div>
     </>

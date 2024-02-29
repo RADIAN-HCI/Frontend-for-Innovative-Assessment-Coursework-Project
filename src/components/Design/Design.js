@@ -67,12 +67,14 @@ const Design = () => {
             marginLeft: "10%",
             marginTop: "2%",
             marginRight: "10%",
+            alignItems: "center",
           }}
         >
           <span
             style={{
               fontWeight: "bolder",
               fontSize: 64,
+              marginRight: 8,
             }}
           >
             Design

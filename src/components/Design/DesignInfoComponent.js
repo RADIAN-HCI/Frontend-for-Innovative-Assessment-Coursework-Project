@@ -6,6 +6,7 @@ const DesignInfoComponent = (props) => {
   return (
     <div
       style={{
+        height: "30%",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",

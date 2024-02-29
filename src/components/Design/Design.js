@@ -4,7 +4,7 @@ import Logo from "../../images/Logo.svg";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
 import { Button, Image } from "antd";
-import CubeIcon from "../../images/CubeIcon.svg";
+import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
 import { DownloadOutlined, EditOutlined } from "@ant-design/icons";
 import DesignInfoComponent from "./DesignInfoComponent";
@@ -29,10 +29,10 @@ const Design = () => {
   return (
     <>
       <img
-        src={CubeIcon}
+        src={DesignCloudIcon}
         style={{
           position: "absolute",
-          right: 0,
+          right: -150,
           top: 50,
           width: "30%",
           height: "30%",
@@ -101,6 +101,20 @@ const Design = () => {
           <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
         </div>
       </div>
+      <img
+        src={DesignCloudIcon}
+        style={{
+          position: "absolute",
+          left: -200,
+          top: 50,
+          width: "30%",
+          height: "30%",
+          color: "red",
+          zIndex: 0,
+          rotate: "revert",
+        }}
+        alt="salam"
+      />
     </>
   );
 };

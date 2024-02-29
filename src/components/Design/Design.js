@@ -207,15 +207,28 @@ const RenderItem = (item, idx) => {
         <Button
           type="dashed"
           icon={<UploadOutlined />}
-          style={{ height: "20%" }}
+          style={{ height: "40%" }}
         >
-          Upload
+          <span
+            style={{ color: "#676767", fontWeight: "bolder", fontSize: 20 }}
+          >
+            Upload
+          </span>
           <br />
-          Attachment
+          <span
+            style={{ color: "#676767", fontWeight: "bolder", fontSize: 20 }}
+          >
+            Attachment
+          </span>
+
           <br />
-          Drag and drop or
+          <span style={{ color: "#676767", fontSize: 14 }}>
+            Drag and drop or
+          </span>
           <br />
-          click to choose
+          <span style={{ color: "#676767", fontSize: 14 }}>
+            click to choose
+          </span>
         </Button>
 
         <Button

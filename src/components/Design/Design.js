@@ -79,17 +79,6 @@ const Design = () => {
           >
             Design
           </span>
-          <DesignInfoComponent
-            color="#00e15A"
-            title="Very High"
-            imgSrc={InnovationIcon}
-          />
-
-          <DesignInfoComponent
-            color="#EA0054"
-            title="Hard"
-            imgSrc={DifficultyIcon}
-          />
         </div>
         <div
           style={{
@@ -120,6 +109,7 @@ const Design = () => {
 };
 
 const RenderItem = (item, idx) => {
+  const infoStyle = { marginRight: 12, marginLeft: 12 };
   return (
     <div
       key={idx}
@@ -133,9 +123,6 @@ const RenderItem = (item, idx) => {
         justifyContent: "space-between",
       }}
       className="rounded-l"
-      // onClick={() => {
-      //   setSelected(idx);
-      // }}
     >
       <div
         style={{
@@ -147,8 +134,26 @@ const RenderItem = (item, idx) => {
           width: "90%",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
           <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
+          <DesignInfoComponent
+            color="#00e15A"
+            title="Very High"
+            imgSrc={InnovationIcon}
+            infoStyle={infoStyle}
+          />
+
+          <DesignInfoComponent
+            color="#EA0054"
+            title="Hard"
+            imgSrc={DifficultyIcon}
+          />
         </div>
         <div
           style={{
@@ -161,7 +166,7 @@ const RenderItem = (item, idx) => {
             style={{
               display: "flex",
               flexDirection: "column",
-              width: "80%",
+              width: "95%",
             }}
           >
             <span>
@@ -198,7 +203,7 @@ const RenderItem = (item, idx) => {
         style={{
           display: "flex",
           flexDirection: "column",
-          width: "30%",
+          width: "20%",
           justifyContent: "space-around",
           columnGap: 2,
           rowGap: 2,
@@ -207,7 +212,7 @@ const RenderItem = (item, idx) => {
         <Button
           type="dashed"
           icon={<UploadOutlined />}
-          style={{ height: "40%" }}
+          style={{ height: "50%" }}
         >
           <span
             style={{ color: "#676767", fontWeight: "bolder", fontSize: 20 }}
@@ -232,14 +237,24 @@ const RenderItem = (item, idx) => {
         </Button>
 
         <Button
-          style={{ backgroundColor: "#F4C6FF", color: "#DE54FF" }}
-          icon={<EditOutlined />}
+          style={{
+            backgroundColor: "#F4C6FF",
+            color: "#DE54FF",
+            height: "15%",
+          }}
+          icon={<EditOutlined width={120} height={120} />}
         >
-          Edit
+          <span
+            style={{ fontWeight: "bolder", color: "#D32EFF", fontSize: 24 }}
+          >
+            Edit
+          </span>
         </Button>
 
-        <Button style={{ backgroundColor: "#DE54FF", color: "white" }}>
-          Enhance
+        <Button
+          style={{ backgroundColor: "#DE54FF", color: "white", height: "15%" }}
+        >
+          <span style={{ fontWeight: "bolder", fontSize: 24 }}>Enhance</span>
         </Button>
       </div>
     </div>

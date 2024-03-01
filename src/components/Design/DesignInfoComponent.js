@@ -6,13 +6,15 @@ const DesignInfoComponent = (props) => {
   return (
     <div
       style={{
-        height: "30%",
+        height: "50%",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        borderRadius: 8,
+        borderRadius: 4,
         borderColor: color,
         borderWidth: 1,
+        padding: 4,
+        ...props.infoStyle,
       }}
     >
       <div style={{ display: "flex", flexDirection: "row" }}>

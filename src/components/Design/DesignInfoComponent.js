@@ -10,7 +10,7 @@ const DesignInfoComponent = (props) => {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        borderRadius: 4,
+        borderRadius: 7,
         borderColor: color,
         borderWidth: 1,
         padding: 4,

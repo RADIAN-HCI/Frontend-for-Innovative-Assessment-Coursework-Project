@@ -8,7 +8,7 @@ import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
 import { EditOutlined, UploadOutlined } from "@ant-design/icons";
 import DesignInfoComponent from "./DesignInfoComponent";
-import DifficultyIcon from "../../images/DifficultyIcon.svg";
+import DifficultyIcon from "../../images/HardIconForDesignPage.svg";
 import InnovationIcon from "../../images/InnovationIcon.svg";
 
 const Design = () => {
@@ -32,8 +32,8 @@ const Design = () => {
         src={DesignCloudIcon}
         style={{
           position: "absolute",
-          right: -150,
-          top: 50,
+          right: 0,
+          top: 250,
           width: "30%",
           height: "30%",
           color: "red",
@@ -95,11 +95,11 @@ const Design = () => {
         style={{
           position: "absolute",
           left: -200,
-          top: 50,
+          top: 250,
           width: "30%",
           height: "30%",
           color: "red",
-          zIndex: 0,
+          zIndex: -1,
           rotate: "revert",
         }}
         alt="salam"

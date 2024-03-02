@@ -110,6 +110,7 @@ const GenerateRenderItem = ({
                 width: "90%",
                 fontWeight: "bolder",
                 fontSize: 16,
+                marginTop: 28,
               }}
               onClick={() => {
                 setAdd(true);

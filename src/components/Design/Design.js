@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
@@ -6,7 +5,7 @@ import "../index.css";
 import { Button, Image } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
-import { EditOutlined, UploadOutlined } from "@ant-design/icons";
+import { EditOutlined } from "@ant-design/icons";
 import DesignInfoComponent from "./DesignInfoComponent";
 import DifficultyIcon from "../../images/HardIconForDesignPage.svg";
 import InnovationIcon from "../../images/InnovationIcon.svg";

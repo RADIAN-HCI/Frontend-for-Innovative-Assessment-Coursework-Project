@@ -1,4 +1,7 @@
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  LoadingOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import { Button, message, Upload } from "antd";
 import React, { useState } from "react";
 const getBase64 = (img, callback) => {
@@ -46,7 +49,11 @@ const GenerateUploadComponent = () => {
       onChange={handleChange}
       style={{ justifyCenter: "center" }}
     >
-      <Button type="dashed" style={{ height: "50%" }} icon={loading ? <LoadingOutlined /> : <PlusOutlined />}>
+      <Button
+        type="dashed"
+        style={{ height: "50%" }}
+        icon={loading ? <LoadingOutlined /> : <PlusOutlined />}
+      >
         <span
           style={{
             color: "#676767",
@@ -54,7 +61,7 @@ const GenerateUploadComponent = () => {
             fontSize: 20,
           }}
         >
-          Upload
+          Attachment
         </span>
       </Button>
     </Upload>

@@ -7,6 +7,7 @@ import GenerateInfoComponent from "./GenerateInfoComponent";
 import DifficultyIcon from "../../images/DifficultyIcon.svg";
 import InnovationIcon from "../../images/InnovationIcon.svg";
 import GenerateUploadComponent from "./GenerateUploadComponent";
+import NoAttachmentComponent from "./NoAttachmentComponent";
 
 const GenerateRenderItem = ({
   item,
@@ -130,7 +131,11 @@ const GenerateRenderItem = ({
           rowGap: 2,
         }}
       >
-        <GenerateUploadComponent />
+        {add ? (
+          <GenerateUploadComponent />
+        ) : (
+          <NoAttachmentComponent/>
+        )}
 
         <GenerateInfoComponent
           color="#00e15A"

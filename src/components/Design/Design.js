@@ -10,6 +10,7 @@ import { EditOutlined, UploadOutlined } from "@ant-design/icons";
 import DesignInfoComponent from "./DesignInfoComponent";
 import DifficultyIcon from "../../images/HardIconForDesignPage.svg";
 import InnovationIcon from "../../images/InnovationIcon.svg";
+import UploadComponent from "./UploadComponent";
 
 const Design = () => {
   // const { state } = useLocation();
@@ -205,36 +206,12 @@ const RenderItem = (item, idx) => {
           flexDirection: "column",
           width: "20%",
           justifyContent: "space-around",
+          // alignItems: "center",
           columnGap: 2,
           rowGap: 2,
         }}
       >
-        <Button
-          type="dashed"
-          icon={<UploadOutlined />}
-          style={{ height: "50%" }}
-        >
-          <span
-            style={{ color: "#676767", fontWeight: "bolder", fontSize: 20 }}
-          >
-            Upload
-          </span>
-          <br />
-          <span
-            style={{ color: "#676767", fontWeight: "bolder", fontSize: 20 }}
-          >
-            Attachment
-          </span>
-
-          <br />
-          <span style={{ color: "#676767", fontSize: 14 }}>
-            Drag and drop or
-          </span>
-          <br />
-          <span style={{ color: "#676767", fontSize: 14 }}>
-            click to choose
-          </span>
-        </Button>
+        <UploadComponent />
 
         <Button
           style={{

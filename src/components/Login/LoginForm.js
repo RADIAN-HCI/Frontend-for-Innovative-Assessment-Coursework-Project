@@ -3,12 +3,14 @@ import { Form, Input, Button, Radio, Image } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [authorized, setAuthorized] = useState(true);
   const navigate = useNavigate();
+  const alert = useAlert();
 
   const login = () => {
     if (username === "" || password === "") {
@@ -88,6 +90,7 @@ const LoginForm = () => {
             setUsername(event.target.value);
           }}
           prefix={<UserOutlined className="site-form-item-icon" />}
+          style={{ backgroundColor: authorized ? null : "#E3000025" }}
         />
       </Form.Item>
       <Form.Item
@@ -108,6 +111,7 @@ const LoginForm = () => {
           }}
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
+          style={{ backgroundColor: authorized ? null : "#E3000025" }}
         />
       </Form.Item>
       {authorized ? null : <UnauthorizedMessage />}
@@ -145,9 +149,19 @@ const LoginForm = () => {
 
 const UnauthorizedMessage = () => {
   return (
-    <div className="mb-2 bg-red-100">
-      <span style={{ color: "red", fontSize: 12 }}>
-        Username or Password in Invalid or Wrong
+    <div
+      className="mb-2 bg-red-100"
+      style={{ borderRadius: 5, borderWidth: 1 }}
+    >
+      <span
+        style={{
+          color: "red",
+          fontSize: 12,
+          paddingLeft: 8,
+          paddingRight: 8,
+        }}
+      >
+        Username or Password is Invalid or Wrong
       </span>
     </div>
   );

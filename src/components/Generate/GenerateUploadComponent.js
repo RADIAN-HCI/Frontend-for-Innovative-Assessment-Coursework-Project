@@ -18,7 +18,7 @@ const beforeUpload = (file) => {
   return isJpgOrPng && isLt2M;
 };
 
-const UploadComponent = () => {
+const GenerateUploadComponent = () => {
   const [loading, setLoading] = useState(false);
   //   const [imageUrl, setImageUrl] = useState();
   const handleChange = (info) => {
@@ -39,37 +39,25 @@ const UploadComponent = () => {
     <Upload
       name="file"
       // listType="picture-card"
-      className="avatar-uploader"
+      // className="avatar-uploader"
       showUploadList={false}
       action="/api/upload"
       beforeUpload={beforeUpload}
       onChange={handleChange}
       style={{ justifyCenter: "center" }}
     >
-      <Button type="dashed" style={{ height: "50%" }}>
-        {loading ? <LoadingOutlined /> : <PlusOutlined />}
-        <br />
+      <Button type="dashed" style={{ height: "50%" }} icon={loading ? <LoadingOutlined /> : <PlusOutlined />}>
         <span
           style={{
             color: "#676767",
             fontWeight: "bolder",
             fontSize: 20,
-            marginTop: 8,
           }}
         >
           Upload
         </span>
-        <br />
-        <span style={{ color: "#676767", fontWeight: "bolder", fontSize: 20 }}>
-          Attachment
-        </span>
-
-        <br />
-        <span style={{ color: "#676767", fontSize: 14 }}>Drag and drop or</span>
-        <br />
-        <span style={{ color: "#676767", fontSize: 14 }}>click to choose</span>
       </Button>
     </Upload>
   );
 };
-export default UploadComponent;
+export default GenerateUploadComponent;

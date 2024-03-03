@@ -9,7 +9,7 @@ import { EditOutlined } from "@ant-design/icons";
 import DesignInfoComponent from "./DesignInfoComponent";
 import DifficultyIcon from "../../images/HardIconForDesignPage.svg";
 import InnovationIcon from "../../images/InnovationIcon.svg";
-import UploadComponent from "./UploadComponent";
+import DesignUploadComponent from "./DesignUploadComponent";
 
 const Design = () => {
   // const { state } = useLocation();
@@ -226,7 +226,7 @@ const RenderItem = (item, idx) => {
           rowGap: 2,
         }}
       >
-        <UploadComponent />
+        <DesignUploadComponent />
 
         <Button
           style={{

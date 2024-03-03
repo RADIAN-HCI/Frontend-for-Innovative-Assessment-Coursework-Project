@@ -2,14 +2,11 @@ import React from "react";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
 import { Button } from "antd";
-import {
-  DownloadOutlined,
-  DeleteFilled,
-  CheckOutlined,
-} from "@ant-design/icons";
+import { DeleteFilled, CheckOutlined } from "@ant-design/icons";
 import GenerateInfoComponent from "./GenerateInfoComponent";
 import DifficultyIcon from "../../images/DifficultyIcon.svg";
 import InnovationIcon from "../../images/InnovationIcon.svg";
+import GenerateUploadComponent from "./GenerateUploadComponent";
 
 const GenerateRenderItem = ({
   item,
@@ -133,9 +130,7 @@ const GenerateRenderItem = ({
           rowGap: 2,
         }}
       >
-        <Button type="dashed" icon={<DownloadOutlined />}>
-          Attachments
-        </Button>
+        <GenerateUploadComponent />
 
         <GenerateInfoComponent
           color="#00e15A"

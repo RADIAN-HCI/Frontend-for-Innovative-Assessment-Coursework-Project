@@ -110,7 +110,11 @@ const Design = () => {
 };
 
 const RenderItem = (item, idx) => {
-  const infoStyle = { marginRight: 12, marginLeft: 12 };
+  const infoStyle = {
+    marginRight: 8,
+    marginLeft: 8,
+    height: 40,
+  };
   return (
     <div
       key={idx}
@@ -140,21 +144,33 @@ const RenderItem = (item, idx) => {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
-          <DesignInfoComponent
-            color="#00e15A"
-            title="Very High"
-            imgSrc={InnovationIcon}
-            infoStyle={infoStyle}
-          />
 
-          <DesignInfoComponent
-            color="#EA0054"
-            title="Hard"
-            imgSrc={DifficultyIcon}
-          />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}
+          >
+            <DesignInfoComponent
+              color="#00e15A"
+              title="Very High"
+              imgSrc={InnovationIcon}
+              infoStyle={infoStyle}
+            />
+
+            <DesignInfoComponent
+              color="#EA0054"
+              title="Hard"
+              imgSrc={DifficultyIcon}
+              infoStyle={infoStyle}
+            />
+          </div>
         </div>
         <div
           style={{

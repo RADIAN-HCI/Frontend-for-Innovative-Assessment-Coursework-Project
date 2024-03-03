@@ -25,7 +25,7 @@ const DesignInfoComponent = (props) => {
           </span>
         ) : null}
       </div>
-      <span style={{ fontSize: 24, color: color, fontWeight: "bold" }}>
+      <span style={{ fontSize: 24, color: color, fontWeight: "bold", marginLeft: 4 }}>
         {title}
       </span>
     </div>

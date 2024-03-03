@@ -1,4 +1,4 @@
-import loginIcon from "../images/Vector.png";
+import loginIcon from "../../images/Vector.png";
 import { Form, Input, Button, Radio, Image } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useState } from "react";

@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AccountForm from "./components/AccountForm";
+import AccountForm from "./components/Login/AccountForm";
 import Assignments from "./components/Assignments";
 import Generate from "./components/Generate/Generate";
 import Design from "./components/Design/Design";

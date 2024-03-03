@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 // import "./index.css";
 import { Image } from "antd";
-import Quote from "../images/Quote.svg";
-import leftBubble from "../images/LeftBubble.svg";
+import Quote from "../../images/Quote.svg";
+import leftBubble from "../../images/LeftBubble.svg";
 import LoginForm from "./LoginForm";
 
 const AccountForm = () => {

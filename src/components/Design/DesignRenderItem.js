@@ -101,7 +101,6 @@ const DesignRenderItem = ({
         {!isEditMode ? (
           <Button
             style={{
-              // backgroundColor: "#F4C6FF",
               color: "#DE54FF",
               height: "15%",
               borderColor: "#F4C6FF",

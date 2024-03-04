@@ -53,7 +53,7 @@ const DesignRenderItem = ({
             justifyContent: "space-between",
           }}
         >
-          <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
+          <span style={{ fontWeight: "bolder", fontSize: 40 }}>{item.title}</span>
 
           <div
             style={{

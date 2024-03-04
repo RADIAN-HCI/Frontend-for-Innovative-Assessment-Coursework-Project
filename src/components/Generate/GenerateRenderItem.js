@@ -29,7 +29,7 @@ const GenerateRenderItem = ({
       key={idx}
       style={{
         backgroundColor: "#F5F5F5",
-        width: "90%",
+        width: "95%",
         height: "90%",
         padding: "1%",
         display: "flex",
@@ -51,7 +51,7 @@ const GenerateRenderItem = ({
           marginLeft: "2%",
           marginRight: "2%",
           marginBottom: "5%",
-          width: "90%",
+          width: "95%",
         }}
       >
         <div
@@ -69,7 +69,9 @@ const GenerateRenderItem = ({
               alignItems: "center",
             }}
           >
-            <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
+            <span style={{ fontWeight: "bolder", fontSize: 40 }}>
+              {item.title}
+            </span>
             {selected === idx ? <SelectedComponent /> : null}
           </div>
           <div
@@ -167,10 +169,9 @@ const GenerateRenderItem = ({
         style={{
           display: "flex",
           flexDirection: "column",
-          width: "30%",
-          justifyContent: "space-around",
-          columnGap: 2,
-          rowGap: 2,
+          width: "10%",
+          justifyContent: "center",
+          backgroundColor: "red",
         }}
       >
         {add ? <GenerateUploadComponent /> : <NoAttachmentComponent />}

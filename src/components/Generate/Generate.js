@@ -15,14 +15,12 @@ const Generate = () => {
 
   const [selected, setSelected] = useState(-1);
   const data = [
-    { title: "salam1", selected: true },
-    { title: "salam2", selected: false },
-    { title: "salam3", selected: false },
-    { title: "salam4", selected: false },
-    { title: "salam5", selected: false },
-    { title: "salam5", selected: false },
-    { title: "salam5", selected: false },
-    { title: "salam5", selected: false },
+    { title: "Idea 1" },
+    { title: "Idea 2" },
+    { title: "Idea 3" },
+    { title: "Idea 4" },
+    { title: "Idea 5" },
+    { title: "Idea 6" },
   ];
 
   const RenderItem = (item, idx) => {

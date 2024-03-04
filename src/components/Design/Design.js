@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
@@ -10,6 +10,8 @@ import DesignInfoComponent from "./DesignInfoComponent";
 import DifficultyIcon from "../../images/HardIconForDesignPage.svg";
 import InnovationIcon from "../../images/InnovationIcon.svg";
 import DesignUploadComponent from "./DesignUploadComponent";
+import EnhanceIcon from "../../images/EnhanceIcon.svg";
+import EditIcon from "../../images/EditIcon.svg";
 
 const Design = () => {
   // const { state } = useLocation();
@@ -109,6 +111,7 @@ const Design = () => {
 };
 
 const RenderItem = (item, idx) => {
+  const [isEditMode, setIsEditMode] = useState(false);
   const infoStyle = {
     marginRight: 8,
     marginLeft: 8,
@@ -221,32 +224,92 @@ const RenderItem = (item, idx) => {
           flexDirection: "column",
           width: "20%",
           justifyContent: "space-around",
-          // alignItems: "center",
           columnGap: 2,
           rowGap: 2,
         }}
       >
         <DesignUploadComponent />
 
-        <Button
-          style={{
-            backgroundColor: "#F4C6FF",
-            color: "#DE54FF",
-            height: "15%",
-          }}
-          icon={<EditOutlined width={120} height={120} />}
-        >
-          <span
-            style={{ fontWeight: "bolder", color: "#D32EFF", fontSize: 24 }}
+        {!isEditMode ? (
+          <Button
+            style={{
+              // backgroundColor: "#F4C6FF",
+              color: "#DE54FF",
+              height: "15%",
+              borderColor: "#F4C6FF",
+              borderWidth: 1,
+            }}
+            onClick={() => {
+              setIsEditMode(true);
+            }}
+            type="default"
           >
-            Edit
-          </span>
-        </Button>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: 'center',
+                alignItems: "center",
+              }}
+            >
+              <Image
+                src={EditIcon}
+                height={25}
+                width={25}
+                style={{ marginRight: 12 }}
+                preview={false}
+              />
+              <span
+                style={{ fontWeight: "bolder", color: "#D32EFF", fontSize: 24 }}
+              >
+                Edit
+              </span>
+            </div>
+          </Button>
+        ) : (
+          <Button
+            style={{
+              backgroundColor: "#F4C6FF",
+              color: "#DE54FF",
+              height: "15%",
+            }}
+            icon={<EditOutlined width={120} height={120} />}
+            onClick={() => {
+              setIsEditMode(false);
+            }}
+          >
+            <span
+              style={{ fontWeight: "bolder", color: "#D32EFF", fontSize: 24 }}
+            >
+              Done
+            </span>
+          </Button>
+        )}
 
         <Button
-          style={{ backgroundColor: "#DE54FF", color: "white", height: "15%" }}
+          style={{
+            backgroundColor: "#DE54FF",
+            color: "white",
+            height: "15%",
+          }}
         >
-          <span style={{ fontWeight: "bolder", fontSize: 24 }}>Enhance</span>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              src={EnhanceIcon}
+              height={25}
+              width={25}
+              style={{ marginRight: 12 }}
+              preview={false}
+            />
+            <span style={{ fontWeight: "bolder", fontSize: 24 }}>Enhance</span>
+          </div>
         </Button>
       </div>
     </div>

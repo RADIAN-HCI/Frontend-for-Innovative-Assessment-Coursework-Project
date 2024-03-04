@@ -28,6 +28,8 @@ const Generate = () => {
   const RenderItem = (item, idx) => {
     const [add, setAdd] = useState(true);
 
+    const [isEditMode, setIsEditMode] = useState(false);
+
     return (
       <GenerateRenderItem
         item={item}
@@ -36,6 +38,8 @@ const Generate = () => {
         setAdd={setAdd}
         selected={selected}
         setSelected={setSelected}
+        isEditMode={isEditMode}
+        setIsEditMode={setIsEditMode}
       />
     );
   };

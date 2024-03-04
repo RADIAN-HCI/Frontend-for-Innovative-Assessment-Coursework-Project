@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
@@ -9,6 +9,7 @@ import GenerateUploadComponent from "./GenerateUploadComponent";
 import NoAttachmentComponent from "./NoAttachmentComponent";
 
 import IconButton from "./IconButton";
+import TextArea from "antd/es/input/TextArea";
 
 const GenerateRenderItem = ({
   item,
@@ -17,8 +18,12 @@ const GenerateRenderItem = ({
   setAdd,
   selected,
   setSelected,
+  isEditMode,
+  setIsEditMode,
 }) => {
-  console.log(item);
+  const [ideaText, setIdeaText] = useState(
+    "English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of “Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin"
+  );
   return (
     <div
       key={idx}
@@ -75,12 +80,27 @@ const GenerateRenderItem = ({
               justifyContent: "space-between",
             }}
           >
-            <IconButton
-              icon={EditIcon}
-              buttonText="Edit"
-              backgroundColor="#F4C6FF"
-              mainColor="#D32EFF"
-            />
+            {isEditMode ? (
+              <IconButton
+                icon={EditIcon}
+                buttonText="Done"
+                backgroundColor="#F4C6FF"
+                mainColor="#D32EFF"
+                onClick={() => {
+                  setIsEditMode(false);
+                }}
+              />
+            ) : (
+              <IconButton
+                icon={EditIcon}
+                buttonText="Edit"
+                backgroundColor="#F4C6FF"
+                mainColor="#D32EFF"
+                onClick={() => {
+                  setIsEditMode(true);
+                }}
+              />
+            )}
 
             {add ? (
               <IconButton
@@ -105,7 +125,7 @@ const GenerateRenderItem = ({
             )}
           </div>
         </div>
-        <div
+        {/* <div
           style={{
             display: "flex",
             flexDirection: "row",
@@ -126,7 +146,13 @@ const GenerateRenderItem = ({
               idea, eternal archetype.” Seneca wrote idea in Latin letters;
             </span>
           </div>
-        </div>
+        </div> */}
+
+        {isEditMode ? (
+          <TextEditor ideaText={ideaText} setIdeaText={setIdeaText} />
+        ) : (
+          <TextDisplay text={ideaText} />
+        )}
         <div
           style={{
             display: "flex",
@@ -178,6 +204,57 @@ const GenerateRenderItem = ({
             ... More
           </span>
         </div> */}
+      </div>
+    </div>
+  );
+};
+
+const TextDisplay = ({ text }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "95%",
+          height: "100%",
+        }}
+      >
+        <span>{text}</span>
+      </div>
+    </div>
+  );
+};
+
+const TextEditor = ({ ideaText, setIdeaText }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "95%",
+          height: "100%",
+        }}
+      >
+        <TextArea
+          value={ideaText}
+          onChange={(e) => setIdeaText(e.target.value)}
+          placeholder="Controlled autosize"
+          autoSize
+        />
       </div>
     </div>
   );

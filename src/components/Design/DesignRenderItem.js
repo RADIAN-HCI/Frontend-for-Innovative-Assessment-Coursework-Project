@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
 import { Button, Image } from "antd";
@@ -9,14 +9,18 @@ import InnovationIcon from "../../images/InnovationIcon.svg";
 import DesignUploadComponent from "./DesignUploadComponent";
 import EnhanceIcon from "../../images/EnhanceIcon.svg";
 import EditIcon from "../../images/EditIcon.svg";
+import TextArea from "antd/es/input/TextArea";
 
 const DesignRenderItem = ({
-    item,
-    idx,
-    isEditMode,
-    setIsEditMode,
-    infoStyle
-  }) => {
+  item,
+  idx,
+  isEditMode,
+  setIsEditMode,
+  infoStyle,
+}) => {
+  const [ideaText, setIdeaText] = useState(
+    "English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of “Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin"
+  );
   return (
     <div
       key={idx}
@@ -74,48 +78,12 @@ const DesignRenderItem = ({
             />
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "95%",
-            }}
-          >
-            <span>
-              English idea comes from one of Seneca’s Epistles (58), written
-              about a.d. 64 during his retirement from Emperor Nero’s court, in
-              which the Roman philosopher uses idea in the sense of “Platonic
-              idea, eternal archetype.” Seneca wrote idea in Latin letters;
-              English idea comes from one of Seneca’s Epistles (58), written
-              about a.d. 64 during his retirement from Emperor Nero’s court, in
-              which the Roman philosopher uses idea in the sense of “Platonic
-              idea, eternal archetype.” Seneca wrote idea in Latin letters;
-              English idea comes from one of Seneca’s Epistles (58), written
-              about a.d. 64 during his retirement from Emperor Nero’s court, in
-              which the Roman philosopher uses idea in the sense of “Platonic
-              idea, eternal archetype.” Seneca wrote idea in Latin letters;
-              English idea comes from one of Seneca’s Epistles (58), written
-              about a.d. 64 during his retirement from Emperor Nero’s court, in
-              which the Roman philosopher uses idea in the sense of “Platonic
-              idea, eternal archetype.” Seneca wrote idea in Latin
-            </span>
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingBottom: 10,
-          }}
-        ></div>
+
+        {isEditMode ? (
+          <TextEditor ideaText={ideaText} setIdeaText={setIdeaText} />
+        ) : (
+          <TextDisplay text={ideaText} />
+        )}
       </div>
 
       <div
@@ -211,6 +179,57 @@ const DesignRenderItem = ({
             <span style={{ fontWeight: "bolder", fontSize: 24 }}>Enhance</span>
           </div>
         </Button>
+      </div>
+    </div>
+  );
+};
+
+const TextDisplay = ({ text }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "95%",
+          height: "100%",
+        }}
+      >
+        <span>{text}</span>
+      </div>
+    </div>
+  );
+};
+
+const TextEditor = ({ ideaText, setIdeaText }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "95%",
+          height: "100%",
+        }}
+      >
+        <TextArea
+          value={ideaText}
+          onChange={(e) => setIdeaText(e.target.value)}
+          placeholder="Controlled autosize"
+          autoSize
+        />
       </div>
     </div>
   );

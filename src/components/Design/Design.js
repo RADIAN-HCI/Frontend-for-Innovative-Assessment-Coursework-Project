@@ -10,15 +10,37 @@ import DesignRenderItem from "./DesignRenderItem";
 const Design = () => {
   // const { state } = useLocation();
   // const { username } = state;
+  const [selected, setSelected] = useState(-1);
 
   const data = [
-    { title: "Idea 1"},
-    { title: "Idea 2"},
-    { title: "Idea 3"},
-    { title: "Idea 4"},
-    { title: "Idea 5"},
-    { title: "Idea 6"},
+    { title: "Idea 1" },
+    { title: "Idea 2" },
+    { title: "Idea 3" },
+    { title: "Idea 4" },
+    { title: "Idea 5" },
+    { title: "Idea 6" },
   ];
+
+  const RenderItem = (item, idx) => {
+    const [isEditMode, setIsEditMode] = useState(false);
+
+    const infoStyle = {
+      marginRight: 8,
+      marginLeft: 8,
+      height: 40,
+    };
+    return (
+      <DesignRenderItem
+        // infoStyle={infoStyle}
+        isEditMode={isEditMode}
+        selected={selected}
+        setSelected={setSelected}
+        setIsEditMode={setIsEditMode}
+        item={item}
+        idx={idx}
+      />
+    );
+  };
 
   return (
     <>
@@ -99,24 +121,6 @@ const Design = () => {
         alt="salam"
       />
     </>
-  );
-};
-
-const RenderItem = (item, idx) => {
-  const [isEditMode, setIsEditMode] = useState(false);
-  const infoStyle = {
-    marginRight: 8,
-    marginLeft: 8,
-    height: 40,
-  };
-  return (
-    <DesignRenderItem
-      infoStyle={infoStyle}
-      isEditMode={isEditMode}
-      setIsEditMode={setIsEditMode}
-      item={item}
-      idx={idx}
-    />
   );
 };
 

@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
-import { Button, Image } from "antd";
-import { EditOutlined } from "@ant-design/icons";
-import DesignInfoComponent from "./DesignInfoComponent";
-import DifficultyIcon from "../../images/HardIconForDesignPage.svg";
-import InnovationIcon from "../../images/InnovationIcon.svg";
-import DesignUploadComponent from "./DesignUploadComponent";
-import EnhanceIcon from "../../images/EnhanceIcon.svg";
+import { Image } from "antd";
 import EditIcon from "../../images/EditIcon.svg";
 import TextArea from "antd/es/input/TextArea";
+
+import "../index.css";
+// import { useLocation } from "react-router-dom";
+import { CheckOutlined } from "@ant-design/icons";
+import GenerateUploadComponent from "../Generate/GenerateUploadComponent";
+import NoAttachmentComponent from "../Generate/NoAttachmentComponent";
+import EyeIcon from "../../images/EyeIcon.svg";
+import CheckIcon from "../../images/CheckIcon.svg";
+
+import IconButton from "../IconButton";
 
 const DesignRenderItem = ({
   item,
   idx,
+  selected,
+  setSelected,
   isEditMode,
   setIsEditMode,
-  infoStyle,
 }) => {
   const [ideaText, setIdeaText] = useState(
     "English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of “Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin"
@@ -26,12 +31,18 @@ const DesignRenderItem = ({
       key={idx}
       style={{
         backgroundColor: "#F5F5F5",
-        width: "90%",
+        width: "95%",
         height: "90%",
         padding: "1%",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
+        borderColor: selected === idx ? "#0066CC" : "#F5F5F5",
+        borderWidth: 3,
+        borderRadius: 10,
+      }}
+      onClick={() => {
+        setSelected(idx);
       }}
       className="rounded-l"
     >
@@ -49,135 +60,116 @@ const DesignRenderItem = ({
           style={{
             display: "flex",
             flexDirection: "row",
-            alignItems: "center",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          <span style={{ fontWeight: "bolder", fontSize: 40 }}>{item.title}</span>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <span style={{ fontWeight: "bolder", fontSize: 40 }}>
+              {item.title}
+            </span>
+            {selected === idx ? <SelectedComponent /> : null}
+          </div>
 
           <div
             style={{
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "flex-end",
+              justifyContent: "space-between",
             }}
           >
-            <DesignInfoComponent
-              color="#00e15A"
-              title="Very High"
-              imgSrc={InnovationIcon}
-              infoStyle={infoStyle}
-            />
+            {isEditMode ? (
+              <IconButton
+                icon={CheckIcon}
+                buttonText="Done"
+                backgroundColor="#F4C6FF"
+                mainColor="#D32EFF"
+                onClick={() => {
+                  setIsEditMode(false);
+                }}
+              />
+            ) : (
+              <IconButton
+                icon={EditIcon}
+                buttonText="Edit"
+                backgroundColor="#F4C6FF"
+                mainColor="#D32EFF"
+                onClick={() => {
+                  setIsEditMode(true);
+                }}
+              />
+            )}
 
-            <DesignInfoComponent
-              color="#EA0054"
-              title="Hard"
-              imgSrc={DifficultyIcon}
-              infoStyle={infoStyle}
+            <IconButton
+              icon={CheckIcon}
+              buttonText="Enhance"
+              backgroundColor="#F4C6FF"
+              mainColor="#D32EFF"
+              onClick={() => {
+                setIsEditMode(false);
+              }}
             />
           </div>
         </div>
+        {isEditMode ? (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Image src={EditIcon} preview={false} />
+            <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
+              Editing Mode
+            </span>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Image src={EyeIcon} preview={false} />
+            <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
+              Reading Mode
+            </span>
+          </div>
+        )}
 
         {isEditMode ? (
           <TextEditor ideaText={ideaText} setIdeaText={setIdeaText} />
         ) : (
           <TextDisplay text={ideaText} />
         )}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            paddingBottom: 10,
+          }}
+        ></div>
       </div>
 
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          width: "20%",
-          justifyContent: "space-around",
-          columnGap: 2,
-          rowGap: 2,
+          width: "10%",
+          justifyContent: "center",
         }}
       >
-        <DesignUploadComponent />
-
-        {!isEditMode ? (
-          <Button
-            style={{
-              color: "#DE54FF",
-              height: "15%",
-              borderColor: "#F4C6FF",
-              borderWidth: 1,
-            }}
-            onClick={() => {
-              setIsEditMode(true);
-            }}
-            type="default"
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Image
-                src={EditIcon}
-                height={25}
-                width={25}
-                style={{ marginRight: 12 }}
-                preview={false}
-              />
-              <span
-                style={{ fontWeight: "bolder", color: "#D32EFF", fontSize: 24 }}
-              >
-                Edit
-              </span>
-            </div>
-          </Button>
-        ) : (
-          <Button
-            style={{
-              backgroundColor: "#F4C6FF",
-              color: "#DE54FF",
-              height: "15%",
-            }}
-            icon={<EditOutlined width={120} height={120} />}
-            onClick={() => {
-              setIsEditMode(false);
-            }}
-          >
-            <span
-              style={{ fontWeight: "bolder", color: "#D32EFF", fontSize: 24 }}
-            >
-              Done
-            </span>
-          </Button>
-        )}
-
-        <Button
-          style={{
-            backgroundColor: "#DE54FF",
-            color: "white",
-            height: "15%",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-            }}
-          >
-            <Image
-              src={EnhanceIcon}
-              height={25}
-              width={25}
-              style={{ marginRight: 12 }}
-              preview={false}
-            />
-            <span style={{ fontWeight: "bolder", fontSize: 24 }}>Enhance</span>
-          </div>
-        </Button>
+        {isEditMode ? <GenerateUploadComponent /> : <NoAttachmentComponent />}
       </div>
     </div>
   );
@@ -230,6 +222,27 @@ const TextEditor = ({ ideaText, setIdeaText }) => {
           autoSize
         />
       </div>
+    </div>
+  );
+};
+
+const SelectedComponent = () => {
+  return (
+    <div
+      style={{
+        borderColor: "#0066CC",
+        borderWidth: 1,
+        display: "flex",
+        flexDirection: "row",
+        borderRadius: 5,
+        height: "40%",
+        padding: 4,
+        alignItems: "center",
+        marginLeft: 4,
+      }}
+    >
+      <CheckOutlined style={{ color: "#0066CC" }} />
+      <span style={{ color: "#0066CC" }}>Selected</span>
     </div>
   );
 };

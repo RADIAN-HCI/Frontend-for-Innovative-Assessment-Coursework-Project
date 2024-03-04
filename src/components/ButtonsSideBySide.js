@@ -4,6 +4,7 @@ import "../index.css";
 import EditIcon from "../images/EditIcon.svg";
 import PlusIcon from "../images/PlusIcon.svg";
 import TrashIcon from "../images/TrashIcon.svg";
+import CheckIcon from "../images/CheckIcon.svg";
 import IconButton from "./IconButton";
 
 const ButtonsSideBySide = ({ isEditMode, setIsEditMode, add, setAdd }) => {
@@ -18,7 +19,7 @@ const ButtonsSideBySide = ({ isEditMode, setIsEditMode, add, setAdd }) => {
     >
       {isEditMode ? (
         <IconButton
-          icon={EditIcon}
+          icon={CheckIcon}
           buttonText="Done"
           backgroundColor="#F4C6FF"
           mainColor="#D32EFF"

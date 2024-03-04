@@ -1,13 +1,14 @@
 import React from "react";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
-import { Button } from "antd";
-import { DeleteFilled, CheckOutlined } from "@ant-design/icons";
-import GenerateInfoComponent from "./GenerateInfoComponent";
-import DifficultyIcon from "../../images/DifficultyIcon.svg";
-import InnovationIcon from "../../images/InnovationIcon.svg";
+import { CheckOutlined } from "@ant-design/icons";
+import EditIcon from "../../images/EditIcon.svg";
+import PlusIcon from "../../images/PlusIcon.svg";
+import TrashIcon from "../../images/TrashIcon.svg";
 import GenerateUploadComponent from "./GenerateUploadComponent";
 import NoAttachmentComponent from "./NoAttachmentComponent";
+
+import IconButton from "./IconButton";
 
 const GenerateRenderItem = ({
   item,
@@ -48,9 +49,61 @@ const GenerateRenderItem = ({
           width: "90%",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
-          {selected === idx ? <SelectedComponent /> : null}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
+            {selected === idx ? <SelectedComponent /> : null}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <IconButton
+              icon={EditIcon}
+              buttonText="Edit"
+              backgroundColor="#F4C6FF"
+              mainColor="#D32EFF"
+            />
+
+            {add ? (
+              <IconButton
+                icon={PlusIcon}
+                buttonText="Add"
+                backgroundColor="#D6E5F5"
+                mainColor="#0066CC"
+                onClick={() => {
+                  setAdd(false);
+                }}
+              />
+            ) : (
+              <IconButton
+                icon={TrashIcon}
+                buttonText="Remove"
+                backgroundColor="#FFF2F4"
+                mainColor="#E72424"
+                onClick={() => {
+                  setAdd(true);
+                }}
+              />
+            )}
+          </div>
         </div>
         <div
           style={{
@@ -63,7 +116,7 @@ const GenerateRenderItem = ({
             style={{
               display: "flex",
               flexDirection: "column",
-              width: "80%",
+              width: "100%",
             }}
           >
             <span>
@@ -81,44 +134,7 @@ const GenerateRenderItem = ({
             justifyContent: "space-between",
             paddingBottom: 10,
           }}
-        >
-          {add ? (
-            <Button
-              className="rounded-xl"
-              style={{
-                color: "#0066CC",
-                backgroundColor: "#D6E5F5",
-                width: "90%",
-                fontWeight: "bolder",
-                fontSize: 16,
-                marginTop: 28,
-              }}
-              onClick={() => {
-                setAdd(false);
-              }}
-            >
-              + Add
-            </Button>
-          ) : (
-            <Button
-              className="rounded-xl"
-              style={{
-                color: "#E72424",
-                backgroundColor: "#FFF2F4",
-                width: "90%",
-                fontWeight: "bolder",
-                fontSize: 16,
-                marginTop: 28,
-              }}
-              onClick={() => {
-                setAdd(true);
-              }}
-              icon={<DeleteFilled />}
-            >
-              Remove
-            </Button>
-          )}
-        </div>
+        ></div>
       </div>
 
       <div
@@ -131,13 +147,9 @@ const GenerateRenderItem = ({
           rowGap: 2,
         }}
       >
-        {add ? (
-          <GenerateUploadComponent />
-        ) : (
-          <NoAttachmentComponent/>
-        )}
+        {add ? <GenerateUploadComponent /> : <NoAttachmentComponent />}
 
-        <GenerateInfoComponent
+        {/*<GenerateInfoComponent
           color="#00e15A"
           title="High"
           subtitle="Innovation"
@@ -149,9 +161,9 @@ const GenerateRenderItem = ({
           title="Easy"
           subtitle="Difficulty"
           imgSrc={DifficultyIcon}
-        />
+        /> */}
 
-        <div
+        {/* <div
           style={{
             display: "flex",
             flexDirection: "column",
@@ -165,7 +177,7 @@ const GenerateRenderItem = ({
           <span style={{ fontSize: 24, fontWeight: "bold", color: "#Dadada" }}>
             ... More
           </span>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -182,7 +194,6 @@ const SelectedComponent = () => {
         borderRadius: 5,
         height: "40%",
         padding: 4,
-        marginTop: 18,
         alignItems: "center",
         marginLeft: 4,
       }}

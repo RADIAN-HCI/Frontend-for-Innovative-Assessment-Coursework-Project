@@ -104,7 +104,7 @@ const Generate = () => {
             marginRight: "10%",
           }}
         >
-          <GeneralList data={data} RenderItem={RenderItem} numOfColumn={2} />
+          <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
         </div>
       </div>
     </>

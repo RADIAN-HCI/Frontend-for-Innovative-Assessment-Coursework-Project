@@ -1,7 +1,4 @@
-import {
-  LoadingOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, message, Upload } from "antd";
 import React, { useState } from "react";
 const getBase64 = (img, callback) => {
@@ -40,7 +37,7 @@ const GenerateUploadComponent = () => {
   };
   return (
     <Upload
-      name="file"
+      name="avatar"
       // listType="picture-card"
       // className="avatar-uploader"
       showUploadList={false}

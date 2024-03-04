@@ -42,7 +42,7 @@ const DesignRenderItem = ({
           marginLeft: "2%",
           marginRight: "2%",
           marginBottom: "5%",
-          width: "90%",
+          width: "95%",
         }}
       >
         <div

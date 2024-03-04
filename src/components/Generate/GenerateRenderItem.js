@@ -3,13 +3,12 @@ import "../index.css";
 // import { useLocation } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
 import EditIcon from "../../images/EditIcon.svg";
-import PlusIcon from "../../images/PlusIcon.svg";
-import TrashIcon from "../../images/TrashIcon.svg";
 import GenerateUploadComponent from "./GenerateUploadComponent";
 import NoAttachmentComponent from "./NoAttachmentComponent";
-
-import IconButton from "./IconButton";
+import EyeIcon from "../../images/EyeIcon.svg";
 import TextArea from "antd/es/input/TextArea";
+import { Image } from "antd";
+import ButtonsSideBySide from "../ButtonsSideBySide";
 
 const GenerateRenderItem = ({
   item,
@@ -74,81 +73,40 @@ const GenerateRenderItem = ({
             </span>
             {selected === idx ? <SelectedComponent /> : null}
           </div>
+          <ButtonsSideBySide
+            isEditMode={isEditMode}
+            setIsEditMode={setIsEditMode}
+            add={add}
+            setAdd={setAdd}
+          />
+        </div>
+        {isEditMode ? (
           <div
             style={{
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "space-between",
             }}
           >
-            {isEditMode ? (
-              <IconButton
-                icon={EditIcon}
-                buttonText="Done"
-                backgroundColor="#F4C6FF"
-                mainColor="#D32EFF"
-                onClick={() => {
-                  setIsEditMode(false);
-                }}
-              />
-            ) : (
-              <IconButton
-                icon={EditIcon}
-                buttonText="Edit"
-                backgroundColor="#F4C6FF"
-                mainColor="#D32EFF"
-                onClick={() => {
-                  setIsEditMode(true);
-                }}
-              />
-            )}
-
-            {add ? (
-              <IconButton
-                icon={PlusIcon}
-                buttonText="Add"
-                backgroundColor="#D6E5F5"
-                mainColor="#0066CC"
-                onClick={() => {
-                  setAdd(false);
-                }}
-              />
-            ) : (
-              <IconButton
-                icon={TrashIcon}
-                buttonText="Remove"
-                backgroundColor="#FFF2F4"
-                mainColor="#E72424"
-                onClick={() => {
-                  setAdd(true);
-                }}
-              />
-            )}
+            <Image src={EditIcon} preview={false} />
+            <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
+              Editing Mode
+            </span>
           </div>
-        </div>
-        {/* <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
+        ) : (
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
-              width: "100%",
+              flexDirection: "row",
+              alignItems: "center",
             }}
           >
-            <span>
-              English idea comes from one of Seneca’s Epistles (58), written
-              about a.d. 64 during his retirement from Emperor Nero’s court, in
-              which the Roman philosopher uses idea in the sense of “Platonic
-              idea, eternal archetype.” Seneca wrote idea in Latin letters;
+            <Image src={EyeIcon} preview={false} />
+            <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
+              Reading Mode
             </span>
           </div>
-        </div> */}
+        )}
 
         {isEditMode ? (
           <TextEditor ideaText={ideaText} setIdeaText={setIdeaText} />
@@ -171,40 +129,9 @@ const GenerateRenderItem = ({
           flexDirection: "column",
           width: "10%",
           justifyContent: "center",
-          backgroundColor: "red",
         }}
       >
         {add ? <GenerateUploadComponent /> : <NoAttachmentComponent />}
-
-        {/*<GenerateInfoComponent
-          color="#00e15A"
-          title="High"
-          subtitle="Innovation"
-          imgSrc={InnovationIcon}
-        />
-
-        <GenerateInfoComponent
-          color="#EA0054"
-          title="Easy"
-          subtitle="Difficulty"
-          imgSrc={DifficultyIcon}
-        /> */}
-
-        {/* <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            borderRadius: 8,
-            borderColor: "#F2F2F2",
-            backgroundColor: "#676767",
-            borderWidth: 1,
-          }}
-        >
-          <span style={{ fontSize: 24, fontWeight: "bold", color: "#Dadada" }}>
-            ... More
-          </span>
-        </div> */}
       </div>
     </div>
   );

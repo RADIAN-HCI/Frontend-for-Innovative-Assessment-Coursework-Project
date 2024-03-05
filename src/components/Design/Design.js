@@ -6,6 +6,7 @@ import { Button, Image } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
 import DesignRenderItem from "./DesignRenderItem";
+import AddQuestionModal from "./AddQuestionModal";
 
 const Design = () => {
   // const { state } = useLocation();
@@ -40,6 +41,18 @@ const Design = () => {
         idx={idx}
       />
     );
+  };
+
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -115,6 +128,9 @@ const Design = () => {
               borderRadius: 10,
               height: 40,
             }}
+            onClick={() => {
+              setIsModalOpen(true);
+            }}
           >
             <span
               style={{
@@ -127,6 +143,7 @@ const Design = () => {
               + Add Question
             </span>
           </Button>
+          <AddQuestionModal isModalOpen={isModalOpen} showModal={showModal} handleCancel={handleCancel} handleOk={handleOk}/>
         </div>
       </div>
       <img

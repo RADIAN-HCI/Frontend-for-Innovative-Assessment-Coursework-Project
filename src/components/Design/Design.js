@@ -45,9 +45,6 @@ const Design = () => {
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -143,7 +140,7 @@ const Design = () => {
               + Add Question
             </span>
           </Button>
-          <AddQuestionModal isModalOpen={isModalOpen} showModal={showModal} handleCancel={handleCancel} handleOk={handleOk}/>
+          <AddQuestionModal isModalOpen={isModalOpen} handleCancel={handleCancel} handleOk={handleOk}/>
         </div>
       </div>
       <img

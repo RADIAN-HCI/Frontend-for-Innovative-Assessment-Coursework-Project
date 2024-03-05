@@ -7,7 +7,7 @@ import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
 import DesignRenderItem from "./DesignRenderItem";
 import AddQuestionModal from "./AddQuestionModal";
-import EmptyPageBackground from "../../images/EmptyPageBackground.svg";
+import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 
 const Design = () => {
   // const { state } = useLocation();
@@ -179,8 +179,10 @@ const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <img alt="background" src={EmptyPageBackground} />
-      <span>There is no question here but you can</span>
+      <img alt="background" src={DesignEmptyVector} />
+      <span style={{ color: "#676767" }}>
+        There is no question here but you can
+      </span>
       <Button
         style={{
           backgroundColor: "#D6E5F5",
@@ -188,6 +190,8 @@ const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
           borderWidth: 1,
           borderRadius: 10,
           height: 40,
+          marginTop: 8,
+          marginBottom: 8,
         }}
         onClick={() => {
           setIsModalOpen(true);
@@ -204,7 +208,7 @@ const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
           + Add Question
         </span>
       </Button>
-      <span>
+      <span style={{ color: "#676767" }}>
         or go to <b>Brain Storm</b> and generate some ideas with AI.
       </span>
       <AddQuestionModal

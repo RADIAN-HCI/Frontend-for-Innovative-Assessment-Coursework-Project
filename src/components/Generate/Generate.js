@@ -3,11 +3,15 @@ import React, { useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
-import { Image } from "antd";
+import { Image, Button } from "antd";
 import CubeIcon from "../../images/CubeIcon.svg";
 import GeneralList from "../GeneralList";
 import GenerateSideIcon from "../../images/GenerateSideIcon.svg";
+
+import GenerateEmptyVector from "../../images/GenerateEmptyVector.svg";
+
 import GenerateRenderItem from "./GenerateRenderItem";
+// import AddQuestionModal from "./AddQuestionModal";
 
 const Generate = () => {
   // const { state } = useLocation();
@@ -55,7 +59,7 @@ const Generate = () => {
           color: "red",
           zIndex: 0,
         }}
-        alt="salam"
+        alt="cube icon"
       />
       <div
         style={{
@@ -99,18 +103,40 @@ const Generate = () => {
             style={{ marginLeft: "5%", marginTop: "5%" }}
           />
         </div>
-        <div
-          style={{
-            marginLeft: "10%",
-            marginTop: "3%",
-            marginRight: "10%",
-          }}
-        >
-          <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
-        </div>
+        {data && data.length > 0 ? (
+          <div
+            style={{
+              marginLeft: "10%",
+              marginTop: "3%",
+              marginRight: "10%",
+            }}
+          >
+            <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
+          </div>
+        ) : (
+          <EmptyPage />
+        )}
       </div>
     </>
   );
 };
 
+const EmptyPage = () => {
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <img alt="background" src={GenerateEmptyVector} />
+      <span style={{ color: "#676767" }}>
+        There is no question here. you can either design
+      </span>
+      <span style={{ color: "#676767" }}>
+        your own question in <b>Design/Brain storm</b>
+      </span>
+      <span style={{ color: "#676767" }}>
+        section or Ask you assistants to do it.
+      </span>
+    </div>
+  );
+};
 export default Generate;

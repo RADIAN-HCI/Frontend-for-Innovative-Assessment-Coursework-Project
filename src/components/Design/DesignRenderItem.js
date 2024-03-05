@@ -12,6 +12,7 @@ import GenerateUploadComponent from "../Generate/GenerateUploadComponent";
 import NoAttachmentComponent from "../Generate/NoAttachmentComponent";
 import EyeIcon from "../../images/EyeIcon.svg";
 import CheckIcon from "../../images/CheckIcon.svg";
+import EnhanceIcon from "../../images/EnhanceIcon.svg";
 
 import IconButton from "../IconButton";
 
@@ -108,10 +109,10 @@ const DesignRenderItem = ({
             )}
 
             <IconButton
-              icon={CheckIcon}
+              icon={EnhanceIcon}
               buttonText="Enhance"
-              backgroundColor="#F4C6FF"
-              mainColor="#D32EFF"
+              backgroundColor="#DE54FF"
+              mainColor="#FFFFFF"
               onClick={() => {
                 setIsEditMode(false);
               }}

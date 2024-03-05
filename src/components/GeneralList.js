@@ -2,7 +2,6 @@ import { List } from "antd";
 
 const GeneralList = ({ data, RenderItem, numOfColumn }) => {
   return (
-    <ul>
       <List
         grid={{
           column: numOfColumn,
@@ -11,7 +10,6 @@ const GeneralList = ({ data, RenderItem, numOfColumn }) => {
         dataSource={data}
         renderItem={RenderItem}
       />
-    </ul>
   );
 };
 

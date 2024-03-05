@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
-import { Image } from "antd";
+import { Button, Image } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
 import DesignRenderItem from "./DesignRenderItem";
@@ -24,11 +24,11 @@ const Design = () => {
   const RenderItem = (item, idx) => {
     const [isEditMode, setIsEditMode] = useState(false);
 
-    const infoStyle = {
-      marginRight: 8,
-      marginLeft: 8,
-      height: 40,
-    };
+    // const infoStyle = {
+    //   marginRight: 8,
+    //   marginLeft: 8,
+    //   height: 40,
+    // };
     return (
       <DesignRenderItem
         // infoStyle={infoStyle}
@@ -48,14 +48,14 @@ const Design = () => {
         src={DesignCloudIcon}
         style={{
           position: "absolute",
-          right: 0,
+          right: -100,
           top: 250,
           width: "30%",
           height: "30%",
           color: "red",
           zIndex: 0,
         }}
-        alt="salam"
+        alt="cloud icon"
       />
       <div
         style={{
@@ -100,10 +100,33 @@ const Design = () => {
           style={{
             marginLeft: "10%",
             marginTop: "3%",
-            marginRight: "10%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "85%",
           }}
         >
           <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
+          <Button
+            style={{
+              backgroundColor: "#D6E5F5",
+              borderColor: "#0066CC",
+              borderWidth: 1,
+              borderRadius: 10,
+              height: 40,
+            }}
+          >
+            <span
+              style={{
+                fontWeight: "bolder",
+                fontSize: 20,
+                color: "#0066CC",
+                marginBottom: 8,
+              }}
+            >
+              + Add Question
+            </span>
+          </Button>
         </div>
       </div>
       <img
@@ -118,7 +141,7 @@ const Design = () => {
           zIndex: -1,
           rotate: "revert",
         }}
-        alt="salam"
+        alt="cloud icon"
       />
     </>
   );

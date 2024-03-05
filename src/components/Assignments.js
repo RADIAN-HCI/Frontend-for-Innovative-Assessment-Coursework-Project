@@ -63,6 +63,7 @@ const Assignments = () => {
           marginLeft: "10%",
           marginTop: "2%",
           marginRight: "10%",
+          alignItems: "center",
         }}
       >
         <span
@@ -76,7 +77,7 @@ const Assignments = () => {
         <Image
           src={Kites}
           preview={false}
-          style={{ marginLeft: "5%", marginTop: "2%" }}
+          style={{ marginLeft: "5%", marginTop: "2%", width: "88%" }}
         />
       </div>
       <div
@@ -129,7 +130,7 @@ const RenderItem = (person, idx) => {
               width: "30%",
             }}
           >
-            <Image src={BookIcon} width={15} />
+            <Image src={BookIcon} width={15} preview={false} />
             <span>Course</span>
             <span>Fundamentals of Programming</span>
           </div>
@@ -141,7 +142,7 @@ const RenderItem = (person, idx) => {
               width: "30%",
             }}
           >
-            <Image src={ProfileIcon} width={15} />
+            <Image src={ProfileIcon} width={15} preview={false} />
             <span>Owner</span>
             <span>Prof. Mohammad Amin Fazli</span>
           </div>
@@ -153,7 +154,7 @@ const RenderItem = (person, idx) => {
               width: "30%",
             }}
           >
-            <Image src={CalendarIcon} width={15} />
+            <Image src={CalendarIcon} width={15} preview={false} />
             <span>Deadline</span>
             <span>26 Jan 23:59</span>
           </div>

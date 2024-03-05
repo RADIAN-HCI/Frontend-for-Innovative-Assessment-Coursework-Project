@@ -3,8 +3,18 @@ import { Button } from "antd";
 
 const NoAttachmentComponent = () => {
   return (
-    <Button type="dashed" icon={<CloseOutlined />} disabled>
-      No Attachment
+    <Button
+      type="dashed"
+      disabled
+      style={{
+        height: "40%",
+        width: "100%",
+        alignItems: "center",
+      }}
+    >
+      <CloseOutlined />
+      <br />
+      <span>No File</span>
     </Button>
   );
 };

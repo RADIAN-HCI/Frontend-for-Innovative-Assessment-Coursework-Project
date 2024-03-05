@@ -37,7 +37,7 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
               value={questionTitle}
               onChange={(e) => setQuestionTitle(e.target.value)}
               placeholder="Enter your question title"
-              style={{ height: "35%" }}
+              style={{ height: "40%" }}
             />
 
             <ButtonForModal

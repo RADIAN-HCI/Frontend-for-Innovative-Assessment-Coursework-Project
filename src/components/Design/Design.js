@@ -7,6 +7,7 @@ import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
 import DesignRenderItem from "./DesignRenderItem";
 import AddQuestionModal from "./AddQuestionModal";
+import EmptyPageBackground from "../../images/EmptyPageBackground.svg";
 
 const Design = () => {
   // const { state } = useLocation();
@@ -14,12 +15,12 @@ const Design = () => {
   const [selected, setSelected] = useState(-1);
 
   const data = [
-    { title: "Idea 1" },
-    { title: "Idea 2" },
-    { title: "Idea 3" },
-    { title: "Idea 4" },
-    { title: "Idea 5" },
-    { title: "Idea 6" },
+    // { title: "Idea 1" },
+    // { title: "Idea 2" },
+    // { title: "Idea 3" },
+    // { title: "Idea 4" },
+    // { title: "Idea 5" },
+    // { title: "Idea 6" },
   ];
 
   const RenderItem = (item, idx) => {
@@ -42,7 +43,6 @@ const Design = () => {
       />
     );
   };
-
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOk = () => {
@@ -106,42 +106,55 @@ const Design = () => {
             Design
           </span>
         </div>
-        <div
-          style={{
-            marginLeft: "10%",
-            marginTop: "3%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: "85%",
-          }}
-        >
-          <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
-          <Button
+        {data && data.length > 0 ? (
+          <div
             style={{
-              backgroundColor: "#D6E5F5",
-              borderColor: "#0066CC",
-              borderWidth: 1,
-              borderRadius: 10,
-              height: 40,
-            }}
-            onClick={() => {
-              setIsModalOpen(true);
+              marginLeft: "10%",
+              marginTop: "3%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              width: "85%",
             }}
           >
-            <span
+            <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
+            <Button
               style={{
-                fontWeight: "bolder",
-                fontSize: 20,
-                color: "#0066CC",
-                marginBottom: 8,
+                backgroundColor: "#D6E5F5",
+                borderColor: "#0066CC",
+                borderWidth: 1,
+                borderRadius: 10,
+                height: 40,
+              }}
+              onClick={() => {
+                setIsModalOpen(true);
               }}
             >
-              + Add Question
-            </span>
-          </Button>
-          <AddQuestionModal isModalOpen={isModalOpen} handleCancel={handleCancel} handleOk={handleOk}/>
-        </div>
+              <span
+                style={{
+                  fontWeight: "bolder",
+                  fontSize: 20,
+                  color: "#0066CC",
+                  marginBottom: 8,
+                }}
+              >
+                + Add Question
+              </span>
+            </Button>
+            <AddQuestionModal
+              isModalOpen={isModalOpen}
+              handleCancel={handleCancel}
+              handleOk={handleOk}
+            />
+          </div>
+        ) : (
+          <EmptyPage
+            setIsModalOpen={setIsModalOpen}
+            isModalOpen={isModalOpen}
+            handleCancel={handleCancel}
+            handleOk={handleOk}
+          />
+        )}
       </div>
       <img
         src={DesignCloudIcon}
@@ -161,4 +174,45 @@ const Design = () => {
   );
 };
 
+const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
+  return (
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <img alt="background" src={EmptyPageBackground} />
+      <span>There is no question here but you can</span>
+      <Button
+        style={{
+          backgroundColor: "#D6E5F5",
+          borderColor: "#0066CC",
+          borderWidth: 1,
+          borderRadius: 10,
+          height: 40,
+        }}
+        onClick={() => {
+          setIsModalOpen(true);
+        }}
+      >
+        <span
+          style={{
+            fontWeight: "bolder",
+            fontSize: 20,
+            color: "#0066CC",
+            marginBottom: 8,
+          }}
+        >
+          + Add Question
+        </span>
+      </Button>
+      <span>
+        or go to <b>Brain Storm</b> and generate some ideas with AI.
+      </span>
+      <AddQuestionModal
+        isModalOpen={isModalOpen}
+        handleCancel={handleCancel}
+        handleOk={handleOk}
+      />
+    </div>
+  );
+};
 export default Design;

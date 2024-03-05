@@ -17,21 +17,20 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
         onOk={handleOk}
         onCancel={handleCancel}
         width="50%"
+        okType="default"
+        footer={null}
       >
         <div
           style={{
             display: "flex",
             flexDirection: "row",
-            // backgroundColor: "yellow",
           }}
         >
-          {/* <div style={{ display: "flex", flexDirection: "column", backgroundColor: 'blue' }}> */}
           <div
             style={{
               display: "flex",
               flexDirection: "row",
               width: "500%",
-              // backgroundColor: "red",
             }}
           >
             <Input
@@ -40,8 +39,6 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
               placeholder="Enter your question title"
               style={{ height: "35%" }}
             />
-
-            {/* <div style={{ display: "flex", flexDirection: "row" }}> */}
 
             <ButtonForModal
               icon={PlusIcon}
@@ -61,9 +58,6 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
               //   setIsEditMode(false);
               // }}
             />
-
-            {/* </div> */}
-            {/* </div> */}
           </div>
           <GenerateUploadComponent />
         </div>
@@ -73,14 +67,16 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
             display: "flex",
             flexDirection: "row",
             width: "82%",
-            // backgroundColor: "red",
           }}
         >
           <TextArea
             value={questionText}
             onChange={(e) => setQuestionText(e.target.value)}
             placeholder="Enter your question"
-            autoSize
+            autoSize={{
+              minRows: 3,
+              maxRows: 7,
+            }}
           />
         </div>
       </Modal>

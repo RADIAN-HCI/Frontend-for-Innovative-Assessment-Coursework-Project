@@ -25,7 +25,7 @@ const GenerateRenderItem = ({
   setData,
 }) => {
   const [ideaText, setIdeaText] = useState(
-    "English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of “Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin"
+    "English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of “Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin"
   );
 
   const swapElements = (arr, pos1, pos2) => {
@@ -35,8 +35,12 @@ const GenerateRenderItem = ({
 
     arr[pos2] = temp;
 
+    console.log(data, " Salam 2");
+
     return arr;
   };
+
+  // const [curIdx, setIdx] = useState(idx);
 
   return (
     <div
@@ -70,8 +74,10 @@ const GenerateRenderItem = ({
           onClick={() => {
             if (idx !== 0) {
               setData(swapElements(data, idx, idx - 1));
+              console.log("up ", idx);
+
+              // setIdx(idx - 1);
             }
-            console.log('down ', idx)
           }}
         />
         <Text code>{idx + 1}</Text>
@@ -79,8 +85,10 @@ const GenerateRenderItem = ({
           onClick={() => {
             if (idx !== data.length - 1) {
               setData(swapElements(data, idx, idx + 1));
+              console.log("down ", idx);
+
+              // setIdx(idx + 1);
             }
-            console.log('down ', idx)
           }}
         />
       </div>

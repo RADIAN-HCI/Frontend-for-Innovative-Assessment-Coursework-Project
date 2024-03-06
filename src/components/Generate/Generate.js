@@ -29,6 +29,8 @@ const Generate = () => {
     { title: "Idea 6" },
   ]);
 
+  console.log(data);
+
   const RenderItem = (item, idx) => {
     const [add, setAdd] = useState(true);
 

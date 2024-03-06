@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
-import { CheckOutlined } from "@ant-design/icons";
+import { CheckOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
 import EditIcon from "../../images/EditIcon.svg";
 import GenerateUploadComponent from "./GenerateUploadComponent";
 import NoAttachmentComponent from "./NoAttachmentComponent";
 import EyeIcon from "../../images/EyeIcon.svg";
 import TextArea from "antd/es/input/TextArea";
-import { Image } from "antd";
+import { Image, Typography } from "antd";
 import ButtonsSideBySide from "../ButtonsSideBySide";
+
+const { Text } = Typography;
 
 const GenerateRenderItem = ({
   item,
@@ -19,10 +21,23 @@ const GenerateRenderItem = ({
   setSelected,
   isEditMode,
   setIsEditMode,
+  data,
+  setData,
 }) => {
   const [ideaText, setIdeaText] = useState(
     "English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of “Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin"
   );
+
+  const swapElements = (arr, pos1, pos2) => {
+    const temp = arr[pos1];
+
+    arr[pos1] = arr[pos2];
+
+    arr[pos2] = temp;
+
+    return arr;
+  };
+
   return (
     <div
       key={idx}
@@ -38,11 +53,38 @@ const GenerateRenderItem = ({
         borderWidth: 3,
         borderRadius: 10,
       }}
-      onClick={() => {
-        setSelected(idx);
-      }}
       className="rounded-l"
     >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "30%",
+          marginBottom: 12,
+          justifyContent: "space-between",
+          alignSelf: "center",
+          alignItems: "center",
+        }}
+      >
+        <UpOutlined
+          onClick={() => {
+            if (idx !== 0) {
+              setData(swapElements(data, idx, idx - 1));
+            }
+            console.log('down ', idx)
+          }}
+        />
+        <Text code>{idx + 1}</Text>
+        <DownOutlined
+          onClick={() => {
+            if (idx !== data.length - 1) {
+              setData(swapElements(data, idx, idx + 1));
+            }
+            console.log('down ', idx)
+          }}
+        />
+      </div>
+
       <div
         style={{
           display: "flex",
@@ -51,6 +93,9 @@ const GenerateRenderItem = ({
           marginRight: "2%",
           marginBottom: "5%",
           width: "95%",
+        }}
+        onClick={() => {
+          setSelected(idx);
         }}
       >
         <div

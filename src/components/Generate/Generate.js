@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
-import { Image, Button } from "antd";
+import { Image } from "antd";
 import CubeIcon from "../../images/CubeIcon.svg";
 import GeneralList from "../GeneralList";
 import GenerateSideIcon from "../../images/GenerateSideIcon.svg";
+import GenerateLeftVector from "../../images/GenerateLeftVector.svg";
 
 import GenerateEmptyVector from "../../images/GenerateEmptyVector.svg";
 
@@ -18,14 +19,15 @@ const Generate = () => {
   // const { username } = state;
 
   const [selected, setSelected] = useState(-1);
-  const data = [
+
+  const [data, setData] = useState([
     { title: "Idea 1" },
     { title: "Idea 2" },
     { title: "Idea 3" },
     { title: "Idea 4" },
     { title: "Idea 5" },
     { title: "Idea 6" },
-  ];
+  ]);
 
   const RenderItem = (item, idx) => {
     const [add, setAdd] = useState(true);
@@ -33,6 +35,20 @@ const Generate = () => {
     const [isEditMode, setIsEditMode] = useState(false);
 
     return (
+      // <div style={{ display: "flex", flexDirection: "row" }}>
+      // <div
+      //   style={{
+      //     display: "flex",
+      //     flexDirection: "column",
+      //     backgroundColor: "red",
+      //     height: "50%",
+      //     marginBottom: 12,
+      //   }}
+      // >
+      //   <span>asdsad</span>
+      //   <span>asdsad</span>
+      //   <span>asdsadasdasd</span>
+      // </div>
       <GenerateRenderItem
         item={item}
         idx={idx}
@@ -42,7 +58,10 @@ const Generate = () => {
         setSelected={setSelected}
         isEditMode={isEditMode}
         setIsEditMode={setIsEditMode}
+        data={data}
+        setData={setData}
       />
+      // </div>
     );
   };
 
@@ -103,6 +122,11 @@ const Generate = () => {
             style={{ marginLeft: "5%", marginTop: "5%" }}
           />
         </div>
+        <img
+          src={GenerateLeftVector}
+          alt="Generate Left Icon"
+          style={{ position: "absolute", left: 0, zIndex: -1 }}
+        />
         {data && data.length > 0 ? (
           <div
             style={{

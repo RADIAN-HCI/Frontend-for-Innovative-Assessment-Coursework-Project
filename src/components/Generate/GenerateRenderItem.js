@@ -35,12 +35,8 @@ const GenerateRenderItem = ({
 
     arr[pos2] = temp;
 
-    console.log(data, " Salam 2");
-
-    return arr;
+    return [...arr];
   };
-
-  // const [curIdx, setIdx] = useState(idx);
 
   return (
     <div
@@ -74,9 +70,6 @@ const GenerateRenderItem = ({
           onClick={() => {
             if (idx !== 0) {
               setData(swapElements(data, idx, idx - 1));
-              console.log("up ", idx);
-
-              // setIdx(idx - 1);
             }
           }}
         />
@@ -85,9 +78,6 @@ const GenerateRenderItem = ({
           onClick={() => {
             if (idx !== data.length - 1) {
               setData(swapElements(data, idx, idx + 1));
-              console.log("down ", idx);
-
-              // setIdx(idx + 1);
             }
           }}
         />

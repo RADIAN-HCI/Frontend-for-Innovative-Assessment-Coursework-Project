@@ -15,12 +15,12 @@ const Design = () => {
   const [selected, setSelected] = useState(-1);
 
   const data = [
-    // { title: "Idea 1" },
-    // { title: "Idea 2" },
-    // { title: "Idea 3" },
-    // { title: "Idea 4" },
-    // { title: "Idea 5" },
-    // { title: "Idea 6" },
+    { title: "Idea 1" },
+    { title: "Idea 2" },
+    { title: "Idea 3" },
+    { title: "Idea 4" },
+    { title: "Idea 5" },
+    { title: "Idea 6" },
   ];
 
   const RenderItem = (item, idx) => {

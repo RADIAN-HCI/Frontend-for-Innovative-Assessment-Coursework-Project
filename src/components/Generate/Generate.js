@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
-import { Image } from "antd";
+import { Button, Image } from "antd";
 import CubeIcon from "../../images/CubeIcon.svg";
 import GeneralList from "../GeneralList";
 import GenerateSideIcon from "../../images/GenerateSideIcon.svg";
@@ -12,6 +12,7 @@ import GenerateLeftVector from "../../images/GenerateLeftVector.svg";
 import GenerateEmptyVector from "../../images/GenerateEmptyVector.svg";
 
 import GenerateRenderItem from "./GenerateRenderItem";
+import NavigatorComponent from "../NavigatorComponent";
 // import AddQuestionModal from "./AddQuestionModal";
 
 const Generate = () => {
@@ -99,8 +100,10 @@ const Generate = () => {
             marginRight: "10%",
             width: "10%",
             height: "10%",
+            alignItems: "center",
           }}
         />
+        <NavigatorComponent firstText="Assignments" secondText="" />
         <div
           style={{
             display: "flex",
@@ -135,9 +138,31 @@ const Generate = () => {
               marginLeft: "10%",
               marginTop: "3%",
               marginRight: "10%",
+              alignItems: "center",
             }}
           >
             <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
+            <Button
+              style={{
+                backgroundColor: "#98FFC1",
+                borderColor: "#00C850",
+                borderWidth: 1,
+                borderRadius: 10,
+                height: 40,
+                marginLeft: "40%",
+              }}
+            >
+              <span
+                style={{
+                  fontWeight: "bolder",
+                  fontSize: 20,
+                  color: "#00C850",
+                  marginBottom: 8,
+                }}
+              >
+                Generate PDF
+              </span>
+            </Button>
           </div>
         ) : (
           <EmptyPage />

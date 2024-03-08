@@ -103,7 +103,7 @@ const Generate = () => {
             alignItems: "center",
           }}
         />
-        <NavigatorComponent firstText="Assignments" secondText="" />
+        <NavigatorComponent firstText="Assignments" secondText="Generate" />
         <div
           style={{
             display: "flex",

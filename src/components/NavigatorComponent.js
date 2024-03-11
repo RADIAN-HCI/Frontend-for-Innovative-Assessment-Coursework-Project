@@ -6,8 +6,9 @@ const NavigatorComponent = ({ firstText, secondText, thirdText }) => {
   const navigate = useNavigate();
 
   const navigationFunction = (text) => {
+    const username = localStorage.getItem("username");
     if (text === "Assignments") {
-      navigate("../assignments");
+      navigate("../assignments", { state: { username } });
     } else if (text === "Generate") {
       navigate("../generate");
     } else if (text === "Design") {
@@ -40,14 +41,15 @@ const NavigatorComponent = ({ firstText, secondText, thirdText }) => {
         {secondText}
       </span>
 
-      <RightOutlined />
-
-      <span
-        style={{ color: "#676767", fontSize: 18 }}
-        onClick={() => navigationFunction(thirdText)}
-      >
-        {thirdText}
-      </span>
+      {thirdText ? (
+        <>
+          <RightOutlined />
+          <span
+            style={{ color: "#676767", fontSize: 18 }}
+            onClick={() => navigationFunction(thirdText)}
+          ></span>
+        </>
+      ) : null}
     </div>
   );
 };

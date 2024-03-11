@@ -8,6 +8,7 @@ import GeneralList from "../GeneralList";
 import DesignRenderItem from "./DesignRenderItem";
 import AddQuestionModal from "./AddQuestionModal";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
+import NavigatorComponent from "../NavigatorComponent";
 
 const Design = () => {
   // const { state } = useLocation();
@@ -86,6 +87,8 @@ const Design = () => {
             height: "10%",
           }}
         />
+        <NavigatorComponent firstText="Assignments" secondText="Design" />
+
         <div
           style={{
             display: "flex",

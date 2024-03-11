@@ -23,7 +23,8 @@ const LoginForm = () => {
       return;
     }
     setAuthorized(true);
-    navigate("/assignments", { state: { username, password } });
+    localStorage.setItem("username", username);
+    navigate("/assignments", { state: { username } });
   };
   const [placement, SetPlacement] = useState("TA");
 
@@ -43,7 +44,6 @@ const LoginForm = () => {
         alignItems: "center",
         marginLeft: "15%",
         marginTop: "10%",
-        // backgroundColor: "blue",
       }}
     >
       <Form.Item

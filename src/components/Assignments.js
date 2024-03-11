@@ -175,6 +175,9 @@ const RenderItem = (person, idx) => {
               fontWeight: "bolder",
               fontSize: 16,
             }}
+            onClick={() => {
+              navigate("/brainstorm");
+            }}
           >
             Brain Storm
           </Button>

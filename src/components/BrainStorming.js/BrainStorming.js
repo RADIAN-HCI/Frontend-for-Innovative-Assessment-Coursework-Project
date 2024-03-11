@@ -5,10 +5,10 @@ import "../index.css";
 import { Button, Image } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
-import DesignRenderItem from "./BrainStormingRenderItem";
 import AddQuestionModal from "./AddQuestionModal";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent";
+import BrainStormingRenderItem from "./BrainStormingRenderItem";
 
 const BrainStorming = () => {
   // const { state } = useLocation();
@@ -33,7 +33,7 @@ const BrainStorming = () => {
     //   height: 40,
     // };
     return (
-      <DesignRenderItem
+      <BrainStormingRenderItem
         // infoStyle={infoStyle}
         isEditMode={isEditMode}
         selected={selected}
@@ -106,7 +106,7 @@ const BrainStorming = () => {
               marginRight: 8,
             }}
           >
-            Design
+            Brain Storming
           </span>
         </div>
         {data && data.length > 0 ? (
@@ -120,7 +120,7 @@ const BrainStorming = () => {
               width: "85%",
             }}
           >
-            <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
+            <GeneralList data={data} RenderItem={RenderItem} numOfColumn={2} />
             <Button
               style={{
                 backgroundColor: "#D6E5F5",

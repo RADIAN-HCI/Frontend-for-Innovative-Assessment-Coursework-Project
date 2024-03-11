@@ -9,7 +9,6 @@ import "../index.css";
 // import { useLocation } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
 import GenerateUploadComponent from "../Generate/GenerateUploadComponent";
-import NoAttachmentComponent from "../Generate/NoAttachmentComponent";
 import EyeIcon from "../../images/EyeIcon.svg";
 import CheckIcon from "../../images/CheckIcon.svg";
 import EnhanceIcon from "../../images/EnhanceIcon.svg";
@@ -169,9 +168,7 @@ const BrainStormingRenderItem = ({
           width: "10%",
           justifyContent: "center",
         }}
-      >
-        {isEditMode ? <GenerateUploadComponent /> : <NoAttachmentComponent />}
-      </div>
+      ></div>
     </div>
   );
 };

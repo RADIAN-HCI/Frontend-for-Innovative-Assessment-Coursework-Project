@@ -8,10 +8,8 @@ import TextArea from "antd/es/input/TextArea";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
-import GenerateUploadComponent from "../Generate/GenerateUploadComponent";
 import EyeIcon from "../../images/EyeIcon.svg";
 import CheckIcon from "../../images/CheckIcon.svg";
-import EnhanceIcon from "../../images/EnhanceIcon.svg";
 
 import IconButton from "../IconButton";
 
@@ -85,7 +83,7 @@ const BrainStormingRenderItem = ({
               justifyContent: "space-between",
             }}
           >
-            {isEditMode ? (
+            {/* {isEditMode ? (
               <IconButton
                 icon={CheckIcon}
                 buttonText="Done"
@@ -105,9 +103,9 @@ const BrainStormingRenderItem = ({
                   setIsEditMode(true);
                 }}
               />
-            )}
+            )} */}
 
-            <IconButton
+            {/* <IconButton
               icon={EnhanceIcon}
               buttonText="Enhance"
               backgroundColor="#DE54FF"
@@ -115,10 +113,10 @@ const BrainStormingRenderItem = ({
               onClick={() => {
                 setIsEditMode(false);
               }}
-            />
+            /> */}
           </div>
         </div>
-        {isEditMode ? (
+        {/* {isEditMode ? (
           <div
             style={{
               display: "flex",
@@ -144,13 +142,15 @@ const BrainStormingRenderItem = ({
               Reading Mode
             </span>
           </div>
-        )}
+        )} */}
 
-        {isEditMode ? (
+        {/* {isEditMode ? (
           <TextEditor ideaText={ideaText} setIdeaText={setIdeaText} />
         ) : (
           <TextDisplay text={ideaText} />
-        )}
+        )} */}
+
+        <TextDisplay text={ideaText} />
         <div
           style={{
             display: "flex",
@@ -196,33 +196,33 @@ const TextDisplay = ({ text }) => {
   );
 };
 
-const TextEditor = ({ ideaText, setIdeaText }) => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "95%",
-          height: "100%",
-        }}
-      >
-        <TextArea
-          value={ideaText}
-          onChange={(e) => setIdeaText(e.target.value)}
-          placeholder="Controlled autosize"
-          autoSize
-        />
-      </div>
-    </div>
-  );
-};
+// const TextEditor = ({ ideaText, setIdeaText }) => {
+//   return (
+//     <div
+//       style={{
+//         display: "flex",
+//         flexDirection: "row",
+//         justifyContent: "space-between",
+//       }}
+//     >
+//       <div
+//         style={{
+//           display: "flex",
+//           flexDirection: "column",
+//           width: "95%",
+//           height: "100%",
+//         }}
+//       >
+//         <TextArea
+//           value={ideaText}
+//           onChange={(e) => setIdeaText(e.target.value)}
+//           placeholder="Controlled autosize"
+//           autoSize
+//         />
+//       </div>
+//     </div>
+//   );
+// };
 
 const SelectedComponent = () => {
   return (

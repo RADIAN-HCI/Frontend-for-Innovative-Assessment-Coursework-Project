@@ -87,7 +87,10 @@ const BrainStorming = () => {
             height: "10%",
           }}
         />
-        <NavigatorComponent firstText="Assignments" secondText="Design" />
+        <NavigatorComponent
+          firstText="Assignments"
+          secondText="Brain Storming"
+        />
 
         <div
           style={{

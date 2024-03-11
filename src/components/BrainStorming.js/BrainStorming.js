@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-// import { useLocation } from "react-router-dom";
 import { Button, Image } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
@@ -11,8 +10,6 @@ import NavigatorComponent from "../NavigatorComponent";
 import BrainStormingRenderItem from "./BrainStormingRenderItem";
 
 const BrainStorming = () => {
-  // const { state } = useLocation();
-  // const { username } = state;
   const [selected, setSelected] = useState(-1);
 
   const data = [

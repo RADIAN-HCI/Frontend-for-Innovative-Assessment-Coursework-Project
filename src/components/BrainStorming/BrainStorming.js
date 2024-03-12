@@ -8,7 +8,6 @@ import AddQuestionModal from "./AddQuestionModal";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent";
 import BrainStormingRenderItem from "./BrainStormingRenderItem";
-import TabComponent from "./TabComponent";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 
 const BrainStorming = () => {

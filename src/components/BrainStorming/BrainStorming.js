@@ -8,6 +8,8 @@ import AddQuestionModal from "./AddQuestionModal";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent";
 import BrainStormingRenderItem from "./BrainStormingRenderItem";
+import TabComponent from "./TabComponent";
+import { DeleteFilled, EditFilled } from "@ant-design/icons";
 
 const BrainStorming = () => {
   const [selected, setSelected] = useState(-1);
@@ -112,43 +114,101 @@ const BrainStorming = () => {
         {data && data.length > 0 ? (
           <div
             style={{
-              marginLeft: "10%",
-              marginTop: "3%",
               display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "85%",
+              flexDirection: "row",
             }}
           >
-            <GeneralList data={data} RenderItem={RenderItem} numOfColumn={2} />
-            <Button
+            <div
               style={{
-                backgroundColor: "#D6E5F5",
-                borderColor: "#0066CC",
-                borderWidth: 1,
-                borderRadius: 10,
-                height: 40,
-              }}
-              onClick={() => {
-                setIsModalOpen(true);
+                backgroundColor: "red",
+                marginLeft: "15%",
+                marginRight: "2%",
+                width: "8%",
               }}
             >
-              <span
+              <div
                 style={{
-                  fontWeight: "bolder",
-                  fontSize: 20,
-                  color: "#0066CC",
-                  marginBottom: 8,
+                  backgroundColor: "#F5F5F5",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
                 }}
               >
-                + Add Question
-              </span>
-            </Button>
-            <AddQuestionModal
-              isModalOpen={isModalOpen}
-              handleCancel={handleCancel}
-              handleOk={handleOk}
-            />
+                <p>Brainstorm 1</p>
+                <EditFilled />
+                <DeleteFilled />
+              </div>
+
+              <div
+                style={{
+                  backgroundColor: "#F5F5F5",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p>Brainstorm 2</p>
+                <EditFilled />
+                <DeleteFilled />
+              </div>
+
+              <div
+                style={{
+                  backgroundColor: "#F5F5F5",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p>Brainstorm 3</p>
+                <EditFilled />
+                <DeleteFilled />
+              </div>
+
+            </div>
+            <div
+              style={{
+                marginTop: "3%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                width: "75%",
+              }}
+            >
+              <GeneralList
+                data={data}
+                RenderItem={RenderItem}
+                numOfColumn={2}
+              />
+              <Button
+                style={{
+                  backgroundColor: "#D6E5F5",
+                  borderColor: "#0066CC",
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  height: 40,
+                }}
+                onClick={() => {
+                  setIsModalOpen(true);
+                }}
+              >
+                <span
+                  style={{
+                    fontWeight: "bolder",
+                    fontSize: 20,
+                    color: "#0066CC",
+                    marginBottom: 8,
+                  }}
+                >
+                  + Add Question
+                </span>
+              </Button>
+              <AddQuestionModal
+                isModalOpen={isModalOpen}
+                handleCancel={handleCancel}
+                handleOk={handleOk}
+              />
+            </div>
           </div>
         ) : (
           <EmptyPage

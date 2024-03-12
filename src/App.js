@@ -4,7 +4,7 @@ import AccountForm from "./components/Login/AccountForm";
 import Assignments from "./components/Assignments";
 import Generate from "./components/Generate/Generate";
 import Design from "./components/Design/Design";
-import BrainStorming from "./components/BrainStorming.js/BrainStorming";
+import BrainStorming from "./components/BrainStorming/BrainStorming";
 
 function App() {
   return (

@@ -4,6 +4,8 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
+import { useMutation } from "@tanstack/react-query";
+import { loginPost } from "../api";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -11,6 +13,8 @@ const LoginForm = () => {
   const [authorized, setAuthorized] = useState(true);
   const navigate = useNavigate();
   const alert = useAlert();
+
+  const [mutate, { isLoading, isError, error, data }] = useMutation(loginPost);
 
   const login = () => {
     if (username === "" || password === "") {
@@ -23,6 +27,12 @@ const LoginForm = () => {
       return;
     }
     setAuthorized(true);
+    // try {
+    //   await mutate({username, password});
+    //   // Do something after successful mutation if needed
+    // } catch (error) {
+    //   // Handle error if needed
+    // }
     localStorage.setItem("username", username);
     navigate("/assignments", { state: { username } });
   };

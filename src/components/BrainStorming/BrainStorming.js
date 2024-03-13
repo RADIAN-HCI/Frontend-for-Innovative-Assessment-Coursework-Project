@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image } from "antd";
+import { Button, Image, Input } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
 import AddQuestionModal from "./AddQuestionModal";
@@ -163,7 +163,6 @@ const BrainStorming = () => {
                 <EditFilled />
                 <DeleteFilled />
               </div>
-
             </div>
             <div
               style={{
@@ -179,6 +178,9 @@ const BrainStorming = () => {
                 RenderItem={RenderItem}
                 numOfColumn={2}
               />
+
+              <Input placeholder="Write your message" />
+
               <Button
                 style={{
                   backgroundColor: "#D6E5F5",
@@ -270,6 +272,7 @@ const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
           + Add Question
         </span>
       </Button>
+
       <span style={{ color: "#676767" }}>
         or go to <b>Brain Storm</b> and generate some ideas with AI.
       </span>

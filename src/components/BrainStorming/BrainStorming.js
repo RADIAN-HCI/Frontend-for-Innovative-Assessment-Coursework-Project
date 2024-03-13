@@ -8,7 +8,9 @@ import AddQuestionModal from "./AddQuestionModal";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent";
 import BrainStormingRenderItem from "./BrainStormingRenderItem";
-import { DeleteFilled, EditFilled, SendOutlined } from "@ant-design/icons";
+import { SendOutlined } from "@ant-design/icons";
+
+import BrainstormVector from "../../images/BrainstormVector.svg";
 
 const BrainStorming = () => {
   const [selected, setSelected] = useState(-1);
@@ -60,7 +62,21 @@ const BrainStorming = () => {
         style={{
           position: "absolute",
           right: -100,
-          top: 250,
+          top: 400,
+          width: "30%",
+          height: "30%",
+          color: "red",
+          zIndex: 0,
+        }}
+        alt="cloud icon"
+      />
+
+      <img
+        src={BrainstormVector}
+        style={{
+          position: "absolute",
+          right: -100,
+          top: 100,
           width: "30%",
           height: "30%",
           color: "red",
@@ -192,12 +208,20 @@ const BrainStorming = () => {
                 }}
                 suffix={
                   <SendOutlined
+                    color="blue"
                     onClick={() => {
                       console.log(text);
                     }}
                   />
                 }
-                style={{ width: "80%" }}
+                style={{
+                  width: "80%",
+                  position: "sticky",
+                  bottom: 15,
+                  borderColor: "black",
+                  borderWidth: 1,
+                  borderRadius: 10,
+                }}
               />
             </div>
           </div>

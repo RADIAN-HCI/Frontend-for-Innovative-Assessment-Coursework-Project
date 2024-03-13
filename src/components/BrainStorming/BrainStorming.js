@@ -8,7 +8,7 @@ import AddQuestionModal from "./AddQuestionModal";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent";
 import BrainStormingRenderItem from "./BrainStormingRenderItem";
-import { DeleteFilled, EditFilled } from "@ant-design/icons";
+import { DeleteFilled, EditFilled, SendOutlined } from "@ant-design/icons";
 
 const BrainStorming = () => {
   const [selected, setSelected] = useState(-1);
@@ -50,6 +50,8 @@ const BrainStorming = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const [text, setText] = useState("");
 
   return (
     <>
@@ -117,7 +119,7 @@ const BrainStorming = () => {
               flexDirection: "row",
             }}
           >
-            <div
+            {/* <div
               style={{
                 backgroundColor: "red",
                 marginLeft: "15%",
@@ -163,14 +165,17 @@ const BrainStorming = () => {
                 <EditFilled />
                 <DeleteFilled />
               </div>
-            </div>
+            </div> */}
             <div
               style={{
                 marginTop: "3%",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                width: "75%",
+                // width: "75%",
+                width: "85%",
+
+                marginLeft: "10%",
               }}
             >
               <GeneralList
@@ -179,35 +184,20 @@ const BrainStorming = () => {
                 numOfColumn={2}
               />
 
-              <Input placeholder="Write your message" />
-
-              <Button
-                style={{
-                  backgroundColor: "#D6E5F5",
-                  borderColor: "#0066CC",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  height: 40,
+              <Input
+                placeholder="Please Enter your subject to brainstorm"
+                value={text}
+                onChange={(e) => {
+                  setText(e.target.value);
                 }}
-                onClick={() => {
-                  setIsModalOpen(true);
-                }}
-              >
-                <span
-                  style={{
-                    fontWeight: "bolder",
-                    fontSize: 20,
-                    color: "#0066CC",
-                    marginBottom: 8,
-                  }}
-                >
-                  + Add Question
-                </span>
-              </Button>
-              <AddQuestionModal
-                isModalOpen={isModalOpen}
-                handleCancel={handleCancel}
-                handleOk={handleOk}
+                suffix={
+                  <SendOutlined
+                    onClick={() => {
+                      console.log(text);
+                    }}
+                  />
+                }
+                style={{ width: "80%" }}
               />
             </div>
           </div>

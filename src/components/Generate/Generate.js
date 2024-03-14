@@ -13,15 +13,17 @@ import GenerateEmptyVector from "../../images/GenerateEmptyVector.svg";
 
 import GenerateRenderItem from "./GenerateRenderItem";
 import NavigatorComponent from "../NavigatorComponent";
-// import AddQuestionModal from "./AddQuestionModal";
+import { useMutation } from "@tanstack/react-query";
+import { generatePDF } from "../api";
 
 const Generate = () => {
-  // const { state } = useLocation();
-  // const { username } = state;
+  const { data, mutate, status } = useMutation({
+    mutationFn: generatePDF,
+  });
 
   const [selected, setSelected] = useState(-1);
 
-  const [data, setData] = useState([
+  const [generateData, setGenerateData] = useState([
     { title: "Idea 1" },
     { title: "Idea 2" },
     { title: "Idea 3" },
@@ -30,7 +32,15 @@ const Generate = () => {
     { title: "Idea 6" },
   ]);
 
-  console.log(data);
+  const handleGeneratePDF = async (id) => {
+    try {
+      await mutate({ assignment_id: id });
+      console.log(status);
+      console.log(data);
+    } catch (e) {
+      console.log("Error");
+    }
+  };
 
   const RenderItem = (item, idx) => {
     const [add, setAdd] = useState(true);
@@ -38,20 +48,6 @@ const Generate = () => {
     const [isEditMode, setIsEditMode] = useState(false);
 
     return (
-      // <div style={{ display: "flex", flexDirection: "row" }}>
-      // <div
-      //   style={{
-      //     display: "flex",
-      //     flexDirection: "column",
-      //     backgroundColor: "red",
-      //     height: "50%",
-      //     marginBottom: 12,
-      //   }}
-      // >
-      //   <span>asdsad</span>
-      //   <span>asdsad</span>
-      //   <span>asdsadasdasd</span>
-      // </div>
       <GenerateRenderItem
         item={item}
         idx={idx}
@@ -61,8 +57,8 @@ const Generate = () => {
         setSelected={setSelected}
         isEditMode={isEditMode}
         setIsEditMode={setIsEditMode}
-        data={data}
-        setData={setData}
+        data={generateData}
+        setData={setGenerateData}
       />
       // </div>
     );
@@ -132,7 +128,7 @@ const Generate = () => {
           alt="Generate Left Icon"
           style={{ position: "absolute", left: 0, zIndex: -1 }}
         />
-        {data && data.length > 0 ? (
+        {generateData && generateData.length > 0 ? (
           <div
             style={{
               marginLeft: "10%",
@@ -141,7 +137,11 @@ const Generate = () => {
               alignItems: "center",
             }}
           >
-            <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
+            <GeneralList
+              data={generateData}
+              RenderItem={RenderItem}
+              numOfColumn={1}
+            />
             <Button
               style={{
                 backgroundColor: "#98FFC1",
@@ -150,6 +150,9 @@ const Generate = () => {
                 borderRadius: 10,
                 height: 40,
                 marginLeft: "40%",
+              }}
+              onClick={() => {
+                handleGeneratePDF(2);
               }}
             >
               <span

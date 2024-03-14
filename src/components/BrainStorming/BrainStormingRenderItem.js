@@ -1,35 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "../index.css";
-// import { useLocation } from "react-router-dom";
-import { Image } from "antd";
-import EditIcon from "../../images/EditIcon.svg";
-import TextArea from "antd/es/input/TextArea";
-
-import "../index.css";
-// import { useLocation } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
-import EyeIcon from "../../images/EyeIcon.svg";
-import CheckIcon from "../../images/CheckIcon.svg";
+import BrainStormingInfoComponent from "./BrainStormingInfoComponent";
+import InnovationIcon from "../../images/InnovationIcon.svg";
+import DifficultyIcon from "../../images/DifficultyIcon.svg";
 
-import IconButton from "../IconButton";
-
-const BrainStormingRenderItem = ({
-  item,
-  idx,
-  selected,
-  setSelected,
-  isEditMode,
-  setIsEditMode,
-}) => {
-  const [ideaText, setIdeaText] = useState(
-    "English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of “Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin"
-  );
+const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
   return (
     <div
       key={idx}
       style={{
         backgroundColor: "#F5F5F5",
-        width: "95%",
+        width: "90%",
         height: "90%",
         padding: "1%",
         display: "flex",
@@ -39,10 +21,10 @@ const BrainStormingRenderItem = ({
         borderWidth: 3,
         borderRadius: 10,
       }}
+      className="rounded-l"
       onClick={() => {
         setSelected(idx);
       }}
-      className="rounded-l"
     >
       <div
         style={{
@@ -51,106 +33,41 @@ const BrainStormingRenderItem = ({
           marginLeft: "2%",
           marginRight: "2%",
           marginBottom: "5%",
-          width: "95%",
+          width: "90%",
         }}
       >
         <div
           style={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",
             alignItems: "center",
+          }}
+        >
+          <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
+          {selected === idx ? <SelectedComponent /> : null}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
           <div
             style={{
               display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
+              flexDirection: "column",
+              width: "80%",
             }}
           >
-            <span style={{ fontWeight: "bolder", fontSize: 40 }}>
-              {item.title}
+            <span>
+              English idea comes from one of Seneca’s Epistles (58), written
+              about a.d. 64 during his retirement from Emperor Nero’s court, in
+              which the Roman philosopher uses idea in the sense of “Platonic
+              idea, eternal archetype.” Seneca wrote idea in Latin letters;
             </span>
-            {selected === idx ? <SelectedComponent /> : null}
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            {/* {isEditMode ? (
-              <IconButton
-                icon={CheckIcon}
-                buttonText="Done"
-                backgroundColor="#F4C6FF"
-                mainColor="#D32EFF"
-                onClick={() => {
-                  setIsEditMode(false);
-                }}
-              />
-            ) : (
-              <IconButton
-                icon={EditIcon}
-                buttonText="Edit"
-                backgroundColor="#F4C6FF"
-                mainColor="#D32EFF"
-                onClick={() => {
-                  setIsEditMode(true);
-                }}
-              />
-            )} */}
-
-            {/* <IconButton
-              icon={EnhanceIcon}
-              buttonText="Enhance"
-              backgroundColor="#DE54FF"
-              mainColor="#FFFFFF"
-              onClick={() => {
-                setIsEditMode(false);
-              }}
-            /> */}
           </div>
         </div>
-        {/* {isEditMode ? (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Image src={EditIcon} preview={false} />
-            <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
-              Editing Mode
-            </span>
-          </div>
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Image src={EyeIcon} preview={false} />
-            <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
-              Reading Mode
-            </span>
-          </div>
-        )} */}
-
-        {/* {isEditMode ? (
-          <TextEditor ideaText={ideaText} setIdeaText={setIdeaText} />
-        ) : (
-          <TextDisplay text={ideaText} />
-        )} */}
-
-        <TextDisplay text={ideaText} />
         <div
           style={{
             display: "flex",
@@ -165,64 +82,29 @@ const BrainStormingRenderItem = ({
         style={{
           display: "flex",
           flexDirection: "column",
-          width: "10%",
-          justifyContent: "center",
-        }}
-      ></div>
-    </div>
-  );
-};
-
-const TextDisplay = ({ text }) => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "95%",
-          height: "100%",
+          width: "30%",
+          justifyContent: "space-around",
+          columnGap: 2,
+          rowGap: 2,
         }}
       >
-        <span>{text}</span>
+        <BrainStormingInfoComponent
+          color="#00e15A"
+          title="High"
+          subtitle="Innovation"
+          imgSrc={InnovationIcon}
+        />
+
+        <BrainStormingInfoComponent
+          color="#EA0054"
+          title="Easy"
+          subtitle="Difficulty"
+          imgSrc={DifficultyIcon}
+        />
       </div>
     </div>
   );
 };
-
-// const TextEditor = ({ ideaText, setIdeaText }) => {
-//   return (
-//     <div
-//       style={{
-//         display: "flex",
-//         flexDirection: "row",
-//         justifyContent: "space-between",
-//       }}
-//     >
-//       <div
-//         style={{
-//           display: "flex",
-//           flexDirection: "column",
-//           width: "95%",
-//           height: "100%",
-//         }}
-//       >
-//         <TextArea
-//           value={ideaText}
-//           onChange={(e) => setIdeaText(e.target.value)}
-//           placeholder="Controlled autosize"
-//           autoSize
-//         />
-//       </div>
-//     </div>
-//   );
-// };
 
 const SelectedComponent = () => {
   return (

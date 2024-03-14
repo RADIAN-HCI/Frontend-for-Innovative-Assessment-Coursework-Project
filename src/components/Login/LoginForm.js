@@ -3,7 +3,6 @@ import { Form, Input, Button, Radio, Image } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAlert } from "react-alert";
 import { useMutation } from "@tanstack/react-query";
 import { loginPost } from "../api";
 
@@ -12,27 +11,23 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [authorized, setAuthorized] = useState(true);
   const navigate = useNavigate();
-  const alert = useAlert();
+  const { mutate } = useMutation({
+    mutationFn: loginPost,
+  });
 
-  const [mutate, { isLoading, isError, error, data }] = useMutation(loginPost);
-
-  const login = () => {
+  const login = async () => {
     if (username === "" || password === "") {
       setAuthorized(false);
-      alert.error(
-        <div style={{ textTransform: "initial" }}>
-          Please Provide Username and Password!
-        </div>
-      );
       return;
     }
     setAuthorized(true);
-    // try {
-    //   await mutate({username, password});
-    //   // Do something after successful mutation if needed
-    // } catch (error) {
-    //   // Handle error if needed
-    // }
+
+    try {
+      await mutate({ username, password });
+      // Do something after successful mutation if needed
+    } catch (error) {
+      console.log("Error!");
+    }
     localStorage.setItem("username", username);
     navigate("/assignments", { state: { username } });
   };
@@ -132,27 +127,6 @@ const LoginForm = () => {
       >
         Login
       </Button>
-
-      {/* <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
-          <a className="login-form-forgot" href="">
-            Forgot password
-          </a>
-        </Form.Item> */}
-
-      {/* <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-          >
-            Log in
-          </Button>
-          Or <a href="">register now!</a>
-        </Form.Item> */}
     </Form>
   );
 };

@@ -32,13 +32,17 @@ const Generate = () => {
     { title: "Idea 6" },
   ]);
 
-  const handleGeneratePDF = async (id) => {
+  const handleGeneratePDF = async (assignment_id) => {
     try {
-      await mutate({ assignment_id: id });
+      console.log("start");
+      // const userData = Object.fromEntries(formData);
+      const objectData = new FormData();
+      objectData.append("assignment_id", assignment_id);
+      await mutate(objectData);
       console.log(status);
       console.log(data);
     } catch (e) {
-      console.log("Error");
+      console.log("Error 500");
     }
   };
 

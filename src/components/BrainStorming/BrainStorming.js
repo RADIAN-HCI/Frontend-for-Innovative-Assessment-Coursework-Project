@@ -13,7 +13,7 @@ import { SendOutlined } from "@ant-design/icons";
 import BrainstormVector from "../../images/BrainstormVector.svg";
 
 const BrainStorming = () => {
-  const [selected, setSelected] = useState(-1);
+  const [selected, setSelected] = useState([]);
 
   const data = [
     { title: "Idea 1" },
@@ -208,7 +208,7 @@ const BrainStorming = () => {
                 }}
                 suffix={
                   <SendOutlined
-                    color="blue"
+                    style={{ color: "blue" }}
                     onClick={() => {
                       console.log(text);
                     }}

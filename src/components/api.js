@@ -1,7 +1,6 @@
-import axios from "axios";
 const baseUrl = "http://127.0.0.1:8000/";
 export async function loginPost(postData) {
-  const response = await fetch(baseUrl + "your-post-api-endpoint", {
+  const response = await fetch(baseUrl + "api/users/login/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

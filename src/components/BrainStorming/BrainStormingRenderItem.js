@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "../index.css";
-import { CheckOutlined } from "@ant-design/icons";
+import { CheckOutlined, DeleteFilled } from "@ant-design/icons";
 import BrainStormingInfoComponent from "./BrainStormingInfoComponent";
 import InnovationIcon from "../../images/InnovationIcon.svg";
 import DifficultyIcon from "../../images/DifficultyIcon.svg";
+import { Button } from "antd";
 
 const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
+  const [isRemoved, setIsRemoved] = useState(true);
   return (
     <div
       key={idx}
@@ -17,14 +19,11 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
-        borderColor: selected === idx ? "#0066CC" : "#F5F5F5",
+        borderColor: selected.includes(idx) ? "#0066CC" : "#F5F5F5",
         borderWidth: 3,
         borderRadius: 10,
       }}
       className="rounded-l"
-      onClick={() => {
-        setSelected(idx);
-      }}
     >
       <div
         style={{
@@ -44,7 +43,7 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
           }}
         >
           <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
-          {selected === idx ? <SelectedComponent /> : null}
+          {selected.includes(idx) ? <SelectedComponent /> : null}
         </div>
         <div
           style={{
@@ -94,13 +93,34 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
           subtitle="Innovation"
           imgSrc={InnovationIcon}
         />
-
         <BrainStormingInfoComponent
           color="#EA0054"
           title="Easy"
           subtitle="Difficulty"
           imgSrc={DifficultyIcon}
         />
+        {isRemoved ? (
+          <Button
+            style={{ backgroundColor: "#D6E5F5", color: "#0066CC" }}
+            onClick={() => {
+              setSelected([...selected, idx]);
+              setIsRemoved(false);
+            }}
+          >
+            <span style={{ fontWeight: "bolder" }}>+ Add for Design</span>
+          </Button>
+        ) : (
+          <Button
+            style={{ backgroundColor: "#FFF2F4", color: "#E72424" }}
+            icon={<DeleteFilled />}
+            onClick={() => {
+              setSelected(selected.filter((a) => a !== idx));
+              setIsRemoved(true);
+            }}
+          >
+            <span style={{ fontWeight: "bolder" }}>Remove</span>
+          </Button>
+        )}
       </div>
     </div>
   );

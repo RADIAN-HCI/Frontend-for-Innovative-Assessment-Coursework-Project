@@ -6,8 +6,31 @@ import InnovationIcon from "../../images/InnovationIcon.svg";
 import DifficultyIcon from "../../images/DifficultyIcon.svg";
 import { Button } from "antd";
 
+import { Typography } from "antd";
+const { Paragraph } = Typography;
+
 const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
   const [isRemoved, setIsRemoved] = useState(true);
+
+  const [state, setState] = useState({
+    expand: false,
+    counter: 0,
+  });
+
+  const typoExpand = () => {
+    setState({
+      expand: true,
+      counter: !state.expand ? state.counter + 0 : state.counter + 1,
+    });
+  };
+
+  const typoClose = () => {
+    setState({
+      expand: false,
+      counter: !state.expand ? state.counter + 0 : state.counter + 1,
+    });
+  };
+
   return (
     <div
       key={idx}
@@ -58,13 +81,21 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
               flexDirection: "column",
               width: "80%",
             }}
+            key={state.counter}
           >
-            <span>
+            <Paragraph
+              ellipsis={{
+                rows: 2,
+                expandable: true,
+                onExpand: typoExpand,
+              }}
+            >
               English idea comes from one of Seneca’s Epistles (58), written
               about a.d. 64 during his retirement from Emperor Nero’s court, in
               which the Roman philosopher uses idea in the sense of “Platonic
               idea, eternal archetype.” Seneca wrote idea in Latin letters;
-            </span>
+            </Paragraph>
+            {state.expand && <a onClick={typoClose}>Collapse</a>}
           </div>
         </div>
         <div

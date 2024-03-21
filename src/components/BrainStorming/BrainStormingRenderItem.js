@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import "../index.css";
 import { CheckOutlined, DeleteFilled } from "@ant-design/icons";
@@ -85,7 +86,7 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
           >
             <Paragraph
               ellipsis={{
-                rows: 2,
+                rows: 4,
                 expandable: true,
                 onExpand: typoExpand,
               }}
@@ -95,7 +96,11 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
               which the Roman philosopher uses idea in the sense of “Platonic
               idea, eternal archetype.” Seneca wrote idea in Latin letters;
             </Paragraph>
-            {state.expand && <a onClick={typoClose}>Collapse</a>}
+            {state.expand && (
+              <a onClick={typoClose} style={{ marginTop: 0, color: "blue" }}>
+                Collapse
+              </a>
+            )}
           </div>
         </div>
         <div

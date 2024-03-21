@@ -221,6 +221,7 @@ const BrainStorming = () => {
                   borderColor: "black",
                   borderWidth: 1,
                   borderRadius: 10,
+                  height: 38,
                 }}
               />
             </div>

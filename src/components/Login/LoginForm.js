@@ -5,21 +5,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { loginPost } from "../api";
+import axios from "axios";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [authorized, setAuthorized] = useState(true);
   const navigate = useNavigate();
-  const [loginData, setData] = useState({});
-  const { mutate } = useMutation({
-    mutationFn: loginPost,
-    onSuccess: async (data) => {
-      console.log(data);
-      setData(data);
-      console.log("data setted");
-    },
-  });
 
   const login = async () => {
     if (username === "" || password === "") {
@@ -29,12 +21,17 @@ const LoginForm = () => {
     setAuthorized(true);
 
     try {
-      const x = await mutate({ username, password });
-      console.log("X is: ", x);
-      console.log("the data is", loginData);
+      const response = await axios.post(
+        "http://127.0.0.1:8000/auth/jwt/create/",
+        { username, password }
+      );
+
+      const { access, refresh } = response.data;
+
+      localStorage.setItem('accessToken', access);
+      localStorage.setItem('refreshToken', refresh);
       localStorage.setItem("username", username);
       navigate("/assignments", { state: { username } });
-      // Do something after successful mutation if needed
     } catch (error) {
       console.log("Error!");
     }

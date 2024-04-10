@@ -5,11 +5,11 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 // import { transitions, positions, Provider as AlertProvider } from "react-alert";
 // import AlertTemplate from "react-alert-template-basic";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
-const queryClient = new QueryClient();
+// import {
+//   QueryClient,
+//   QueryClientProvider,
+// } from '@tanstack/react-query'
+// const queryClient = new QueryClient();
 
 // optional configuration
 // const options = {
@@ -24,9 +24,9 @@ const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
+    {/* <QueryClientProvider client={queryClient}> */}
+    <App />
+    {/* </QueryClientProvider> */}
   </React.StrictMode>
 );
 

@@ -11,8 +11,14 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [authorized, setAuthorized] = useState(true);
   const navigate = useNavigate();
+  const [loginData, setData] = useState({});
   const { mutate } = useMutation({
     mutationFn: loginPost,
+    onSuccess: async (data) => {
+      console.log(data);
+      setData(data);
+      console.log("data setted");
+    },
   });
 
   const login = async () => {
@@ -23,13 +29,15 @@ const LoginForm = () => {
     setAuthorized(true);
 
     try {
-      await mutate({ username, password });
+      const x = await mutate({ username, password });
+      console.log("X is: ", x);
+      console.log("the data is", loginData);
+      localStorage.setItem("username", username);
+      navigate("/assignments", { state: { username } });
       // Do something after successful mutation if needed
     } catch (error) {
       console.log("Error!");
     }
-    localStorage.setItem("username", username);
-    navigate("/assignments", { state: { username } });
   };
   const [placement, SetPlacement] = useState("TA");
 

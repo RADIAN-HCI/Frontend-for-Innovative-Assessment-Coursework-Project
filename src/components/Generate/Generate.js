@@ -13,13 +13,12 @@ import GenerateEmptyVector from "../../images/GenerateEmptyVector.svg";
 
 import GenerateRenderItem from "./GenerateRenderItem";
 import NavigatorComponent from "../NavigatorComponent";
-import { useMutation } from "@tanstack/react-query";
-import { generatePDF } from "../api";
+
 
 const Generate = () => {
-  const { data, mutate, status } = useMutation({
-    mutationFn: generatePDF,
-  });
+  // const { data, mutate, status } = useMutation({
+  //   mutationFn: generatePDF,
+  // });
 
   const [selected, setSelected] = useState(-1);
 
@@ -34,13 +33,12 @@ const Generate = () => {
 
   const handleGeneratePDF = async (assignment_id) => {
     try {
-      console.log("start");
-      // const userData = Object.fromEntries(formData);
-      const objectData = new FormData();
-      objectData.append("assignment_id", assignment_id);
-      await mutate(objectData);
-      console.log(status);
-      console.log(data);
+      // console.log("start");
+      // const objectData = new FormData();
+      // objectData.append("assignment_id", assignment_id);
+      // await mutate(objectData);
+      // console.log(status);
+      // console.log(data);
     } catch (e) {
       console.log("Error 500");
     }

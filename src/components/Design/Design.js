@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
 // import { useLocation } from "react-router-dom";
@@ -9,10 +9,18 @@ import DesignRenderItem from "./DesignRenderItem";
 import AddQuestionModal from "./AddQuestionModal";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent";
+import api from "../api";
 
 const Design = () => {
   // const { state } = useLocation();
   // const { username } = state;
+  useEffect(() => {
+    const fetchDesignData = async () => {
+      const response = await api.get("api/ideas/");
+      console.log(response);
+    };
+    fetchDesignData();
+  }, []);
   const [selected, setSelected] = useState(-1);
 
   const data = [

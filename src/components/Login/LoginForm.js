@@ -3,8 +3,7 @@ import { Form, Input, Button, Radio, Image } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { loginPost } from "../api";
+// import { loginPost } from "../api";
 import axios from "axios";
 
 const LoginForm = () => {
@@ -28,9 +27,10 @@ const LoginForm = () => {
 
       const { access, refresh } = response.data;
 
-      localStorage.setItem('accessToken', access);
+      localStorage.setItem('token', access);
       localStorage.setItem('refreshToken', refresh);
       localStorage.setItem("username", username);
+
       navigate("/assignments", { state: { username } });
     } catch (error) {
       console.log("Error!");

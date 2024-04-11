@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "../images/Logo.svg";
 import "./index.css";
 import { useLocation } from "react-router-dom";
@@ -10,9 +10,17 @@ import { Button } from "antd";
 import BookIcon from "../images/BookIcon.svg";
 import ProfileIcon from "../images/ProfileIcon.svg";
 import CalendarIcon from "../images/CalendarIcon.svg";
+import api from "./api";
 
 import { useNavigate } from "react-router-dom";
 const Assignments = () => {
+  useEffect(() => {
+    const fetchAssignmentData = async () => {
+      const response = await api.get("api/assignments/");
+      console.log(response);
+    };
+    fetchAssignmentData();
+  }, []);
   const { state } = useLocation();
   const { username } = state;
   const data = [

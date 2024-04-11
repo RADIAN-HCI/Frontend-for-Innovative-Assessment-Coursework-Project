@@ -1,32 +1,53 @@
+import axios from "axios";
+
 const baseUrl = "http://127.0.0.1:8000/";
-export async function loginPost(postData) {
-  const response = await fetch(baseUrl + "auth/jwt/create/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      // Add any additional headers if needed
-    },
-    body: JSON.stringify(postData),
-  });
 
-  if (!response.ok) {
-    throw new Error("Failed to submit data");
+const api = axios.create({
+  baseURL: baseUrl,
+});
+
+// Add a request interceptor
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Add a response interceptor
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    // If the error status is 401 and there is no originalRequest._retry flag,
+    // it means the token has expired and we need to refresh it
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        const refreshToken = localStorage.getItem("refreshToken");
+        const response = await axios.post(baseUrl + "auth/refresh-token", {
+          refreshToken,
+        });
+        const { token } = response.data;
+
+        localStorage.setItem("token", token);
+
+        // Retry the original request with the new token
+        originalRequest.headers.Authorization = `Bearer ${token}`;
+        return axios(originalRequest);
+      } catch (error) {
+        // Handle refresh token error or redirect to login
+      }
+    }
+
+    return Promise.reject(error);
   }
-  return response.json();
-}
+);
 
-export async function generatePDF(postData) {
-  const response = await fetch(baseUrl + "generate_pdf", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      // Add any additional headers if needed
-    },
-    body: postData,
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to submit data");
-  }
-  return response.json();
-}
+export default api;

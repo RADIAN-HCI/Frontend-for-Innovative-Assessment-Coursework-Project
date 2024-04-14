@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../images/Logo.svg";
 import "./index.css";
 import { useLocation } from "react-router-dom";
@@ -11,28 +11,192 @@ import BookIcon from "../images/BookIcon.svg";
 import ProfileIcon from "../images/ProfileIcon.svg";
 import CalendarIcon from "../images/CalendarIcon.svg";
 import api from "./api";
+import { Dropdown, Space } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import DesignEmptyVector from "../images/DesignEmptyVector.svg";
 
 import { useNavigate } from "react-router-dom";
 const Assignments = () => {
+  const [courseMenuItems, setCourseMenuItems] = useState([]);
+
+  const [currentCourse, setCurrentCourse] = useState();
+
   useEffect(() => {
+    const fetchCourseData = async () => {
+      const response = await api.get("api/courses/");
+      localStorage.setItem("courses", JSON.stringify(response.data));
+      console.log(response.data);
+      const mapperFunction = (obj) => {
+        return { label: obj.name, key: obj.id };
+      };
+      const courseItemsFromBackend = response.data.map(mapperFunction);
+      console.log(courseItemsFromBackend);
+
+      setCourseMenuItems(courseItemsFromBackend);
+    };
+    fetchCourseData();
+
     const fetchAssignmentData = async () => {
       const response = await api.get("api/assignments/");
-      console.log(response);
+      localStorage.setItem("assignments", JSON.stringify(response.data));
+      console.log(response.data);
     };
     fetchAssignmentData();
   }, []);
+
   const { state } = useLocation();
   const { username } = state;
-  const data = [
-    { title: "salam1" },
-    { title: "salam2" },
-    { title: "salam3" },
-    { title: "salam4" },
-    { title: "salam5" },
-    { title: "salam5" },
-    { title: "salam5" },
-    { title: "salam5" },
-  ];
+
+  const [data, setData] = useState();
+  const handleMenuClick = (e) => {
+    const checkAdult = (item) => {
+      if (item?.course === +e.key) {
+        return item;
+      }
+    };
+
+    const filterCourses = (course) => {
+      if (course.id === +e.key) {
+        return course;
+      }
+    };
+    setCurrentCourse(
+      JSON.parse(localStorage.getItem("courses")).filter(filterCourses)[0]
+    );
+
+    console.log(currentCourse);
+
+    const allAssignments = JSON.parse(localStorage.getItem("assignments"));
+
+    const result = allAssignments.filter(checkAdult);
+    setData(result);
+  };
+
+  const RenderItem = (person, idx) => {
+    const navigate = useNavigate();
+    return (
+      <div
+        key={idx}
+        style={{
+          backgroundColor: "#F5F5F5",
+          width: "90%",
+          height: "90%",
+          padding: "1%",
+        }}
+        className="rounded-l"
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginLeft: "2%",
+            marginRight: "2%",
+            marginBottom: "5%",
+          }}
+        >
+          <span style={{ fontWeight: "bolder", fontSize: 40 }}>
+            FOP Project
+          </span>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "30%",
+              }}
+            >
+              <Image src={BookIcon} width={15} preview={false} />
+              <span>Course</span>
+              <span>{currentCourse?.name}</span>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "30%",
+              }}
+            >
+              <Image src={ProfileIcon} width={15} preview={false} />
+              <span>Owner</span>
+              <span>{currentCourse?.professor_name}</span>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: "30%",
+              }}
+            >
+              <Image src={CalendarIcon} width={15} preview={false} />
+              <span>Deadline</span>
+              <span>26 Jan 23:59</span>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Button
+              className="rounded-xl bg-blue-600"
+              style={{
+                color: "#0066CC",
+                backgroundColor: "#D6E5F5",
+                width: "30%",
+                fontWeight: "bolder",
+                fontSize: 16,
+              }}
+              onClick={() => {
+                navigate("/brainstorm");
+              }}
+            >
+              Brain Storm
+            </Button>
+            <Button
+              className="w-1/3 rounded-xl"
+              style={{
+                backgroundColor: "#DDCDFF",
+                color: "#7330FF",
+                width: "30%",
+                fontWeight: "bolder",
+                fontSize: 16,
+              }}
+              onClick={() => {
+                navigate("/design");
+              }}
+            >
+              Design
+            </Button>
+            <Button
+              className="w-1/3 rounded-xl bg-blue-600"
+              style={{
+                color: "#D32EFF",
+                backgroundColor: "#F4C6FF",
+                width: "30%",
+                fontWeight: "bolder",
+                fontSize: 16,
+              }}
+              onClick={() => {
+                navigate("/generate");
+              }}
+            >
+              Generate
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div
@@ -54,6 +218,14 @@ const Assignments = () => {
           height: "10%",
         }}
       />
+      <Dropdown menu={{ items: courseMenuItems, onClick: handleMenuClick }}>
+        <Button>
+          <Space>
+            Courses
+            <DownOutlined />
+          </Space>
+        </Button>
+      </Dropdown>
       <span
         style={{
           marginLeft: "10%",
@@ -95,132 +267,26 @@ const Assignments = () => {
           marginRight: "10%",
         }}
       >
-        <GeneralList data={data} RenderItem={RenderItem} numOfColumn={2} />
+        {data && data.length > 0 ? (
+          <GeneralList data={data} RenderItem={RenderItem} numOfColumn={2} />
+        ) : (
+          <EmptyPage />
+        )}
       </div>
     </div>
   );
 };
 
-const RenderItem = (person, idx) => {
-  const navigate = useNavigate();
+const EmptyPage = () => {
   return (
     <div
-      key={idx}
-      style={{
-        backgroundColor: "#F5F5F5",
-        width: "90%",
-        height: "90%",
-        padding: "1%",
-      }}
-      className="rounded-l"
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          marginLeft: "2%",
-          marginRight: "2%",
-          marginBottom: "5%",
-        }}
-      >
-        <span style={{ fontWeight: "bolder", fontSize: 40 }}>FOP Project</span>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "30%",
-            }}
-          >
-            <Image src={BookIcon} width={15} preview={false} />
-            <span>Course</span>
-            <span>Fundamentals of Programming</span>
-          </div>
+      <img alt="background" src={DesignEmptyVector} />
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "30%",
-            }}
-          >
-            <Image src={ProfileIcon} width={15} preview={false} />
-            <span>Owner</span>
-            <span>Prof. Mohammad Amin Fazli</span>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "30%",
-            }}
-          >
-            <Image src={CalendarIcon} width={15} preview={false} />
-            <span>Deadline</span>
-            <span>26 Jan 23:59</span>
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <Button
-            className="rounded-xl bg-blue-600"
-            style={{
-              color: "#0066CC",
-              backgroundColor: "#D6E5F5",
-              width: "30%",
-              fontWeight: "bolder",
-              fontSize: 16,
-            }}
-            onClick={() => {
-              navigate("/brainstorm");
-            }}
-          >
-            Brain Storm
-          </Button>
-          <Button
-            className="w-1/3 rounded-xl"
-            style={{
-              backgroundColor: "#DDCDFF",
-              color: "#7330FF",
-              width: "30%",
-              fontWeight: "bolder",
-              fontSize: 16,
-            }}
-            onClick={() => {
-              navigate("/design");
-            }}
-          >
-            Design
-          </Button>
-          <Button
-            className="w-1/3 rounded-xl bg-blue-600"
-            style={{
-              color: "#D32EFF",
-              backgroundColor: "#F4C6FF",
-              width: "30%",
-              fontWeight: "bolder",
-              fontSize: 16,
-            }}
-            onClick={() => {
-              navigate("/generate");
-            }}
-          >
-            Generate
-          </Button>
-        </div>
-      </div>
+      <span style={{ color: "#676767" }}>
+        or go to <b>Brain Storm</b> and generate some ideas with AI.
+      </span>
     </div>
   );
 };

@@ -66,7 +66,9 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
             alignItems: "center",
           }}
         >
-          <span style={{ fontWeight: "bolder", fontSize: 40 }}>Idea 1</span>
+          <span style={{ fontWeight: "bolder", fontSize: 40 }}>
+            {item.title}
+          </span>
           {selected.includes(idx) ? <SelectedComponent /> : null}
         </div>
         <div
@@ -91,10 +93,7 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
                 onExpand: typoExpand,
               }}
             >
-              English idea comes from one of Seneca’s Epistles (58), written
-              about a.d. 64 during his retirement from Emperor Nero’s court, in
-              which the Roman philosopher uses idea in the sense of “Platonic
-              idea, eternal archetype.” Seneca wrote idea in Latin letters;
+              {item.details}
             </Paragraph>
             {state.expand && (
               <a onClick={typoClose} style={{ marginTop: 0, color: "blue" }}>
@@ -125,13 +124,13 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
       >
         <BrainStormingInfoComponent
           color="#00e15A"
-          title="High"
+          score={item.innovation}
           subtitle="Innovation"
           imgSrc={InnovationIcon}
         />
         <BrainStormingInfoComponent
           color="#EA0054"
-          title="Easy"
+          score={item.difficulty}
           subtitle="Difficulty"
           imgSrc={DifficultyIcon}
         />

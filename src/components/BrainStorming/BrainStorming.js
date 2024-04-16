@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
 import { Button, Image, Input } from "antd";
@@ -9,20 +9,38 @@ import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent";
 import BrainStormingRenderItem from "./BrainStormingRenderItem";
 import { SendOutlined } from "@ant-design/icons";
+import api from "../api";
 
 import BrainstormVector from "../../images/BrainstormVector.svg";
 
 const BrainStorming = () => {
   const [selected, setSelected] = useState([]);
 
-  const data = [
-    { title: "Idea 1" },
-    { title: "Idea 2" },
-    { title: "Idea 3" },
-    { title: "Idea 4" },
-    { title: "Idea 5" },
-    { title: "Idea 6" },
-  ];
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // const fetchCourseData = async () => {
+    //   const response = await api.get("api/courses/");
+    //   localStorage.setItem("courses", JSON.stringify(response.data));
+    //   console.log(response.data);
+    //   const mapperFunction = (obj) => {
+    //     return { label: obj.name, key: obj.id };
+    //   };
+    //   const courseItemsFromBackend = response.data.map(mapperFunction);
+    //   console.log(courseItemsFromBackend);
+
+    //   setCourseMenuItems(courseItemsFromBackend);
+    // };
+    // fetchCourseData();
+
+    const fetchIdeasData = async () => {
+      const response = await api.get("api/ideas/");
+      localStorage.setItem("ideas", JSON.stringify(response.data));
+      console.log(response.data);
+      setData(response.data);
+    };
+    fetchIdeasData();
+  }, []);
 
   const RenderItem = (item, idx) => {
     const [isEditMode, setIsEditMode] = useState(false);

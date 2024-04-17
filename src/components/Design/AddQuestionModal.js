@@ -2,12 +2,23 @@ import { Input, Modal, Button, Image } from "antd";
 import React, { useState } from "react";
 import GenerateUploadComponent from "../Generate/GenerateUploadComponent";
 import EnhanceIcon from "../../images/EnhanceIcon.svg";
-import PlusIcon from "../../images/PlusIcon.svg";
+// import PlusIcon from "../../images/PlusIcon.svg";
 import TextArea from "antd/es/input/TextArea";
+import api from "../api";
 
 const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
   const [questionText, setQuestionText] = useState("");
   const [questionTitle, setQuestionTitle] = useState("");
+
+  const sendAddQuestionRequest = async () => {
+    const response = await api.post("api/questions/", {
+      lang: "fa",
+      details_original: questionText,
+      title: questionTitle,
+    });
+
+    console.log(response);
+  };
 
   return (
     <div>
@@ -41,20 +52,15 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
             />
 
             <ButtonForModal
-              icon={PlusIcon}
-              buttonText="Create and Enhance"
-              backgroundColor="#D6E5F5"
-              mainColor="#0066CC"
-            />
-            {/* <ButtonForModal
+              // icon={PlusIcon}
               icon={EnhanceIcon}
-              buttonText="Enhance"
+              buttonText="Create and Enhance"
+              // backgroundColor="#D6E5F5"
               backgroundColor="#DE54FF"
+              // mainColor="#0066CC"
               mainColor="#FFFFFF"
-              // onClick={() => {
-              //   setIsEditMode(false);
-              // }}
-            /> */}
+              onClick={sendAddQuestionRequest}
+            />
           </div>
           <GenerateUploadComponent />
         </div>
@@ -86,7 +92,7 @@ const ButtonForModal = ({
   buttonText,
   mainColor,
   backgroundColor,
-  onClick,
+  onclick,
 }) => {
   return (
     <Button
@@ -99,7 +105,7 @@ const ButtonForModal = ({
         marginRight: 4,
         marginLeft: 4,
       }}
-      onClick={onClick}
+      onClick={onclick}
       type="default"
     >
       <div

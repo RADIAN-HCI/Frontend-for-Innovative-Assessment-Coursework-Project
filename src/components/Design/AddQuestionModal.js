@@ -42,14 +42,11 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
 
             <ButtonForModal
               icon={PlusIcon}
-              buttonText="Add"
+              buttonText="Create and Enhance"
               backgroundColor="#D6E5F5"
               mainColor="#0066CC"
-              // onClick={() => {
-              //   setAdd(false);
-              // }}
             />
-            <ButtonForModal
+            {/* <ButtonForModal
               icon={EnhanceIcon}
               buttonText="Enhance"
               backgroundColor="#DE54FF"
@@ -57,7 +54,7 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
               // onClick={() => {
               //   setIsEditMode(false);
               // }}
-            />
+            /> */}
           </div>
           <GenerateUploadComponent />
         </div>

@@ -218,14 +218,18 @@ const Assignments = () => {
           height: "10%",
         }}
       />
-      <Dropdown menu={{ items: courseMenuItems, onClick: handleMenuClick }}>
-        <Button>
-          <Space>
-            Courses
-            <DownOutlined />
-          </Space>
-        </Button>
-      </Dropdown>
+      <div
+        style={{ width: "22%", alignSelf: "center"}}
+      >
+        <Dropdown menu={{ items: courseMenuItems, onClick: handleMenuClick }}>
+          <Button>
+            <Space>
+              Select Your Course to View its Assignments
+              <DownOutlined />
+            </Space>
+          </Button>
+        </Dropdown>
+      </div>
       <span
         style={{
           marginLeft: "10%",
@@ -285,7 +289,7 @@ const EmptyPage = () => {
       <img alt="background" src={DesignEmptyVector} />
 
       <span style={{ color: "#676767" }}>
-        or go to <b>Brain Storm</b> and generate some ideas with AI.
+        <b>No Assignment Yet!</b>
       </span>
     </div>
   );

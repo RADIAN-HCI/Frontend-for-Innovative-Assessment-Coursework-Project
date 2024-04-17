@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import "../index.css";
-// import { useLocation } from "react-router-dom";
 import { Image } from "antd";
 import EditIcon from "../../images/EditIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 
 import "../index.css";
-// import { useLocation } from "react-router-dom";
 import { CheckOutlined } from "@ant-design/icons";
 import GenerateUploadComponent from "../Generate/GenerateUploadComponent";
 import NoAttachmentComponent from "../Generate/NoAttachmentComponent";

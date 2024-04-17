@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-// import { useLocation } from "react-router-dom";
 import { Button, Image } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
@@ -12,8 +11,6 @@ import NavigatorComponent from "../NavigatorComponent";
 import api from "../api";
 
 const Design = () => {
-  // const { state } = useLocation();
-  // const { username } = state;
 
   const [data, setData] = useState([])
 
@@ -34,14 +31,8 @@ const Design = () => {
   const RenderItem = (item, idx) => {
     const [isEditMode, setIsEditMode] = useState(false);
 
-    // const infoStyle = {
-    //   marginRight: 8,
-    //   marginLeft: 8,
-    //   height: 40,
-    // };
     return (
       <DesignRenderItem
-        // infoStyle={infoStyle}
         isEditMode={isEditMode}
         selected={selected}
         setSelected={setSelected}

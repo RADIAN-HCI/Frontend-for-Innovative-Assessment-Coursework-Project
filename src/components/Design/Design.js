@@ -14,23 +14,22 @@ import api from "../api";
 const Design = () => {
   // const { state } = useLocation();
   // const { username } = state;
-  useEffect(() => {
-    const fetchDesignData = async () => {
-      const response = await api.get("api/ideas/");
-      console.log(response);
-    };
-    fetchDesignData();
-  }, []);
-  const [selected, setSelected] = useState(-1);
 
-  const data = [
-    { title: "Idea 1" },
-    { title: "Idea 2" },
-    { title: "Idea 3" },
-    { title: "Idea 4" },
-    { title: "Idea 5" },
-    { title: "Idea 6" },
-  ];
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+
+    const fetchIdeasData = async () => {
+      const response = await api.get("api/questions/");
+      localStorage.setItem("questions", JSON.stringify(response.data));
+      console.log(response.data);
+      setData(response.data);
+    };
+    fetchIdeasData();
+  }, []);
+
+
+  const [selected, setSelected] = useState(-1);
 
   const RenderItem = (item, idx) => {
     const [isEditMode, setIsEditMode] = useState(false);

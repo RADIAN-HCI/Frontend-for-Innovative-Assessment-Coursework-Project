@@ -11,11 +11,9 @@ import NavigatorComponent from "../NavigatorComponent";
 import api from "../api";
 
 const Design = () => {
-
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-
     const fetchIdeasData = async () => {
       const response = await api.get("api/questions/");
       localStorage.setItem("questions", JSON.stringify(response.data));
@@ -25,11 +23,19 @@ const Design = () => {
     fetchIdeasData();
   }, []);
 
-
   const [selected, setSelected] = useState(-1);
 
   const RenderItem = (item, idx) => {
     const [isEditMode, setIsEditMode] = useState(false);
+
+    const editQuestion = async (ideaText) => {
+      const response = await api.patch(`api/questions/${item.id}/`, {
+        details_modified: ideaText,
+      });
+      // localStorage.setItem("questions", JSON.stringify(response.data));
+      console.log(response.data);
+      // setData(response.data);
+    };
 
     return (
       <DesignRenderItem
@@ -39,6 +45,7 @@ const Design = () => {
         setIsEditMode={setIsEditMode}
         item={item}
         idx={idx}
+        onClickEdit={editQuestion}
       />
     );
   };

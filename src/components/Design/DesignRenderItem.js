@@ -21,8 +21,11 @@ const DesignRenderItem = ({
   setSelected,
   isEditMode,
   setIsEditMode,
+  onClickEdit,
 }) => {
-  const [ideaText, setIdeaText] = useState(item.details_original);
+  const [ideaText, setIdeaText] = useState(
+    item.details_modified !== "" ? item.details_modified : item.details_original
+  );
   return (
     <div
       key={idx}
@@ -90,6 +93,7 @@ const DesignRenderItem = ({
                 mainColor="#D32EFF"
                 onClick={() => {
                   setIsEditMode(false);
+                  onClickEdit(ideaText);
                 }}
               />
             ) : (

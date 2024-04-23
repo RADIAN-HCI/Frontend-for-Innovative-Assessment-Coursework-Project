@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-// import { useLocation } from "react-router-dom";
 import { Button, Image } from "antd";
 import CubeIcon from "../../images/CubeIcon.svg";
 import GeneralList from "../GeneralList";
@@ -13,12 +12,9 @@ import GenerateEmptyVector from "../../images/GenerateEmptyVector.svg";
 
 import GenerateRenderItem from "./GenerateRenderItem";
 import NavigatorComponent from "../NavigatorComponent";
-
+import api from "../api";
 
 const Generate = () => {
-  // const { data, mutate, status } = useMutation({
-  //   mutationFn: generatePDF,
-  // });
 
   const [selected, setSelected] = useState(-1);
 
@@ -33,12 +29,10 @@ const Generate = () => {
 
   const handleGeneratePDF = async (assignment_id) => {
     try {
-      // console.log("start");
-      // const objectData = new FormData();
-      // objectData.append("assignment_id", assignment_id);
-      // await mutate(objectData);
-      // console.log(status);
-      // console.log(data);
+      const objectData = new FormData();
+      objectData.append("assignment_id", assignment_id);
+      const response = await api.post("generate_pdf/", objectData);
+      console.log(response.data);
     } catch (e) {
       console.log("Error 500");
     }
@@ -62,7 +56,6 @@ const Generate = () => {
         data={generateData}
         setData={setGenerateData}
       />
-      // </div>
     );
   };
 

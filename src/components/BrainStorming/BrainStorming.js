@@ -4,10 +4,8 @@ import "../index.css";
 import { Button, Image, Input } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList";
-import AddQuestionModal from "./AddQuestionModal";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent";
-import { useLocation } from "react-router-dom";
 import BrainStormingRenderItem from "./BrainStormingRenderItem";
 import { SendOutlined } from "@ant-design/icons";
 import api from "../api";
@@ -19,8 +17,7 @@ const BrainStorming = () => {
 
   const [data, setData] = useState([]);
 
-  const { state } = useLocation();
-  const { brainstormID } = state;
+  const assignmentID = localStorage.getItem("assignment_id");
 
   useEffect(() => {
     // const fetchCourseData = async () => {
@@ -38,13 +35,13 @@ const BrainStorming = () => {
     // fetchCourseData();
 
     const fetchIdeasData = async () => {
-      const response = await api.get(`api/brainstorms/${brainstormID}/ideas/`);
+      const response = await api.get(`api/brainstorms/${assignmentID}/ideas/`);
       localStorage.setItem("ideas", JSON.stringify(response.data));
       console.log(response.data);
       setData(response.data);
     };
     fetchIdeasData();
-  }, []);
+  }, [assignmentID]);
 
   const RenderItem = (item, idx) => {
     const [isEditMode, setIsEditMode] = useState(false);
@@ -313,11 +310,6 @@ const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
       <span style={{ color: "#676767" }}>
         or go to <b>Brain Storm</b> and generate some ideas with AI.
       </span>
-      <AddQuestionModal
-        isModalOpen={isModalOpen}
-        handleCancel={handleCancel}
-        handleOk={handleOk}
-      />
     </div>
   );
 };

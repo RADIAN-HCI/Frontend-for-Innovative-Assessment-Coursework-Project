@@ -64,7 +64,7 @@ const Assignments = () => {
       JSON.parse(localStorage.getItem("courses")).filter(filterCourses)[0]
     );
 
-    console.log(currentCourse);
+    console.log("The current course is: ", currentCourse);
 
     const allAssignments = JSON.parse(localStorage.getItem("assignments"));
 
@@ -137,7 +137,7 @@ const Assignments = () => {
             >
               <Image src={CalendarIcon} width={15} preview={false} />
               <span>Deadline</span>
-              <span>26 Jan 23:59</span>
+              <span>{item?.deadline}</span>
             </div>
           </div>
           <div
@@ -157,7 +157,8 @@ const Assignments = () => {
                 fontSize: 16,
               }}
               onClick={() => {
-                navigate("/brainstorm", { state: { brainstormID: item.id } });
+                localStorage.setItem("assignment_id", item.id)
+                navigate("/brainstorm");
               }}
             >
               Brain Storm
@@ -172,6 +173,7 @@ const Assignments = () => {
                 fontSize: 16,
               }}
               onClick={() => {
+                localStorage.setItem("assignment_id", item.id)
                 navigate("/design");
               }}
             >
@@ -187,6 +189,7 @@ const Assignments = () => {
                 fontSize: 16,
               }}
               onClick={() => {
+                localStorage.setItem("assignment_id", item.id)
                 navigate("/generate");
               }}
             >

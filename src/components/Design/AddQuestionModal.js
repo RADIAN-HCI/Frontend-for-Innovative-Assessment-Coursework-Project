@@ -2,7 +2,6 @@ import { Input, Modal, Button, Image } from "antd";
 import React, { useState } from "react";
 import GenerateUploadComponent from "../Generate/GenerateUploadComponent";
 import EnhanceIcon from "../../images/EnhanceIcon.svg";
-// import PlusIcon from "../../images/PlusIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 import api from "../api";
 
@@ -11,13 +10,18 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
   const [questionTitle, setQuestionTitle] = useState("");
 
   const sendAddQuestionRequest = async () => {
-    const response = await api.post("api/questions/", {
-      lang: "fa",
+    console.log("salam");
+    const data = {
       details_original: questionText,
+      lang: "fa",
       title: questionTitle,
-    });
+      assignment: localStorage.getItem("assignment_id"),
+      author: 1,
+      details_modified: "",
+    };
 
-    console.log(response);
+    const response = await api.post("api/questions/", data);
+    console.log(response.data);
   };
 
   return (
@@ -59,6 +63,7 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
               backgroundColor="#DE54FF"
               // mainColor="#0066CC"
               mainColor="#FFFFFF"
+              // onClick={sendAddQuestionRequest}
               onClick={sendAddQuestionRequest}
             />
           </div>
@@ -92,7 +97,7 @@ const ButtonForModal = ({
   buttonText,
   mainColor,
   backgroundColor,
-  onclick,
+  onClick,
 }) => {
   return (
     <Button
@@ -105,7 +110,7 @@ const ButtonForModal = ({
         marginRight: 4,
         marginLeft: 4,
       }}
-      onClick={onclick}
+      onClick={onClick}
       type="default"
     >
       <div

@@ -7,6 +7,7 @@ import GeneralList from "../GeneralList";
 import AddQuestionModal from "./AddQuestionModal";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent";
+import { useLocation } from "react-router-dom";
 import BrainStormingRenderItem from "./BrainStormingRenderItem";
 import { SendOutlined } from "@ant-design/icons";
 import api from "../api";
@@ -17,6 +18,9 @@ const BrainStorming = () => {
   const [selected, setSelected] = useState([]);
 
   const [data, setData] = useState([]);
+
+  const { state } = useLocation();
+  const { brainstormID } = state;
 
   useEffect(() => {
     // const fetchCourseData = async () => {
@@ -34,7 +38,7 @@ const BrainStorming = () => {
     // fetchCourseData();
 
     const fetchIdeasData = async () => {
-      const response = await api.get("api/ideas/");
+      const response = await api.get(`api/brainstorms/${brainstormID}/ideas/`);
       localStorage.setItem("ideas", JSON.stringify(response.data));
       console.log(response.data);
       setData(response.data);

@@ -72,7 +72,7 @@ const Assignments = () => {
     setData(result);
   };
 
-  const RenderItem = (person, idx) => {
+  const RenderItem = (item, idx) => {
     const navigate = useNavigate();
     return (
       <div
@@ -157,7 +157,7 @@ const Assignments = () => {
                 fontSize: 16,
               }}
               onClick={() => {
-                navigate("/brainstorm");
+                navigate("/brainstorm", { state: { brainstormID: item.id } });
               }}
             >
               Brain Storm
@@ -218,9 +218,7 @@ const Assignments = () => {
           height: "10%",
         }}
       />
-      <div
-        style={{ width: "22%", alignSelf: "center"}}
-      >
+      <div style={{ width: "22%", alignSelf: "center" }}>
         <Dropdown menu={{ items: courseMenuItems, onClick: handleMenuClick }}>
           <Button>
             <Space>

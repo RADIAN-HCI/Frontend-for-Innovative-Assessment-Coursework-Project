@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../index.css";
-// import { useLocation } from "react-router-dom";
 import { CheckOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
 import EditIcon from "../../images/EditIcon.svg";
 import GenerateUploadComponent from "./GenerateUploadComponent";
@@ -23,9 +22,10 @@ const GenerateRenderItem = ({
   setIsEditMode,
   data,
   setData,
+  onClickEdit,
 }) => {
   const [ideaText, setIdeaText] = useState(
-    "English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of “Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype.” Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin letters; English idea comes from one of Senecas Epistles (58), written about a.d. 64 during his retirement from Emperor Neros court, in which the Roman philosopher uses idea in the sense of Platonic idea, eternal archetype. Seneca wrote idea in Latin"
+    item.details_modified !== "" ? item.details_modified : item.details_original
   );
 
   const swapElements = (arr, pos1, pos2) => {
@@ -121,6 +121,8 @@ const GenerateRenderItem = ({
             setIsEditMode={setIsEditMode}
             add={add}
             setAdd={setAdd}
+            ideaText={ideaText}
+            onClickEdit={onClickEdit}
           />
         </div>
         {isEditMode ? (

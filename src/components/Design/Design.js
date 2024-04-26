@@ -13,13 +13,14 @@ import api from "../api";
 const Design = () => {
   const [data, setData] = useState([]);
 
+  const fetchIdeasData = async () => {
+    const response = await api.get("api/questions/");
+    localStorage.setItem("questions", JSON.stringify(response.data));
+    console.log(response.data);
+    setData(response.data);
+  };
+
   useEffect(() => {
-    const fetchIdeasData = async () => {
-      const response = await api.get("api/questions/");
-      localStorage.setItem("questions", JSON.stringify(response.data));
-      console.log(response.data);
-      setData(response.data);
-    };
     fetchIdeasData();
   }, []);
 
@@ -182,7 +183,12 @@ const Design = () => {
   );
 };
 
-const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
+const EmptyPage = ({
+  setIsModalOpen,
+  isModalOpen,
+  handleCancel,
+  handleOk,
+}) => {
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
 import { Button, Image } from "antd";
@@ -18,30 +18,19 @@ const Generate = () => {
 
   const [selected, setSelected] = useState(-1);
 
-  const [generateData, setGenerateData] = useState([
-    { title: "Idea 1" },
-    { title: "Idea 2" },
-    { title: "Idea 3" },
-    { title: "Idea 4" },
-    { title: "Idea 5" },
-    { title: "Idea 6" },
-  ]);
-
-  const handleGeneratePDF = async (assignment_id) => {
-    try {
-      const objectData = new FormData();
-      objectData.append("assignment_id", assignment_id);
-      const response = await api.post("generate_pdf/", objectData);
-      console.log(response.data);
-    } catch (e) {
-      console.log("Error 500");
-    }
-  };
-
   const RenderItem = (item, idx) => {
     const [add, setAdd] = useState(true);
 
     const [isEditMode, setIsEditMode] = useState(false);
+
+    const editQuestion = async (ideaText) => {
+      const response = await api.patch(`api/questions/${item.id}/`, {
+        details_modified: ideaText,
+      });
+      // localStorage.setItem("questions", JSON.stringify(response.data));
+      console.log(response.data);
+      // setData(response.data);
+    };
 
     return (
       <GenerateRenderItem
@@ -55,8 +44,36 @@ const Generate = () => {
         setIsEditMode={setIsEditMode}
         data={generateData}
         setData={setGenerateData}
+        onClickEdit={editQuestion}
       />
     );
+  };
+
+
+
+  const [generateData, setGenerateData] = useState([]);
+
+  const fetchGenerateData = async () => {
+    const response = await api.get("api/questions/");
+    localStorage.setItem("questions", JSON.stringify(response.data));
+    console.log(response.data);
+    setGenerateData(response.data);
+  };
+
+
+  useEffect(() => {
+    fetchGenerateData();
+  }, []);
+
+  const handleGeneratePDF = async (assignment_id) => {
+    try {
+      const objectData = new FormData();
+      objectData.append("assignment_id", assignment_id);
+      const response = await api.post("generate_pdf/", objectData);
+      console.log(response.data);
+    } catch (e) {
+      console.log("Error 500");
+    }
   };
 
   return (

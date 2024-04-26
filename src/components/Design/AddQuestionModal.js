@@ -5,12 +5,15 @@ import EnhanceIcon from "../../images/EnhanceIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 import api from "../api";
 
-const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
+const AddQuestionModal = ({
+  isModalOpen,
+  handleOk,
+  handleCancel,
+}) => {
   const [questionText, setQuestionText] = useState("");
   const [questionTitle, setQuestionTitle] = useState("");
 
   const sendAddQuestionRequest = async () => {
-    console.log("salam");
     const data = {
       details_original: questionText,
       lang: "fa",
@@ -20,8 +23,14 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
       details_modified: "",
     };
 
-    const response = await api.post("api/questions/", data);
-    console.log(response.data);
+    try {
+      const response = await api.post("api/questions/", data);
+      console.log(response.data);
+      handleOk();
+      // refetchFunction();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

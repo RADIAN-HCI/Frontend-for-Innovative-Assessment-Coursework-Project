@@ -4,13 +4,13 @@ import "./index.css";
 import { useLocation } from "react-router-dom";
 import { Image } from "antd";
 import Kites from "../images/Kites.svg";
-import GeneralList from "./GeneralList";
+import GeneralList from "./GeneralList.tsx";
 
 import { Button } from "antd";
 import BookIcon from "../images/BookIcon.svg";
 import ProfileIcon from "../images/ProfileIcon.svg";
 import CalendarIcon from "../images/CalendarIcon.svg";
-import api from "./api";
+import api from "./api.ts";
 import { Dropdown, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import DesignEmptyVector from "../images/DesignEmptyVector.svg";
@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 const Assignments = () => {
   const [courseMenuItems, setCourseMenuItems] = useState([]);
 
-  const [currentCourse, setCurrentCourse] = useState();
+  const [currentCourse, setCurrentCourse] = useState<any>();
 
   useEffect(() => {
     const fetchCourseData = async () => {
@@ -47,7 +47,7 @@ const Assignments = () => {
   const { state } = useLocation();
   const { username } = state;
 
-  const [data, setData] = useState();
+  const [data, setData] = useState<any[]>();
   const handleMenuClick = (e) => {
     const checkAdult = (item) => {
       if (item?.course === +e.key) {
@@ -61,12 +61,16 @@ const Assignments = () => {
       }
     };
     setCurrentCourse(
-      JSON.parse(localStorage.getItem("courses")).filter(filterCourses)[0]
+      JSON.parse(localStorage.getItem("courses") || "{}").filter(
+        filterCourses
+      )[0]
     );
 
     console.log("The current course is: ", currentCourse);
 
-    const allAssignments = JSON.parse(localStorage.getItem("assignments"));
+    const allAssignments = JSON.parse(
+      localStorage.getItem("assignments") || "{}"
+    );
 
     const result = allAssignments.filter(checkAdult);
     setData(result);
@@ -157,7 +161,7 @@ const Assignments = () => {
                 fontSize: 16,
               }}
               onClick={() => {
-                localStorage.setItem("assignment_id", item.id)
+                localStorage.setItem("assignment_id", item.id);
                 navigate("/brainstorm");
               }}
             >
@@ -173,7 +177,7 @@ const Assignments = () => {
                 fontSize: 16,
               }}
               onClick={() => {
-                localStorage.setItem("assignment_id", item.id)
+                localStorage.setItem("assignment_id", item.id);
                 navigate("/design");
               }}
             >
@@ -189,7 +193,7 @@ const Assignments = () => {
                 fontSize: 16,
               }}
               onClick={() => {
-                localStorage.setItem("assignment_id", item.id)
+                localStorage.setItem("assignment_id", item.id);
                 navigate("/generate");
               }}
             >
@@ -226,7 +230,10 @@ const Assignments = () => {
           <Button>
             <Space>
               Select Your Course to View its Assignments
-              <DownOutlined />
+              <DownOutlined
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+              />
             </Space>
           </Button>
         </Dropdown>

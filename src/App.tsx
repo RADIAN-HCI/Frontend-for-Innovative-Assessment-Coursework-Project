@@ -1,10 +1,11 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AccountForm from "./components/Login/AccountForm";
-import Assignments from "./components/Assignments";
-import Generate from "./components/Generate/Generate";
-import Design from "./components/Design/Design";
-import BrainStorming from "./components/BrainStorming/BrainStorming";
+import AccountForm from "./components/Login/AccountForm.tsx";
+import Assignments from "./components/Assignments.tsx";
+import Generate from "./components/Generate/Generate.tsx";
+import Design from "./components/Design/Design.tsx";
+import BrainStorming from "./components/BrainStorming/BrainStorming.tsx";
+import React from "react";
 
 function App() {
   const isLoggedIn = localStorage.getItem("username") !== null ? true : false;

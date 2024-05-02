@@ -1,43 +1,31 @@
 import React, { useState } from "react";
 import "../index.css";
-import { CheckOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
+import { Image } from "antd";
 import EditIcon from "../../images/EditIcon.svg";
-import GenerateUploadComponent from "./GenerateUploadComponent";
-import NoAttachmentComponent from "./NoAttachmentComponent";
-import EyeIcon from "../../images/EyeIcon.svg";
 import TextArea from "antd/es/input/TextArea";
-import { Image, Typography } from "antd";
-import ButtonsSideBySide from "../ButtonsSideBySide";
 
-const { Text } = Typography;
+import "../index.css";
+import { CheckOutlined } from "@ant-design/icons";
+import GenerateUploadComponent from "../Generate/GenerateUploadComponent.tsx";
+import NoAttachmentComponent from "../Generate/NoAttachmentComponent.tsx";
+import EyeIcon from "../../images/EyeIcon.svg";
+import CheckIcon from "../../images/CheckIcon.svg";
+import EnhanceIcon from "../../images/EnhanceIcon.svg";
 
-const GenerateRenderItem = ({
+import IconButton from "../IconButton.tsx";
+
+const DesignRenderItem = ({
   item,
   idx,
-  add,
-  setAdd,
   selected,
   setSelected,
   isEditMode,
   setIsEditMode,
-  data,
-  setData,
   onClickEdit,
 }) => {
   const [ideaText, setIdeaText] = useState(
     item.details_modified !== "" ? item.details_modified : item.details_original
   );
-
-  const swapElements = (arr, pos1, pos2) => {
-    const temp = arr[pos1];
-
-    arr[pos1] = arr[pos2];
-
-    arr[pos2] = temp;
-
-    return [...arr];
-  };
-
   return (
     <div
       key={idx}
@@ -53,36 +41,11 @@ const GenerateRenderItem = ({
         borderWidth: 3,
         borderRadius: 10,
       }}
+      onClick={() => {
+        setSelected(idx);
+      }}
       className="rounded-l"
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "30%",
-          marginBottom: 12,
-          justifyContent: "space-between",
-          alignSelf: "center",
-          alignItems: "center",
-        }}
-      >
-        <UpOutlined
-          onClick={() => {
-            if (idx !== 0) {
-              setData(swapElements(data, idx, idx - 1));
-            }
-          }}
-        />
-        <Text code>{idx + 1}</Text>
-        <DownOutlined
-          onClick={() => {
-            if (idx !== data.length - 1) {
-              setData(swapElements(data, idx, idx + 1));
-            }
-          }}
-        />
-      </div>
-
       <div
         style={{
           display: "flex",
@@ -91,9 +54,6 @@ const GenerateRenderItem = ({
           marginRight: "2%",
           marginBottom: "5%",
           width: "95%",
-        }}
-        onClick={() => {
-          setSelected(idx);
         }}
       >
         <div
@@ -116,14 +76,48 @@ const GenerateRenderItem = ({
             </span>
             {selected === idx ? <SelectedComponent /> : null}
           </div>
-          <ButtonsSideBySide
-            isEditMode={isEditMode}
-            setIsEditMode={setIsEditMode}
-            add={add}
-            setAdd={setAdd}
-            ideaText={ideaText}
-            onClickEdit={onClickEdit}
-          />
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            {isEditMode ? (
+              <IconButton
+                icon={CheckIcon}
+                buttonText="Done"
+                backgroundColor="#F4C6FF"
+                mainColor="#D32EFF"
+                onClick={() => {
+                  setIsEditMode(false);
+                  onClickEdit(ideaText);
+                }}
+              />
+            ) : (
+              <IconButton
+                icon={EditIcon}
+                buttonText="Edit"
+                backgroundColor="#F4C6FF"
+                mainColor="#D32EFF"
+                onClick={() => {
+                  setIsEditMode(true);
+                }}
+              />
+            )}
+
+            <IconButton
+              icon={EnhanceIcon}
+              buttonText="Enhance"
+              backgroundColor="#DE54FF"
+              mainColor="#FFFFFF"
+              onClick={() => {
+                setIsEditMode(false);
+              }}
+            />
+          </div>
         </div>
         {isEditMode ? (
           <div
@@ -176,7 +170,7 @@ const GenerateRenderItem = ({
           justifyContent: "center",
         }}
       >
-        {add ? <GenerateUploadComponent /> : <NoAttachmentComponent />}
+        {isEditMode ? <GenerateUploadComponent /> : <NoAttachmentComponent />}
       </div>
     </div>
   );
@@ -248,10 +242,10 @@ const SelectedComponent = () => {
         marginLeft: 4,
       }}
     >
-      <CheckOutlined style={{ color: "#0066CC" }} />
+      <CheckOutlined style={{ color: "#0066CC" }} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
       <span style={{ color: "#0066CC" }}>Selected</span>
     </div>
   );
 };
 
-export default GenerateRenderItem;
+export default DesignRenderItem;

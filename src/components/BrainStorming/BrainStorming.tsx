@@ -3,12 +3,12 @@ import Logo from "../../images/Logo.svg";
 import "../index.css";
 import { Button, Image, Input } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
-import GeneralList from "../GeneralList";
+import GeneralList from "../GeneralList.tsx";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
-import NavigatorComponent from "../NavigatorComponent";
-import BrainStormingRenderItem from "./BrainStormingRenderItem";
+import NavigatorComponent from "../NavigatorComponent.tsx";
+import BrainStormingRenderItem from "./BrainStormingRenderItem.tsx";
 import { SendOutlined } from "@ant-design/icons";
-import api from "../api";
+import api from "../api.ts";
 
 import BrainstormVector from "../../images/BrainstormVector.svg";
 
@@ -124,8 +124,7 @@ const BrainStorming = () => {
         />
         <NavigatorComponent
           firstText="Assignments"
-          secondText="Brain Storming"
-        />
+          secondText="Brain Storming" thirdText={undefined}        />
 
         <div
           style={{
@@ -230,8 +229,7 @@ const BrainStorming = () => {
                     style={{ color: "blue" }}
                     onClick={() => {
                       console.log(text);
-                    }}
-                  />
+                    } } onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                  />
                 }
                 style={{
                   width: "80%",

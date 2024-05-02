@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "../index.css";
 import { CheckOutlined, DeleteFilled } from "@ant-design/icons";
-import BrainStormingInfoComponent from "./BrainStormingInfoComponent";
+import BrainStormingInfoComponent from "./BrainStormingInfoComponent.tsx";
 import InnovationIcon from "../../images/InnovationIcon.svg";
 import DifficultyIcon from "../../images/DifficultyIcon.svg";
 import { Button } from "antd";
@@ -147,7 +147,7 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
         ) : (
           <Button
             style={{ backgroundColor: "#FFF2F4", color: "#E72424" }}
-            icon={<DeleteFilled />}
+            icon={<DeleteFilled onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
             onClick={() => {
               setSelected(selected.filter((a) => a !== idx));
               setIsRemoved(true);
@@ -176,7 +176,7 @@ const SelectedComponent = () => {
         marginLeft: 4,
       }}
     >
-      <CheckOutlined style={{ color: "#0066CC" }} />
+      <CheckOutlined style={{ color: "#0066CC" }} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
       <span style={{ color: "#0066CC" }}>Selected</span>
     </div>
   );

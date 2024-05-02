@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Image } from "antd";
 import Quote from "../../images/Quote.svg";
 import leftBubble from "../../images/LeftBubble.svg";
-import LoginForm from "./LoginForm";
+import LoginForm from "./LoginForm.tsx";
 
 const AccountForm = () => {
   const [width, setWidth] = useState(window.innerWidth);

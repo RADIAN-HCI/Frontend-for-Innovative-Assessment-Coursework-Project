@@ -47,7 +47,17 @@ const DesignUploadComponent = () => {
       style={{ justifyCenter: "center" }}
     >
       <Button type="dashed" style={{ height: "50%" }}>
-        {loading ? <LoadingOutlined /> : <PlusOutlined />}
+        {loading ? (
+          <LoadingOutlined
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          />
+        ) : (
+          <PlusOutlined
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          />
+        )}
         <br />
         <span
           style={{

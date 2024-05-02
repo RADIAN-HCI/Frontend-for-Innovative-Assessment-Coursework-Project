@@ -3,12 +3,12 @@ import Logo from "../../images/Logo.svg";
 import "../index.css";
 import { Button, Image } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
-import GeneralList from "../GeneralList";
-import DesignRenderItem from "./DesignRenderItem";
-import AddQuestionModal from "./AddQuestionModal";
+import GeneralList from "../GeneralList.tsx";
+import DesignRenderItem from "./DesignRenderItem.tsx";
+import AddQuestionModal from "./AddQuestionModal.tsx";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
-import NavigatorComponent from "../NavigatorComponent";
-import api from "../api";
+import NavigatorComponent from "../NavigatorComponent.tsx";
+import api from "../api.ts";
 
 const Design = () => {
   const [data, setData] = useState([]);
@@ -93,7 +93,7 @@ const Design = () => {
             height: "10%",
           }}
         />
-        <NavigatorComponent firstText="Assignments" secondText="Design" />
+        <NavigatorComponent firstText="Assignments" secondText="Design" thirdText={undefined} />
 
         <div
           style={{

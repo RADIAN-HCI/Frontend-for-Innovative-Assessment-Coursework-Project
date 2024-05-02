@@ -4,15 +4,15 @@ import Logo from "../../images/Logo.svg";
 import "../index.css";
 import { Button, Image } from "antd";
 import CubeIcon from "../../images/CubeIcon.svg";
-import GeneralList from "../GeneralList";
+import GeneralList from "../GeneralList.tsx";
 import GenerateSideIcon from "../../images/GenerateSideIcon.svg";
 import GenerateLeftVector from "../../images/GenerateLeftVector.svg";
 
 import GenerateEmptyVector from "../../images/GenerateEmptyVector.svg";
 
-import GenerateRenderItem from "./GenerateRenderItem";
-import NavigatorComponent from "../NavigatorComponent";
-import api from "../api";
+import GenerateRenderItem from "./GenerateRenderItem.tsx";
+import NavigatorComponent from "../NavigatorComponent.tsx";
+import api from "../api.ts";
 
 const Generate = () => {
 
@@ -111,7 +111,7 @@ const Generate = () => {
             alignItems: "center",
           }}
         />
-        <NavigatorComponent firstText="Assignments" secondText="Generate" />
+        <NavigatorComponent firstText="Assignments" secondText="Generate" thirdText={undefined} />
         <div
           style={{
             display: "flex",

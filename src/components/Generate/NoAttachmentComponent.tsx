@@ -1,5 +1,6 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Button } from "antd";
+import React from "react";
 import { useEffect, useState } from "react";
 
 const NoAttachmentComponent = () => {
@@ -22,7 +23,7 @@ const NoAttachmentComponent = () => {
         alignItems: "center",
       }}
     >
-      <CloseOutlined />
+      <CloseOutlined onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
       <br />
       {width >= 930 ? <span>No File</span> : null}
     </Button>

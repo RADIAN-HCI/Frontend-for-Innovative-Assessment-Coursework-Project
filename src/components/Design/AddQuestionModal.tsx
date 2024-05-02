@@ -1,9 +1,9 @@
 import { Input, Modal, Button, Image } from "antd";
 import React, { useState } from "react";
-import GenerateUploadComponent from "../Generate/GenerateUploadComponent";
+import GenerateUploadComponent from "../Generate/GenerateUploadComponent.tsx";
 import EnhanceIcon from "../../images/EnhanceIcon.svg";
 import TextArea from "antd/es/input/TextArea";
-import api from "../api";
+import api from "../api.ts";
 
 const AddQuestionModal = ({
   isModalOpen,

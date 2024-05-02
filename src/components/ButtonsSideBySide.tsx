@@ -5,7 +5,7 @@ import EditIcon from "../images/EditIcon.svg";
 import PlusIcon from "../images/PlusIcon.svg";
 import TrashIcon from "../images/TrashIcon.svg";
 import CheckIcon from "../images/CheckIcon.svg";
-import IconButton from "./IconButton";
+import IconButton from "./IconButton.tsx";
 
 const ButtonsSideBySide = ({ isEditMode, setIsEditMode, add, setAdd, onClickEdit, ideaText }) => {
   return (

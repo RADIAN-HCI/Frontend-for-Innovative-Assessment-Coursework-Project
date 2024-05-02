@@ -44,7 +44,7 @@ const DesignUploadComponent = () => {
       action="/api/upload"
       beforeUpload={beforeUpload}
       onChange={handleChange}
-      style={{ justifyCenter: "center" }}
+      style={{ justifyContent: "center" }}
     >
       <Button type="dashed" style={{ height: "50%" }}>
         {loading ? (

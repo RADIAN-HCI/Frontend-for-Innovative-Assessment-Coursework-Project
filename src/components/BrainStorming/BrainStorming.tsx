@@ -54,10 +54,10 @@ const BrainStorming = () => {
     return (
       <BrainStormingRenderItem
         // infoStyle={infoStyle}
-        isEditMode={isEditMode}
+        // isEditMode={isEditMode}
         selected={selected}
         setSelected={setSelected}
-        setIsEditMode={setIsEditMode}
+        // setIsEditMode={setIsEditMode}
         item={item}
         idx={idx}
       />

@@ -17,7 +17,7 @@ const BrainStorming = () => {
 
   const [data, setData] = useState([]);
 
-  const assignmentID = localStorage.getItem("assignment_id");
+  const assignmentID = localStorage.getItem("assignment_id")!;
 
   useEffect(() => {
     // const fetchCourseData = async () => {
@@ -35,7 +35,10 @@ const BrainStorming = () => {
     // fetchCourseData();
 
     const fetchIdeasData = async () => {
-      const response = await api.get(`api/brainstorms/${assignmentID}/ideas/`);
+      const author_id = 1;
+      const response = await api.get(
+        `api/brainstorms/?author_id=${author_id}&assignment_id=${assignmentID}`
+      );
       localStorage.setItem("ideas", JSON.stringify(response.data));
       console.log(response.data);
       setData(response.data);
@@ -124,7 +127,9 @@ const BrainStorming = () => {
         />
         <NavigatorComponent
           firstText="Assignments"
-          secondText="Brain Storming" thirdText={undefined}        />
+          secondText="Brain Storming"
+          thirdText={undefined}
+        />
 
         <div
           style={{
@@ -229,7 +234,10 @@ const BrainStorming = () => {
                     style={{ color: "blue" }}
                     onClick={() => {
                       console.log(text);
-                    } } onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}                  />
+                    }}
+                    onPointerEnterCapture={undefined}
+                    onPointerLeaveCapture={undefined}
+                  />
                 }
                 style={{
                   width: "80%",

@@ -1,36 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React from "react";
 import "../index.css";
-import { CheckOutlined, DeleteFilled } from "@ant-design/icons";
-import BrainStormingInfoComponent from "./BrainStormingInfoComponent.tsx";
-import InnovationIcon from "../../images/InnovationIcon.svg";
-import DifficultyIcon from "../../images/DifficultyIcon.svg";
 import { Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
-import { Typography } from "antd";
-const { Paragraph } = Typography;
+const BrainStormingRenderItem = ({ item, idx, selected }) => {
+  const navigate = useNavigate();
 
-const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
-  const [isRemoved, setIsRemoved] = useState(true);
-
-  const [state, setState] = useState({
-    expand: false,
-    counter: 0,
-  });
-
-  const typoExpand = () => {
-    setState({
-      expand: true,
-      counter: !state.expand ? state.counter + 0 : state.counter + 1,
-    });
-  };
-
-  const typoClose = () => {
-    setState({
-      expand: false,
-      counter: !state.expand ? state.counter + 0 : state.counter + 1,
-    });
-  };
+  const allAssignments = JSON.parse(localStorage.getItem("assignments"));
 
   return (
     <div
@@ -49,7 +26,7 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
       }}
       className="rounded-l"
     >
-      <div
+      {/* <div
         style={{
           display: "flex",
           flexDirection: "column",
@@ -93,7 +70,7 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
                 onExpand: typoExpand,
               }}
             >
-              {item.details}
+              {item.prompt}
             </Paragraph>
             {state.expand && (
               <a onClick={typoClose} style={{ marginTop: 0, color: "blue" }}>
@@ -110,6 +87,35 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
             paddingBottom: 10,
           }}
         ></div>
+      </div> */}
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          marginLeft: "2%",
+          marginRight: "2%",
+          marginBottom: "5%",
+          width: "90%",
+          backgroundColor: "red",
+          height: 40,
+        }}
+      >
+        <span>
+          Created At: {new Date(item.created_at).toLocaleDateString()}
+        </span>
+        <span>{item.prompt}</span>
+        <span>
+          Related Assignment:{" "}
+          {
+            allAssignments.find((x) => {
+              if (x.id === item.assignment) {
+                console.log("alksdjaslkjdaslk");
+                return x;
+              }
+            }).title
+          }
+        </span>
       </div>
 
       <div
@@ -122,62 +128,17 @@ const BrainStormingRenderItem = ({ item, idx, selected, setSelected }) => {
           rowGap: 2,
         }}
       >
-        <BrainStormingInfoComponent
-          color="#00e15A"
-          score={item.innovation}
-          subtitle="Innovation"
-          imgSrc={InnovationIcon}
-        />
-        <BrainStormingInfoComponent
-          color="#EA0054"
-          score={item.difficulty}
-          subtitle="Difficulty"
-          imgSrc={DifficultyIcon}
-        />
-        {isRemoved ? (
-          <Button
-            style={{ backgroundColor: "#D6E5F5", color: "#0066CC" }}
-            onClick={() => {
-              setSelected([...selected, idx]);
-              setIsRemoved(false);
-            }}
-          >
-            <span style={{ fontWeight: "bolder" }}>+ Add for Design</span>
-          </Button>
-        ) : (
-          <Button
-            style={{ backgroundColor: "#FFF2F4", color: "#E72424" }}
-            icon={<DeleteFilled onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
-            onClick={() => {
-              setSelected(selected.filter((a) => a !== idx));
-              setIsRemoved(true);
-            }}
-          >
-            <span style={{ fontWeight: "bolder" }}>Remove</span>
-          </Button>
-        )}
+        <Button
+          style={{ backgroundColor: "#D6E5F5", color: "#0066CC" }}
+          onClick={() => {
+            navigate("/ideas", { state: { brainstormId: item.id } });
+          }}
+        >
+          <span style={{ fontWeight: "bolder" }}>
+            Go to Correspondent Ideas
+          </span>
+        </Button>
       </div>
-    </div>
-  );
-};
-
-const SelectedComponent = () => {
-  return (
-    <div
-      style={{
-        borderColor: "#0066CC",
-        borderWidth: 1,
-        display: "flex",
-        flexDirection: "row",
-        borderRadius: 5,
-        height: "40%",
-        padding: 4,
-        alignItems: "center",
-        marginLeft: 4,
-      }}
-    >
-      <CheckOutlined style={{ color: "#0066CC" }} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
-      <span style={{ color: "#0066CC" }}>Selected</span>
     </div>
   );
 };

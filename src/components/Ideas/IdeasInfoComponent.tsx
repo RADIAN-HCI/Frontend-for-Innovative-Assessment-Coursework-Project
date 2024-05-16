@@ -2,7 +2,7 @@ import React from "react";
 import { Image } from "antd";
 import { Rate } from "antd";
 
-const BrainStormingInfoComponent = (props) => {
+const IdeasInfoComponent = (props) => {
   const { score, color, imgSrc, subtitle } = props;
   return (
     <div
@@ -39,4 +39,4 @@ const BrainStormingInfoComponent = (props) => {
   );
 };
 
-export default BrainStormingInfoComponent;
+export default IdeasInfoComponent;

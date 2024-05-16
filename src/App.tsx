@@ -6,6 +6,7 @@ import Generate from "./components/Generate/Generate.tsx";
 import Design from "./components/Design/Design.tsx";
 import BrainStorming from "./components/BrainStorming/BrainStorming.tsx";
 import React from "react";
+import Ideas from "./components/Ideas/Ideas.tsx";
 
 function App() {
   const isLoggedIn = localStorage.getItem("username") !== null ? true : false;
@@ -20,6 +21,7 @@ function App() {
             <Route path="generate" element={<Generate />} />
             <Route path="design" element={<Design />} />
             <Route path="brainstorm" element={<BrainStorming />} />
+            <Route path="ideas" element={<Ideas />} />
           </>
         ) : null}
       </Routes>

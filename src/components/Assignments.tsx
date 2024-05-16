@@ -99,7 +99,7 @@ const Assignments = () => {
           }}
         >
           <span style={{ fontWeight: "bolder", fontSize: 40 }}>
-            FOP Project
+            {item.title}
           </span>
           <div
             style={{

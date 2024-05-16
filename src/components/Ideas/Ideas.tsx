@@ -6,13 +6,13 @@ import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent.tsx";
-import BrainStormingRenderItem from "./BrainStormingRenderItem.tsx";
+import IdeasRenderItem from "./IdeasRenderItem.tsx";
 import { SendOutlined } from "@ant-design/icons";
 import api from "../api.ts";
 
 import BrainstormVector from "../../images/BrainstormVector.svg";
 
-const BrainStorming = () => {
+const Ideas = () => {
   const [selected, setSelected] = useState([]);
 
   const [data, setData] = useState([]);
@@ -47,10 +47,20 @@ const BrainStorming = () => {
   }, [assignmentID]);
 
   const RenderItem = (item, idx) => {
+    const [isEditMode, setIsEditMode] = useState(false);
+
+    // const infoStyle = {
+    //   marginRight: 8,
+    //   marginLeft: 8,
+    //   height: 40,
+    // };
     return (
-      <BrainStormingRenderItem
+      <IdeasRenderItem
+        // infoStyle={infoStyle}
+        // isEditMode={isEditMode}
         selected={selected}
         setSelected={setSelected}
+        // setIsEditMode={setIsEditMode}
         item={item}
         idx={idx}
       />
@@ -148,6 +158,53 @@ const BrainStorming = () => {
               flexDirection: "row",
             }}
           >
+            {/* <div
+              style={{
+                backgroundColor: "red",
+                marginLeft: "15%",
+                marginRight: "2%",
+                width: "8%",
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: "#F5F5F5",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p>Brainstorm 1</p>
+                <EditFilled />
+                <DeleteFilled />
+              </div>
+
+              <div
+                style={{
+                  backgroundColor: "#F5F5F5",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p>Brainstorm 2</p>
+                <EditFilled />
+                <DeleteFilled />
+              </div>
+
+              <div
+                style={{
+                  backgroundColor: "#F5F5F5",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p>Brainstorm 3</p>
+                <EditFilled />
+                <DeleteFilled />
+              </div>
+            </div> */}
             <div
               style={{
                 marginTop: "3%",
@@ -163,7 +220,7 @@ const BrainStorming = () => {
               <GeneralList
                 data={data}
                 RenderItem={RenderItem}
-                numOfColumn={1}
+                numOfColumn={2}
               />
 
               <Input
@@ -262,4 +319,4 @@ const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
     </div>
   );
 };
-export default BrainStorming;
+export default Ideas;

@@ -11,56 +11,33 @@ import { SendOutlined } from "@ant-design/icons";
 import api from "../api.ts";
 
 import BrainstormVector from "../../images/BrainstormVector.svg";
+import { useLocation } from "react-router-dom";
 
 const Ideas = () => {
   const [selected, setSelected] = useState([]);
 
   const [data, setData] = useState([]);
 
-  const assignmentID = localStorage.getItem("assignment_id")!;
+  const { state } = useLocation();
+  const { brainstormId } = state;
 
   useEffect(() => {
-    // const fetchCourseData = async () => {
-    //   const response = await api.get("api/courses/");
-    //   localStorage.setItem("courses", JSON.stringify(response.data));
-    //   console.log(response.data);
-    //   const mapperFunction = (obj) => {
-    //     return { label: obj.name, key: obj.id };
-    //   };
-    //   const courseItemsFromBackend = response.data.map(mapperFunction);
-    //   console.log(courseItemsFromBackend);
-
-    //   setCourseMenuItems(courseItemsFromBackend);
-    // };
-    // fetchCourseData();
-
     const fetchIdeasData = async () => {
-      const author_id = 1;
       const response = await api.get(
-        `api/brainstorms/?author_id=${author_id}&assignment_id=${assignmentID}`
+        `api/ideas/?brainstorm_id=${brainstormId}`
       );
       localStorage.setItem("ideas", JSON.stringify(response.data));
       console.log(response.data);
       setData(response.data);
     };
     fetchIdeasData();
-  }, [assignmentID]);
+  }, [brainstormId]);
 
   const RenderItem = (item, idx) => {
-    const [isEditMode, setIsEditMode] = useState(false);
-
-    // const infoStyle = {
-    //   marginRight: 8,
-    //   marginLeft: 8,
-    //   height: 40,
-    // };
     return (
       <IdeasRenderItem
-        // infoStyle={infoStyle}
-        // isEditMode={isEditMode}
         selected={selected}
         setSelected={setSelected}
-        // setIsEditMode={setIsEditMode}
         item={item}
         idx={idx}
       />
@@ -158,60 +135,12 @@ const Ideas = () => {
               flexDirection: "row",
             }}
           >
-            {/* <div
-              style={{
-                backgroundColor: "red",
-                marginLeft: "15%",
-                marginRight: "2%",
-                width: "8%",
-              }}
-            >
-              <div
-                style={{
-                  backgroundColor: "#F5F5F5",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <p>Brainstorm 1</p>
-                <EditFilled />
-                <DeleteFilled />
-              </div>
-
-              <div
-                style={{
-                  backgroundColor: "#F5F5F5",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <p>Brainstorm 2</p>
-                <EditFilled />
-                <DeleteFilled />
-              </div>
-
-              <div
-                style={{
-                  backgroundColor: "#F5F5F5",
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <p>Brainstorm 3</p>
-                <EditFilled />
-                <DeleteFilled />
-              </div>
-            </div> */}
             <div
               style={{
                 marginTop: "3%",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                // width: "75%",
                 width: "85%",
 
                 marginLeft: "10%",
@@ -220,6 +149,7 @@ const Ideas = () => {
               <GeneralList
                 data={data}
                 RenderItem={RenderItem}
+                // numOfColumn={data.length >= 2 ? 2 : 1}
                 numOfColumn={2}
               />
 

@@ -84,8 +84,6 @@ const Generate = () => {
           position: "absolute",
           right: 0,
           top: 50,
-          width: "30%",
-          height: "30%",
           color: "red",
           zIndex: 0,
         }}

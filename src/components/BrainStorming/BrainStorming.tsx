@@ -50,7 +50,7 @@ const BrainStorming = () => {
     return (
       <BrainStormingRenderItem
         selected={selected}
-        setSelected={setSelected}
+        // setSelected={setSelected}
         item={item}
         idx={idx}
       />
@@ -73,10 +73,8 @@ const BrainStorming = () => {
         src={DesignCloudIcon}
         style={{
           position: "absolute",
-          right: -100,
+          right: 0,
           top: 400,
-          width: "30%",
-          height: "30%",
           color: "red",
           zIndex: 0,
         }}
@@ -87,10 +85,8 @@ const BrainStorming = () => {
         src={BrainstormVector}
         style={{
           position: "absolute",
-          right: -100,
+          right: 0,
           top: 100,
-          width: "30%",
-          height: "30%",
           color: "red",
           zIndex: 0,
         }}

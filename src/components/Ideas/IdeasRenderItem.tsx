@@ -38,7 +38,7 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
       style={{
         backgroundColor: "#F5F5F5",
         width: "90%",
-        height: "90%",
+        // height: "90%",
         // width: 750,
         // height: 270,
         padding: "1%",
@@ -48,7 +48,7 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
         borderColor: selected.includes(idx) ? "#0066CC" : "#F5F5F5",
         borderWidth: 3,
         borderRadius: 10,
-        margin: '2%'
+        margin: "2%",
       }}
       className="rounded-l"
     >
@@ -119,10 +119,12 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
         style={{
           display: "flex",
           flexDirection: "column",
-          width: "30%",
+          width: "35%",
           justifyContent: "space-around",
           columnGap: 2,
           rowGap: 2,
+          margin: 4,
+          padding: 2,
         }}
       >
         <IdeasInfoComponent

@@ -13,18 +13,21 @@ const IdeasInfoComponent = (props) => {
         borderRadius: 8,
         borderColor: color,
         borderWidth: 1,
+        marginTop: 4,
+        marginBottom: 4,
+        width: "100%",
       }}
     >
       <div style={{ display: "flex", flexDirection: "row" }}>
         <Image
           preview={false}
           src={imgSrc}
-          style={{ marginTop: 6, height: 22 }}
+          style={{ marginTop: 4, height: 22 }}
         />
         <span
           style={{
             marginLeft: 4,
-            fontSize: 24,
+            fontSize: 20,
             color: color,
             fontWeight: "bold",
           }}

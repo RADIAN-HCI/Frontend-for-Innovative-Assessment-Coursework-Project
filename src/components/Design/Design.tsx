@@ -65,10 +65,8 @@ const Design = () => {
         src={DesignCloudIcon}
         style={{
           position: "absolute",
-          right: -100,
+          right: 0,
           top: 250,
-          width: "30%",
-          height: "30%",
           color: "red",
           zIndex: 0,
         }}

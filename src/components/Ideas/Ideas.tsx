@@ -55,15 +55,13 @@ const Ideas = () => {
   const [text, setText] = useState("");
 
   return (
-    <>
+    <div style={{ overflow: "hidden" }}>
       <img
         src={DesignCloudIcon}
         style={{
           position: "absolute",
-          right: -100,
+          right: 0,
           top: 400,
-          width: "30%",
-          height: "30%",
           color: "red",
           zIndex: 0,
         }}
@@ -74,10 +72,8 @@ const Ideas = () => {
         src={BrainstormVector}
         style={{
           position: "absolute",
-          right: -100,
+          right: 0,
           top: 100,
-          width: "30%",
-          height: "30%",
           color: "red",
           zIndex: 0,
         }}
@@ -125,61 +121,51 @@ const Ideas = () => {
               marginRight: 8,
             }}
           >
-            Brain Storming
+            Ideas
           </span>
         </div>
         {data && data.length > 0 ? (
           <div
             style={{
-              display: "flex",
-              flexDirection: "row",
+              marginLeft: "10%",
+              marginTop: "3%",
+              marginRight: "10%",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <div
-              style={{
-                marginTop: "3%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: "85%",
+            <GeneralList
+              data={data}
+              RenderItem={RenderItem}
+              numOfColumn={data.length >= 2 ? 2 : 1}
+            />
 
-                marginLeft: "10%",
+            {/* <Input
+              placeholder="Please Enter your subject to brainstorm"
+              value={text}
+              onChange={(e) => {
+                setText(e.target.value);
               }}
-            >
-              <GeneralList
-                data={data}
-                RenderItem={RenderItem}
-                // numOfColumn={data.length >= 2 ? 2 : 1}
-                numOfColumn={2}
-              />
-
-              <Input
-                placeholder="Please Enter your subject to brainstorm"
-                value={text}
-                onChange={(e) => {
-                  setText(e.target.value);
-                }}
-                suffix={
-                  <SendOutlined
-                    style={{ color: "blue" }}
-                    onClick={() => {
-                      console.log(text);
-                    }}
-                    onPointerEnterCapture={undefined}
-                    onPointerLeaveCapture={undefined}
-                  />
-                }
-                style={{
-                  width: "80%",
-                  position: "sticky",
-                  bottom: 15,
-                  borderColor: "black",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  height: 38,
-                }}
-              />
-            </div>
+              suffix={
+                <SendOutlined
+                  style={{ color: "blue" }}
+                  onClick={() => {
+                    console.log(text);
+                  }}
+                  onPointerEnterCapture={undefined}
+                  onPointerLeaveCapture={undefined}
+                />
+              }
+              style={{
+                width: "100%",
+                position: "sticky",
+                bottom: 15,
+                borderColor: "black",
+                borderWidth: 1,
+                borderRadius: 10,
+                height: 38,
+              }}
+            /> */}
           </div>
         ) : (
           <EmptyPage
@@ -204,7 +190,7 @@ const Ideas = () => {
         }}
         alt="cloud icon"
       />
-    </>
+    </div>
   );
 };
 

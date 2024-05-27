@@ -3,7 +3,7 @@ import "../index.css";
 import { CheckOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
 import EditIcon from "../../images/EditIcon.svg";
 import GenerateUploadComponent from "./GenerateUploadComponent.tsx";
-import NoAttachmentComponent from "./NoAttachmentComponent.tsx";
+import NoAttachmentComponent from "../NoAttachmentComponent.tsx";
 import EyeIcon from "../../images/EyeIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 import { Image, Typography } from "antd";
@@ -71,14 +71,20 @@ const GenerateRenderItem = ({
             if (idx !== 0) {
               setData(swapElements(data, idx, idx - 1));
             }
-          } } onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        />
+          }}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        />
         <Text code>{idx + 1}</Text>
         <DownOutlined
           onClick={() => {
             if (idx !== data.length - 1) {
               setData(swapElements(data, idx, idx + 1));
             }
-          } } onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        />
+          }}
+          onPointerEnterCapture={undefined}
+          onPointerLeaveCapture={undefined}
+        />
       </div>
 
       <div
@@ -246,7 +252,11 @@ const SelectedComponent = () => {
         marginLeft: 4,
       }}
     >
-      <CheckOutlined style={{ color: "#0066CC" }} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+      <CheckOutlined
+        style={{ color: "#0066CC" }}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+      />
       <span style={{ color: "#0066CC" }}>Selected</span>
     </div>
   );

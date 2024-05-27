@@ -1,5 +1,6 @@
 import { Button, Image } from "antd";
 import React from "react";
+import "./ButtonStyle.css";
 
 const IconButton = ({
   icon,
@@ -12,37 +13,25 @@ const IconButton = ({
     <Button
       style={{
         color: mainColor,
-        height: "5%",
         backgroundColor: backgroundColor,
-        borderWidth: 1,
-        borderRadius: 15,
-        marginRight: 4,
-        marginLeft: 4,
       }}
+      className="flex mr-2 border-2 rounded-2xl h-auto"
       onClick={onClick}
       type="default"
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <div className="flex justify-center align-middle flex-row items-center">
         <Image
           src={icon}
           height={20}
           width={20}
-          style={{ marginRight: 12 }}
+          className="mr-3"
           preview={false}
         />
         <span
           style={{
-            fontWeight: "bolder",
             color: mainColor,
-            fontSize: 24,
           }}
+          className="BtnStyle"
         >
           {buttonText}
         </span>

@@ -6,13 +6,13 @@ import TextArea from "antd/es/input/TextArea";
 
 import "../index.css";
 import { CheckOutlined } from "@ant-design/icons";
-import GenerateUploadComponent from "../Generate/GenerateUploadComponent.tsx";
-import NoAttachmentComponent from "../Generate/NoAttachmentComponent.tsx";
+import NoAttachmentComponent from "../NoAttachmentComponent.tsx";
 import EyeIcon from "../../images/EyeIcon.svg";
 import CheckIcon from "../../images/CheckIcon.svg";
-import EnhanceIcon from "../../images/EnhanceIcon.svg";
 
 import IconButton from "../IconButton.tsx";
+import DesignUploadComponent from "./DesignUploadComponent.tsx";
+import ViewAttachments from "../ViewAttachments.tsx";
 
 const DesignRenderItem = ({
   item,
@@ -26,6 +26,8 @@ const DesignRenderItem = ({
   const [ideaText, setIdeaText] = useState(
     item.details_modified !== "" ? item.details_modified : item.details_original
   );
+
+  const [fileName, setFileName] = useState("");
   return (
     <div
       key={idx}
@@ -40,6 +42,7 @@ const DesignRenderItem = ({
         borderColor: selected === idx ? "#0066CC" : "#F5F5F5",
         borderWidth: 3,
         borderRadius: 10,
+        overflow: "hidden",
       }}
       onClick={() => {
         setSelected(idx);
@@ -81,34 +84,64 @@ const DesignRenderItem = ({
             style={{
               display: "flex",
               flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: "flex-end",
             }}
           >
-            {isEditMode ? (
-              <IconButton
-                icon={CheckIcon}
-                buttonText="Done"
-                backgroundColor="#F4C6FF"
-                mainColor="#D32EFF"
-                onClick={() => {
-                  setIsEditMode(false);
-                  onClickEdit(ideaText);
-                }}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              {isEditMode ? (
+                <IconButton
+                  icon={CheckIcon}
+                  buttonText="Done"
+                  backgroundColor="#F4C6FF"
+                  mainColor="#D32EFF"
+                  onClick={() => {
+                    setIsEditMode(false);
+                    onClickEdit({ ideaText, fileName });
+                  }}
+                />
+              ) : (
+                <IconButton
+                  icon={EditIcon}
+                  buttonText="Edit and Enhance"
+                  backgroundColor="#F4C6FF"
+                  mainColor="#D32EFF"
+                  onClick={() => {
+                    setIsEditMode(true);
+                  }}
+                />
+              )}
+
+              {/* {isEditMode ? (
+              item.attachment ? (
+                <ViewAttachments
+                  id={idx}
+                  attachment={item.attachment}
+                  editFunction={onClickEdit}
+                />
+              ) : (
+                <DesignUploadComponent
+                  fileName={fileName}
+                  setFileName={setFileName}
+                />
+              )
+            ) : item.attachment ? (
+              <ViewAttachments
+                id={idx}
+                attachment={item.attachment}
+                editFunction={onClickEdit}
               />
             ) : (
-              <IconButton
-                icon={EditIcon}
-                buttonText="Edit"
-                backgroundColor="#F4C6FF"
-                mainColor="#D32EFF"
-                onClick={() => {
-                  setIsEditMode(true);
-                }}
-              />
-            )}
+              <NoAttachmentComponent />
+            )} */}
 
-            <IconButton
+              {/* <IconButton
               icon={EnhanceIcon}
               buttonText="Enhance"
               backgroundColor="#DE54FF"
@@ -116,9 +149,33 @@ const DesignRenderItem = ({
               onClick={() => {
                 setIsEditMode(false);
               }}
-            />
+            /> */}
+            </div>
+
+            {isEditMode ? (
+              item.attachment ? (
+                <ViewAttachments
+                  id={idx}
+                  attachment={item.attachment}
+                  editFunction={onClickEdit}
+                />
+              ) : (
+                <DesignUploadComponent
+                  setFileName={setFileName}
+                />
+              )
+            ) : item.attachment ? (
+              <ViewAttachments
+                id={idx}
+                attachment={item.attachment}
+                editFunction={onClickEdit}
+              />
+            ) : (
+              <NoAttachmentComponent />
+            )}
           </div>
         </div>
+
         {isEditMode ? (
           <div
             style={{
@@ -161,7 +218,7 @@ const DesignRenderItem = ({
           }}
         ></div>
       </div>
-
+      {/* 
       <div
         style={{
           display: "flex",
@@ -170,8 +227,29 @@ const DesignRenderItem = ({
           justifyContent: "center",
         }}
       >
-        {isEditMode ? <GenerateUploadComponent /> : <NoAttachmentComponent />}
-      </div>
+        {isEditMode ? (
+          item.attachment ? (
+            <ViewAttachments
+              id={idx}
+              attachment={item.attachment}
+              editFunction={onClickEdit}
+            />
+          ) : (
+            <DesignUploadComponent
+              fileName={fileName}
+              setFileName={setFileName}
+            />
+          )
+        ) : item.attachment ? (
+          <ViewAttachments
+            id={idx}
+            attachment={item.attachment}
+            editFunction={onClickEdit}
+          />
+        ) : (
+          <NoAttachmentComponent />
+        )}
+      </div> */}
     </div>
   );
 };
@@ -242,7 +320,11 @@ const SelectedComponent = () => {
         marginLeft: 4,
       }}
     >
-      <CheckOutlined style={{ color: "#0066CC" }} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+      <CheckOutlined
+        style={{ color: "#0066CC" }}
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
+      />
       <span style={{ color: "#0066CC" }}>Selected</span>
     </div>
   );

@@ -19,7 +19,7 @@ const NoAttachmentComponent = () => {
       disabled
       style={{
         height: "40%",
-        width: "100%",
+        width: 120,
         alignItems: "center",
       }}
     >

@@ -1,85 +1,25 @@
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, message, Upload } from "antd";
-import React, { useState } from "react";
-const getBase64 = (img, callback) => {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result));
-  reader.readAsDataURL(img);
-};
-const beforeUpload = (file) => {
-  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-  if (!isJpgOrPng) {
-    message.error("You can only upload JPG/PNG file!");
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
-  }
-  return isJpgOrPng && isLt2M;
-};
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import { FileUpload } from "primereact/fileupload";
+import React from "react";
 
-const DesignUploadComponent = () => {
-  const [loading, setLoading] = useState(false);
-  //   const [imageUrl, setImageUrl] = useState();
-  const handleChange = (info) => {
-    console.log(info.file);
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (url) => {
-        setLoading(false);
-        // setImageUrl("https://localhost:8000");
-      });
-    }
+function DesignUploadComponent({ setFileName }) {
+  const onChangeHandler = ({ files }) => {
+    const [file] = files;
+    setFileName(file);
   };
-  return (
-    <Upload
-      name="file"
-      // listType="picture-card"
-      className="avatar-uploader"
-      showUploadList={false}
-      action="/api/upload"
-      beforeUpload={beforeUpload}
-      onChange={handleChange}
-      style={{ justifyContent: "center" }}
-    >
-      <Button type="dashed" style={{ height: "50%" }}>
-        {loading ? (
-          <LoadingOutlined
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-          />
-        ) : (
-          <PlusOutlined
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-          />
-        )}
-        <br />
-        <span
-          style={{
-            color: "#676767",
-            fontWeight: "bolder",
-            fontSize: 20,
-            marginTop: 8,
-          }}
-        >
-          Upload
-        </span>
-        <br />
-        <span style={{ color: "#676767", fontWeight: "bolder", fontSize: 20 }}>
-          Attachment
-        </span>
 
-        <br />
-        <span style={{ color: "#676767", fontSize: 14 }}>Drag and drop or</span>
-        <br />
-        <span style={{ color: "#676767", fontSize: 14 }}>click to choose</span>
-      </Button>
-    </Upload>
+  return (
+    <div className="card flex-col justify-content-center">
+      <FileUpload
+        customUpload={true}
+        mode="basic"
+        auto={true}
+        uploadHandler={onChangeHandler}
+        name="uploader"
+        chooseLabel="Select a File"
+      />
+    </div>
   );
-};
+}
+
 export default DesignUploadComponent;

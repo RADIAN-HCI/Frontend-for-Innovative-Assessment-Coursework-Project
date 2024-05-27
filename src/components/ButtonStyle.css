@@ -1,0 +1,10 @@
+.BtnStyle {
+    font-weight: bolder;
+    font-size: 16px;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .BtnStyle {
+        white-space: wrap;
+    }
+  }

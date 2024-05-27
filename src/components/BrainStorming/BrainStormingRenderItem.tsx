@@ -4,10 +4,10 @@ import "../index.css";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 
-const BrainStormingRenderItem = ({ item, idx, selected }) => {
+const BrainStormingRenderItem = ({ item, idx }) => {
   const navigate = useNavigate();
 
-  const allAssignments = JSON.parse(localStorage.getItem("assignments"));
+  const allAssignments = JSON.parse(localStorage.getItem("assignments")!);
 
   return (
     <div
@@ -20,7 +20,7 @@ const BrainStormingRenderItem = ({ item, idx, selected }) => {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
-        borderColor: selected.includes(idx) ? "#0066CC" : "#F5F5F5",
+        // borderColor: selected.includes(idx) ? "#0066CC" : "#F5F5F5",
         borderWidth: 3,
         borderRadius: 10,
       }}
@@ -110,9 +110,9 @@ const BrainStormingRenderItem = ({ item, idx, selected }) => {
           {
             allAssignments.find((x) => {
               if (x.id === item.assignment) {
-                console.log("alksdjaslkjdaslk");
                 return x;
               }
+              return 0;
             }).title
           }
         </span>

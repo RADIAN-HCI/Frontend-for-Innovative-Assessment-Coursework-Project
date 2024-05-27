@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image, Input } from "antd";
+import { Button, Image } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent.tsx";
 import IdeasRenderItem from "./IdeasRenderItem.tsx";
-import { SendOutlined } from "@ant-design/icons";
 import api from "../api.ts";
 
 import BrainstormVector from "../../images/BrainstormVector.svg";
@@ -51,8 +50,6 @@ const Ideas = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
-  const [text, setText] = useState("");
 
   return (
     <div style={{ overflow: "hidden" }}>

@@ -16,7 +16,7 @@ const Design = () => {
   const fetchIdeasData = async () => {
     const response = await api.get("api/questions/");
     localStorage.setItem("questions", JSON.stringify(response.data));
-    console.log(response.data);
+    console.log(" response: ", response.data);
     setData(response.data);
   };
 
@@ -29,12 +29,22 @@ const Design = () => {
   const RenderItem = (item, idx) => {
     const [isEditMode, setIsEditMode] = useState(false);
 
-    const editQuestion = async (ideaText) => {
-      const response = await api.patch(`api/questions/${item.id}/`, {
-        details_modified: ideaText,
-      });
+    const editQuestion = async (objectData) => {
+      await api.patch(
+        `api/questions/${item.id}/`,
+        objectData.fileName
+          ? {
+              details_modified: objectData.ideaText,
+              attachment: objectData.fileName,
+            }
+          : { details_modified: objectData.ideaText },
+        // {
+        //   details_modified: objectData.ideaText,
+        //   attachment: objectData.fileName,
+        // },
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
       // localStorage.setItem("questions", JSON.stringify(response.data));
-      console.log(response.data);
       // setData(response.data);
     };
 
@@ -46,7 +56,10 @@ const Design = () => {
         setIsEditMode={setIsEditMode}
         item={item}
         idx={idx}
-        onClickEdit={editQuestion}
+        onClickEdit={async (objectData) => {
+          await editQuestion(objectData);
+          fetchIdeasData();
+        }}
       />
     );
   };
@@ -91,7 +104,11 @@ const Design = () => {
             height: "10%",
           }}
         />
-        <NavigatorComponent firstText="Assignments" secondText="Design" thirdText={undefined} />
+        <NavigatorComponent
+          firstText="Assignments"
+          secondText="Design"
+          thirdText={undefined}
+        />
 
         <div
           style={{
@@ -181,12 +198,7 @@ const Design = () => {
   );
 };
 
-const EmptyPage = ({
-  setIsModalOpen,
-  isModalOpen,
-  handleCancel,
-  handleOk,
-}) => {
+const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}

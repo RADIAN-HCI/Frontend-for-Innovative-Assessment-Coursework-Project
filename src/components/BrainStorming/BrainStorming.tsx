@@ -13,27 +13,13 @@ import api from "../api.ts";
 import BrainstormVector from "../../images/BrainstormVector.svg";
 
 const BrainStorming = () => {
-  const [selected, setSelected] = useState([]);
+  // const [selected, setSelected] = useState([]);
 
   const [data, setData] = useState([]);
 
   const assignmentID = localStorage.getItem("assignment_id")!;
 
   useEffect(() => {
-    // const fetchCourseData = async () => {
-    //   const response = await api.get("api/courses/");
-    //   localStorage.setItem("courses", JSON.stringify(response.data));
-    //   console.log(response.data);
-    //   const mapperFunction = (obj) => {
-    //     return { label: obj.name, key: obj.id };
-    //   };
-    //   const courseItemsFromBackend = response.data.map(mapperFunction);
-    //   console.log(courseItemsFromBackend);
-
-    //   setCourseMenuItems(courseItemsFromBackend);
-    // };
-    // fetchCourseData();
-
     const fetchIdeasData = async () => {
       const author_id = 1;
       const response = await api.get(
@@ -49,7 +35,7 @@ const BrainStorming = () => {
   const RenderItem = (item, idx) => {
     return (
       <BrainStormingRenderItem
-        selected={selected}
+        // selected={selected}
         // setSelected={setSelected}
         item={item}
         idx={idx}
@@ -71,25 +57,14 @@ const BrainStorming = () => {
     <>
       <img
         src={DesignCloudIcon}
-        style={{
-          position: "absolute",
-          right: 0,
-          top: 400,
-          color: "red",
-          zIndex: 0,
-        }}
+        style={{ top: 400 }}
+        className="absolute right-0 top-100 z-0"
         alt="cloud icon"
       />
 
       <img
         src={BrainstormVector}
-        style={{
-          position: "absolute",
-          right: 0,
-          top: 100,
-          color: "red",
-          zIndex: 0,
-        }}
+        className="absolute right-0 top-24 z-0"
         alt="cloud icon"
       />
       <div

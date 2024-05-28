@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import "../index.css";
 import { CheckOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
 import EditIcon from "../../images/EditIcon.svg";
-import GenerateUploadComponent from "./GenerateUploadComponent.tsx";
 import NoAttachmentComponent from "../NoAttachmentComponent.tsx";
 import EyeIcon from "../../images/EyeIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 import { Image, Typography } from "antd";
 import ButtonsSideBySide from "../ButtonsSideBySide.tsx";
 import api from "../api.ts";
+import ViewAttachments from "../ViewAttachments.tsx";
+import DesignUploadComponent from "../Design/DesignUploadComponent.tsx";
 
 const { Text } = Typography;
 
@@ -29,6 +30,10 @@ const GenerateRenderItem = ({
     item.details_modified !== "" ? item.details_modified : item.details_original
   );
 
+  const [fileName, setFileName] = useState("");
+
+  console.log(fileName);
+
   const swapElements = (arr, pos1, pos2) => {
     const temp = arr[pos1];
 
@@ -44,7 +49,6 @@ const GenerateRenderItem = ({
     const assignment_id = localStorage.getItem("assignment_id");
 
     for (let i = 0; i < data.length; i++) {
-      console.log("Items", data[i].id);
       sendingData.push({ order: i + 1, id: data[i].id });
     }
 
@@ -59,25 +63,13 @@ const GenerateRenderItem = ({
         width: "95%",
         height: "90%",
         padding: "1%",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
         borderColor: selected === idx ? "#0066CC" : "#F5F5F5",
-        borderWidth: 3,
-        borderRadius: 10,
       }}
-      className="rounded-l"
+      className="rounded-xl justify-between flex flex-row border-2"
     >
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "30%",
-          marginBottom: 12,
-          justifyContent: "space-between",
-          alignSelf: "center",
-          alignItems: "center",
-        }}
+        style={{ height: "30%" }}
+        className="flex flex-col mb-3 justify-between items-center self-center"
       >
         <UpOutlined
           onClick={async () => {
@@ -116,56 +108,54 @@ const GenerateRenderItem = ({
           setSelected(idx);
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
+        <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-row items-center">
             <span style={{ fontWeight: "bolder", fontSize: 40 }}>
               {item.title}
             </span>
             {selected === idx ? <SelectedComponent /> : null}
           </div>
-          <ButtonsSideBySide
-            isEditMode={isEditMode}
-            setIsEditMode={setIsEditMode}
-            add={add}
-            setAdd={setAdd}
-            ideaText={ideaText}
-            onClickEdit={onClickEdit}
-          />
+          <div className="flex flex-row justify-between">
+            <ButtonsSideBySide
+              isEditMode={isEditMode}
+              setIsEditMode={setIsEditMode}
+              add={add}
+              setAdd={setAdd}
+              ideaText={ideaText}
+              onClickEdit={onClickEdit}
+            />
+
+            {isEditMode ? (
+              item.attachment ? (
+                <ViewAttachments
+                  id={idx}
+                  attachment={item.attachment}
+                  editFunction={onClickEdit}
+                />
+              ) : (
+                <DesignUploadComponent setFileName={setFileName} />
+              )
+            ) : item.attachment ? (
+              <ViewAttachments
+                id={idx}
+                attachment={item.attachment}
+                editFunction={onClickEdit}
+              />
+            ) : (
+              <NoAttachmentComponent />
+            )}
+          </div>
         </div>
+
         {isEditMode ? (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex flex-row items-center">
             <Image src={EditIcon} preview={false} />
             <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
               Editing Mode
             </span>
           </div>
         ) : (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex flex-row items-center">
             <Image src={EyeIcon} preview={false} />
             <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
               Reading Mode
@@ -178,25 +168,6 @@ const GenerateRenderItem = ({
         ) : (
           <TextDisplay text={ideaText} />
         )}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingBottom: 10,
-          }}
-        ></div>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "10%",
-          justifyContent: "center",
-        }}
-      >
-        {add ? <GenerateUploadComponent /> : <NoAttachmentComponent />}
       </div>
     </div>
   );

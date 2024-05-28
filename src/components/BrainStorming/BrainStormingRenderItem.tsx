@@ -16,90 +16,12 @@ const BrainStormingRenderItem = ({ item, idx }) => {
         backgroundColor: "#F5F5F5",
         width: "90%",
         height: "90%",
-        padding: "1%",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        // borderColor: selected.includes(idx) ? "#0066CC" : "#F5F5F5",
-        borderWidth: 3,
-        borderRadius: 10,
       }}
-      className="rounded-l"
+      className="flex flex-row justify-between rounded-lg p-2 border-4"
     >
-      {/* <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          marginLeft: "2%",
-          marginRight: "2%",
-          marginBottom: "5%",
-          width: "90%",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <span style={{ fontWeight: "bolder", fontSize: 40 }}>
-            {item.title}
-          </span>
-          {selected.includes(idx) ? <SelectedComponent /> : null}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "80%",
-            }}
-            key={state.counter}
-          >
-            <Paragraph
-              ellipsis={{
-                rows: 4,
-                expandable: true,
-                onExpand: typoExpand,
-              }}
-            >
-              {item.prompt}
-            </Paragraph>
-            {state.expand && (
-              <a onClick={typoClose} style={{ marginTop: 0, color: "blue" }}>
-                Collapse
-              </a>
-            )}
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingBottom: 10,
-          }}
-        ></div>
-      </div> */}
-
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          marginLeft: "2%",
-          marginRight: "2%",
-          marginBottom: "5%",
-          width: "90%",
-          backgroundColor: "red",
-          height: 40,
-        }}
+        style={{ width: "90%" }}
+        className="bg-slate-400 rounded-lg p-2 flex flex-col mr-2 ml-2"
       >
         <span>
           Created At: {new Date(item.created_at).toLocaleDateString()}
@@ -119,14 +41,8 @@ const BrainStormingRenderItem = ({ item, idx }) => {
       </div>
 
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "30%",
-          justifyContent: "space-around",
-          columnGap: 2,
-          rowGap: 2,
-        }}
+        style={{ width: "30%" }}
+        className="flex flex-col gap-x-1 gap-y-1 justify-around"
       >
         <Button
           style={{ backgroundColor: "#D6E5F5", color: "#0066CC" }}

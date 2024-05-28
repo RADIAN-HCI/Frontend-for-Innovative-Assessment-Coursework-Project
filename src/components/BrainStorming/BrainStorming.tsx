@@ -125,9 +125,7 @@ const BrainStorming = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                // width: "75%",
                 width: "85%",
-
                 marginLeft: "10%",
               }}
             >
@@ -192,7 +190,7 @@ const BrainStorming = () => {
   );
 };
 
-const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
+const EmptyPage = ({ setIsModalOpen }) => {
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}

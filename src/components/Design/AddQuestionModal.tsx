@@ -1,17 +1,15 @@
 import { Input, Modal, Button, Image } from "antd";
 import React, { useState } from "react";
-import GenerateUploadComponent from "../Generate/GenerateUploadComponent.tsx";
 import EnhanceIcon from "../../images/EnhanceIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 import api from "../api.ts";
+import DesignUploadComponent from "./DesignUploadComponent.tsx";
 
-const AddQuestionModal = ({
-  isModalOpen,
-  handleOk,
-  handleCancel,
-}) => {
+const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
   const [questionText, setQuestionText] = useState("");
   const [questionTitle, setQuestionTitle] = useState("");
+
+  const [fileName, setFileName] = useState("");
 
   const sendAddQuestionRequest = async () => {
     const data = {
@@ -44,19 +42,8 @@ const AddQuestionModal = ({
         okType="default"
         footer={null}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              width: "500%",
-            }}
-          >
+        <div className="flex flex-row">
+          <div style={{ width: "500%" }} className="flex flex-row">
             <Input
               value={questionTitle}
               onChange={(e) => setQuestionTitle(e.target.value)}
@@ -65,18 +52,14 @@ const AddQuestionModal = ({
             />
 
             <ButtonForModal
-              // icon={PlusIcon}
               icon={EnhanceIcon}
               buttonText="Create and Enhance"
-              // backgroundColor="#D6E5F5"
               backgroundColor="#DE54FF"
-              // mainColor="#0066CC"
               mainColor="#FFFFFF"
-              // onClick={sendAddQuestionRequest}
               onClick={sendAddQuestionRequest}
             />
           </div>
-          <GenerateUploadComponent />
+          <DesignUploadComponent setFileName={setFileName} />
         </div>
 
         <div
@@ -115,26 +98,17 @@ const ButtonForModal = ({
         height: "40%",
         backgroundColor: backgroundColor,
         borderWidth: 1,
-        borderRadius: 15,
-        marginRight: 4,
-        marginLeft: 4,
       }}
+      className="ml-1 mr-1 rounded-2xl"
       onClick={onClick}
       type="default"
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <div className="flex flex-row justify-center items-center">
         <Image
           src={icon}
           height={20}
           width={20}
-          style={{ marginRight: 12 }}
+          className="mr-3"
           preview={false}
         />
         <span

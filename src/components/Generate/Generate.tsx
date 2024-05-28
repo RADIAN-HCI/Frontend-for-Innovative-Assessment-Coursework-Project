@@ -14,23 +14,6 @@ import GenerateRenderItem from "./GenerateRenderItem.tsx";
 import NavigatorComponent from "../NavigatorComponent.tsx";
 import api from "../api.ts";
 
-type responseType = {
-  assignment: number;
-  attachment: string;
-  author: number;
-  created_at: string;
-
-  details_modified: string;
-
-  details_original: string;
-
-  id: number;
-  is_selected_for_assignment: boolean;
-  lang: string;
-  order: number;
-  title: string;
-};
-
 const Generate = () => {
   const [selected, setSelected] = useState(-1);
 
@@ -65,7 +48,7 @@ const Generate = () => {
     );
   };
 
-  const [generateData, setGenerateData] = useState<responseType[]>([]);
+  const [generateData, setGenerateData] = useState([]);
 
   const fetchGenerateData = async () => {
     const response = await api.get("api/questions/sorted/1");

@@ -25,13 +25,10 @@ const Assignments = () => {
     const fetchCourseData = async () => {
       const response = await api.get("api/courses/");
       localStorage.setItem("courses", JSON.stringify(response.data));
-      console.log(response.data);
       const mapperFunction = (obj) => {
         return { label: obj.name, key: obj.id };
       };
       const courseItemsFromBackend = response.data.map(mapperFunction);
-      console.log(courseItemsFromBackend);
-
       setCourseMenuItems(courseItemsFromBackend);
     };
     fetchCourseData();
@@ -39,7 +36,6 @@ const Assignments = () => {
     const fetchAssignmentData = async () => {
       const response = await api.get("api/assignments/");
       localStorage.setItem("assignments", JSON.stringify(response.data));
-      console.log(response.data);
     };
     fetchAssignmentData();
   }, []);
@@ -65,8 +61,6 @@ const Assignments = () => {
         filterCourses
       )[0]
     );
-
-    console.log("The current course is: ", currentCourse);
 
     const allAssignments = JSON.parse(
       localStorage.getItem("assignments") || "{}"

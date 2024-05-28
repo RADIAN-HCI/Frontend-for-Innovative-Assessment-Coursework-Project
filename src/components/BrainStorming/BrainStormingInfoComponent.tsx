@@ -6,16 +6,10 @@ const BrainStormingInfoComponent = (props) => {
   const { score, color, imgSrc, subtitle } = props;
   return (
     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        borderRadius: 8,
-        borderColor: color,
-        borderWidth: 1,
-      }}
+      style={{ borderColor: color }}
+      className="border-1 rounded-lg items-center flex flex-col"
     >
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div className="flex flex-row">
         <Image
           preview={false}
           src={imgSrc}

@@ -38,14 +38,8 @@ const Design = () => {
               attachment: objectData.fileName,
             }
           : { details_modified: objectData.ideaText },
-        // {
-        //   details_modified: objectData.ideaText,
-        //   attachment: objectData.fileName,
-        // },
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      // localStorage.setItem("questions", JSON.stringify(response.data));
-      // setData(response.data);
     };
 
     return (
@@ -76,13 +70,8 @@ const Design = () => {
     <>
       <img
         src={DesignCloudIcon}
-        style={{
-          position: "absolute",
-          right: 0,
-          top: 250,
-          color: "red",
-          zIndex: 0,
-        }}
+        style={{ top: 250 }}
+        className="flex absolute right-0 z-0"
         alt="cloud icon"
       />
       <div

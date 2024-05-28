@@ -38,9 +38,6 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
       style={{
         backgroundColor: "#F5F5F5",
         width: "90%",
-        // height: "90%",
-        // width: 750,
-        // height: 270,
         padding: "1%",
         display: "flex",
         flexDirection: "row",

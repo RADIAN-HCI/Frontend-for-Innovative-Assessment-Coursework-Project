@@ -14,8 +14,24 @@ import GenerateRenderItem from "./GenerateRenderItem.tsx";
 import NavigatorComponent from "../NavigatorComponent.tsx";
 import api from "../api.ts";
 
-const Generate = () => {
+type responseType = {
+  assignment: number;
+  attachment: string;
+  author: number;
+  created_at: string;
 
+  details_modified: string;
+
+  details_original: string;
+
+  id: number;
+  is_selected_for_assignment: boolean;
+  lang: string;
+  order: number;
+  title: string;
+};
+
+const Generate = () => {
   const [selected, setSelected] = useState(-1);
 
   const RenderItem = (item, idx) => {
@@ -49,17 +65,14 @@ const Generate = () => {
     );
   };
 
-
-
-  const [generateData, setGenerateData] = useState([]);
+  const [generateData, setGenerateData] = useState<responseType[]>([]);
 
   const fetchGenerateData = async () => {
-    const response = await api.get("api/questions/");
+    const response = await api.get("api/questions/sorted/1");
     localStorage.setItem("questions", JSON.stringify(response.data));
-    console.log(response.data);
+    console.log("Generate Data ", response.data);
     setGenerateData(response.data);
   };
-
 
   useEffect(() => {
     fetchGenerateData();
@@ -109,7 +122,11 @@ const Generate = () => {
             alignItems: "center",
           }}
         />
-        <NavigatorComponent firstText="Assignments" secondText="Generate" thirdText={undefined} />
+        <NavigatorComponent
+          firstText="Assignments"
+          secondText="Generate"
+          thirdText={undefined}
+        />
         <div
           style={{
             display: "flex",

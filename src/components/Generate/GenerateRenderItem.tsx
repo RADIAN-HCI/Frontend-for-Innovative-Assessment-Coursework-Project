@@ -8,6 +8,7 @@ import EyeIcon from "../../images/EyeIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 import { Image, Typography } from "antd";
 import ButtonsSideBySide from "../ButtonsSideBySide.tsx";
+import api from "../api.ts";
 
 const { Text } = Typography;
 
@@ -36,6 +37,18 @@ const GenerateRenderItem = ({
     arr[pos2] = temp;
 
     return [...arr];
+  };
+
+  const sortAPICall = async (data: []) => {
+    const sendingData: Object[] = [];
+    const assignment_id = localStorage.getItem("assignment_id");
+
+    for (let i = 0; i < data.length; i++) {
+      console.log("Items", data[i].id);
+      sendingData.push({ order: i + 1, id: data[i].id });
+    }
+
+    await api.put(`api/questions/order/${assignment_id}/`, sendingData);
   };
 
   return (
@@ -67,9 +80,11 @@ const GenerateRenderItem = ({
         }}
       >
         <UpOutlined
-          onClick={() => {
+          onClick={async () => {
             if (idx !== 0) {
-              setData(swapElements(data, idx, idx - 1));
+              await setData(swapElements(data, idx, idx - 1));
+
+              sortAPICall(data);
             }
           }}
           onPointerEnterCapture={undefined}
@@ -77,9 +92,10 @@ const GenerateRenderItem = ({
         />
         <Text code>{idx + 1}</Text>
         <DownOutlined
-          onClick={() => {
+          onClick={async () => {
             if (idx !== data.length - 1) {
-              setData(swapElements(data, idx, idx + 1));
+              await setData(swapElements(data, idx, idx + 1));
+              sortAPICall(data);
             }
           }}
           onPointerEnterCapture={undefined}

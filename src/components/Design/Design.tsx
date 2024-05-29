@@ -14,7 +14,11 @@ import { useNavigate } from "react-router-dom";
 const Design = () => {
   const [data, setData] = useState([]);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const navigate = useNavigate();
+
+  const [selected, setSelected] = useState(-1);
 
   const fetchDesignData = async () => {
     try {
@@ -30,10 +34,7 @@ const Design = () => {
     fetchDesignData();
   }, []);
 
-  const [selected, setSelected] = useState(-1);
-
   const RenderItem = (item, idx) => {
-    const [isEditMode, setIsEditMode] = useState(false);
 
     const editQuestion = async (objectData) => {
       await api.patch(
@@ -50,10 +51,10 @@ const Design = () => {
 
     return (
       <DesignRenderItem
-        isEditMode={isEditMode}
+        // isEditMode={isEditMode}
         selected={selected}
         setSelected={setSelected}
-        setIsEditMode={setIsEditMode}
+        // setIsEditMode={setIsEditMode}
         item={item}
         idx={idx}
         onClickEdit={async (objectData) => {
@@ -64,9 +65,9 @@ const Design = () => {
     );
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOk = () => {
     setIsModalOpen(false);
+    fetchDesignData();
   };
   const handleCancel = () => {
     setIsModalOpen(false);

@@ -19,13 +19,12 @@ const DesignRenderItem = ({
   idx,
   selected,
   setSelected,
-  isEditMode,
-  setIsEditMode,
   onClickEdit,
 }) => {
   const [ideaText, setIdeaText] = useState(
     item.details_modified !== "" ? item.details_modified : item.details_original
   );
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const [fileName, setFileName] = useState("");
   return (
@@ -35,19 +34,13 @@ const DesignRenderItem = ({
         backgroundColor: "#F5F5F5",
         width: "95%",
         height: "90%",
-        padding: "1%",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
         borderColor: selected === idx ? "#0066CC" : "#F5F5F5",
         borderWidth: 3,
-        borderRadius: 10,
-        overflow: "hidden",
       }}
       onClick={() => {
         setSelected(idx);
       }}
-      className="rounded-l"
+      className="rounded-l justify-between flex flex-row rounded-lg overflow-hidden p-3"
     >
       <div
         style={{
@@ -204,7 +197,6 @@ const TextDisplay = ({ text }) => {
           height: "100%",
         }}
       >
-        {/* <span>{text}</span> */}
         <TextArea value={text} disabled autoSize style={{ color: "black" }} />
       </div>
     </div>

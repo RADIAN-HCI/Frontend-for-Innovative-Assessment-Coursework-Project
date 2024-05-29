@@ -30,20 +30,23 @@ const AddQuestionModal = ({
     };
 
     try {
-      await api.post("api/questions/", dataToBeSent);
-      handleOk();
-      messageApi.open({
-        type: "success",
-        content: "Question Added!",
-      });
+      const response = await api.post("api/questions/", dataToBeSent);
+      if (response.status.toString().startsWith("2")) {
+        await handleOk();
+        messageApi.open({
+          type: "success",
+          content: "Question Added!",
+        });
+        // await fetchDesignData();
+      }
     } catch (e) {
-      // console.log(e);
+      console.log(e);
 
-      messageApi.open({
-        type: "error",
-        content: "Something Went Wrong!",
-      });
-      handleOk();
+      // messageApi.open({
+      //   type: "error",
+      //   content: "Something Went Wrong!",
+      // });
+      // handleOk();
     }
   };
 

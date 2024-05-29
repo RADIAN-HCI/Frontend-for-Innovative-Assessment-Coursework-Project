@@ -17,6 +17,7 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
       lang: "fa",
       title: questionTitle,
       assignment: localStorage.getItem("assignment_id"),
+      
       author: 1,
       details_modified: "",
     };

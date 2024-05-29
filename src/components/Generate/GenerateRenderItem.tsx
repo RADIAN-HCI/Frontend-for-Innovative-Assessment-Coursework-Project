@@ -190,7 +190,7 @@ const TextDisplay = ({ text }) => {
           height: "100%",
         }}
       >
-        <span>{text}</span>
+        <TextArea value={text} disabled autoSize style={{ color: "black" }} />
       </div>
     </div>
   );

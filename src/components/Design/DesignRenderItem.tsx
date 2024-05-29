@@ -14,6 +14,10 @@ import IconButton from "../IconButton.tsx";
 import DesignUploadComponent from "./DesignUploadComponent.tsx";
 import ViewAttachments from "../ViewAttachments.tsx";
 
+import { Typography } from "antd";
+
+const { Text, Paragraph } = Typography;
+
 const DesignRenderItem = ({
   item,
   idx,
@@ -160,9 +164,7 @@ const DesignRenderItem = ({
                   editFunction={onClickEdit}
                 />
               ) : (
-                <DesignUploadComponent
-                  setFileName={setFileName}
-                />
+                <DesignUploadComponent setFileName={setFileName} />
               )
             ) : item.attachment ? (
               <ViewAttachments
@@ -271,7 +273,8 @@ const TextDisplay = ({ text }) => {
           height: "100%",
         }}
       >
-        <span>{text}</span>
+        {/* <span>{text}</span> */}
+        <TextArea value={text} disabled autoSize style={{ color: "black" }} />
       </div>
     </div>
   );

@@ -14,10 +14,6 @@ import IconButton from "../IconButton.tsx";
 import DesignUploadComponent from "./DesignUploadComponent.tsx";
 import ViewAttachments from "../ViewAttachments.tsx";
 
-import { Typography } from "antd";
-
-const { Text, Paragraph } = Typography;
-
 const DesignRenderItem = ({
   item,
   idx,
@@ -121,39 +117,6 @@ const DesignRenderItem = ({
                   }}
                 />
               )}
-
-              {/* {isEditMode ? (
-              item.attachment ? (
-                <ViewAttachments
-                  id={idx}
-                  attachment={item.attachment}
-                  editFunction={onClickEdit}
-                />
-              ) : (
-                <DesignUploadComponent
-                  fileName={fileName}
-                  setFileName={setFileName}
-                />
-              )
-            ) : item.attachment ? (
-              <ViewAttachments
-                id={idx}
-                attachment={item.attachment}
-                editFunction={onClickEdit}
-              />
-            ) : (
-              <NoAttachmentComponent />
-            )} */}
-
-              {/* <IconButton
-              icon={EnhanceIcon}
-              buttonText="Enhance"
-              backgroundColor="#DE54FF"
-              mainColor="#FFFFFF"
-              onClick={() => {
-                setIsEditMode(false);
-              }}
-            /> */}
             </div>
 
             {isEditMode ? (
@@ -220,38 +183,6 @@ const DesignRenderItem = ({
           }}
         ></div>
       </div>
-      {/* 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "10%",
-          justifyContent: "center",
-        }}
-      >
-        {isEditMode ? (
-          item.attachment ? (
-            <ViewAttachments
-              id={idx}
-              attachment={item.attachment}
-              editFunction={onClickEdit}
-            />
-          ) : (
-            <DesignUploadComponent
-              fileName={fileName}
-              setFileName={setFileName}
-            />
-          )
-        ) : item.attachment ? (
-          <ViewAttachments
-            id={idx}
-            attachment={item.attachment}
-            editFunction={onClickEdit}
-          />
-        ) : (
-          <NoAttachmentComponent />
-        )}
-      </div> */}
     </div>
   );
 };

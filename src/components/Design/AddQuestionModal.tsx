@@ -3,90 +3,105 @@ import React, { useState } from "react";
 import EnhanceIcon from "../../images/EnhanceIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 import api from "../api.ts";
+import { message } from "antd";
 // import DesignUploadComponent from "./DesignUploadComponent.tsx";
 
-const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
+const AddQuestionModal = ({
+  isModalOpen,
+  handleOk,
+  handleCancel,
+  fetchDesignData,
+}) => {
   const [questionText, setQuestionText] = useState("");
   const [questionTitle, setQuestionTitle] = useState("");
+
+  const [messageApi, contextHolder] = message.useMessage();
 
   // const [fileName, setFileName] = useState(null);
 
   const sendAddQuestionRequest = async () => {
-    let data = {
+    let dataToBeSent = {
       details_original: questionText,
       lang: "fa",
       title: questionTitle,
       assignment: localStorage.getItem("assignment_id"),
-      
       author: 1,
       details_modified: "",
     };
-    // if (fileName) {
-    //   data = Object.assign({ attachment: fileName }, data);
-    // }
 
     try {
-      // console.log("file: ", fileName);
-      // console.log("data: ", data);
-
-      const response = await api.post("api/questions/", data);
-      console.log(response.data);
+      await api.post("api/questions/", dataToBeSent);
       handleOk();
+      messageApi.open({
+        type: "success",
+        content: "Question Added!",
+      });
     } catch (e) {
-      console.log(e);
+      // console.log(e);
+
+      messageApi.open({
+        type: "error",
+        content: "Something Went Wrong!",
+      });
+      handleOk();
     }
   };
 
   return (
-    <div>
-      <Modal
-        title="+ Add a Question"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        width="50%"
-        okType="default"
-        footer={null}
-      >
-        <div className="flex flex-row">
-          <div className="flex flex-row mb-2">
-            <Input
-              value={questionTitle}
-              onChange={(e) => setQuestionTitle(e.target.value)}
-              placeholder="Enter your question title"
-              // style={{ height: "40%" }}
-            />
+    <>
+      {contextHolder}
+      <div>
+        <Modal
+          title="+ Add a Question"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          width="50%"
+          okType="default"
+          footer={null}
+        >
+          <div className="flex flex-row">
+            <div className="flex flex-row mb-2">
+              <Input
+                value={questionTitle}
+                onChange={(e) => setQuestionTitle(e.target.value)}
+                placeholder="Enter your question title"
+                // style={{ height: "40%" }}
+              />
 
-            <ButtonForModal
-              icon={EnhanceIcon}
-              buttonText="Create and Enhance"
-              backgroundColor="#DE54FF"
-              mainColor="#FFFFFF"
-              onClick={sendAddQuestionRequest}
+              <ButtonForModal
+                icon={EnhanceIcon}
+                buttonText="Create and Enhance"
+                backgroundColor="#DE54FF"
+                mainColor="#FFFFFF"
+                onClick={() => {
+                  sendAddQuestionRequest();
+                  // setTimeout(fetchDesignData, 1000);
+                }}
+              />
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "82%",
+            }}
+          >
+            <TextArea
+              value={questionText}
+              onChange={(e) => setQuestionText(e.target.value)}
+              placeholder="Enter your question"
+              autoSize={{
+                minRows: 3,
+                maxRows: 7,
+              }}
             />
           </div>
-          {/* <DesignUploadComponent setFileName={setFileName} /> */}
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            width: "82%",
-          }}
-        >
-          <TextArea
-            value={questionText}
-            onChange={(e) => setQuestionText(e.target.value)}
-            placeholder="Enter your question"
-            autoSize={{
-              minRows: 3,
-              maxRows: 7,
-            }}
-          />
-        </div>
-      </Modal>
-    </div>
+        </Modal>
+      </div>
+    </>
   );
 };
 
@@ -104,6 +119,7 @@ const ButtonForModal = ({
         // height: "40%",
         backgroundColor: backgroundColor,
         borderWidth: 1,
+        height: "auto",
       }}
       className="ml-1 mr-1 rounded-2xl"
       onClick={onClick}

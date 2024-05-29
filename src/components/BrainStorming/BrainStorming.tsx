@@ -21,9 +21,9 @@ const BrainStorming = () => {
   useEffect(() => {
     const fetchIdeasData = async () => {
       try {
-        const author_id = 1;
+        // const author_id = 1;
         const response = await api.get(
-          `api/brainstorms/?author_id=${author_id}&assignment_id=${assignmentID}`
+          `api/brainstorms/?assignment_id=${assignmentID}`
         );
         localStorage.setItem("ideas", JSON.stringify(response.data));
         console.log(response.data);

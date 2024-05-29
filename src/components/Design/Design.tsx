@@ -16,11 +16,10 @@ const Design = () => {
 
   const navigate = useNavigate();
 
-  const fetchIdeasData = async () => {
+  const fetchDesignData = async () => {
     try {
       const response = await api.get("api/questions/");
       localStorage.setItem("questions", JSON.stringify(response.data));
-      console.log(" response: ", response.data);
       setData(response.data);
     } catch (e) {
       navigate("/login");
@@ -28,7 +27,7 @@ const Design = () => {
   };
 
   useEffect(() => {
-    fetchIdeasData();
+    fetchDesignData();
   }, []);
 
   const [selected, setSelected] = useState(-1);
@@ -59,7 +58,7 @@ const Design = () => {
         idx={idx}
         onClickEdit={async (objectData) => {
           await editQuestion(objectData);
-          fetchIdeasData();
+          fetchDesignData();
         }}
       />
     );
@@ -165,6 +164,7 @@ const Design = () => {
               isModalOpen={isModalOpen}
               handleCancel={handleCancel}
               handleOk={handleOk}
+              fetchDesignData={fetchDesignData}
             />
           </div>
         ) : (

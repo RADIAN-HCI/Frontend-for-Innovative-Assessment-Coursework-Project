@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import EnhanceIcon from "../../images/EnhanceIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 import api from "../api.ts";
-import DesignUploadComponent from "./DesignUploadComponent.tsx";
+// import DesignUploadComponent from "./DesignUploadComponent.tsx";
 
 const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
   const [questionText, setQuestionText] = useState("");
   const [questionTitle, setQuestionTitle] = useState("");
 
-  const [fileName, setFileName] = useState("");
+  // const [fileName, setFileName] = useState(null);
 
   const sendAddQuestionRequest = async () => {
-    const data = {
+    let data = {
       details_original: questionText,
       lang: "fa",
       title: questionTitle,
@@ -20,12 +20,17 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
       author: 1,
       details_modified: "",
     };
+    // if (fileName) {
+    //   data = Object.assign({ attachment: fileName }, data);
+    // }
 
     try {
+      // console.log("file: ", fileName);
+      // console.log("data: ", data);
+
       const response = await api.post("api/questions/", data);
       console.log(response.data);
       handleOk();
-      // refetchFunction();
     } catch (e) {
       console.log(e);
     }
@@ -43,12 +48,12 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
         footer={null}
       >
         <div className="flex flex-row">
-          <div style={{ width: "500%" }} className="flex flex-row">
+          <div className="flex flex-row mb-2">
             <Input
               value={questionTitle}
               onChange={(e) => setQuestionTitle(e.target.value)}
               placeholder="Enter your question title"
-              style={{ height: "40%" }}
+              // style={{ height: "40%" }}
             />
 
             <ButtonForModal
@@ -59,7 +64,7 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
               onClick={sendAddQuestionRequest}
             />
           </div>
-          <DesignUploadComponent setFileName={setFileName} />
+          {/* <DesignUploadComponent setFileName={setFileName} /> */}
         </div>
 
         <div
@@ -95,7 +100,7 @@ const ButtonForModal = ({
     <Button
       style={{
         color: mainColor,
-        height: "40%",
+        // height: "40%",
         backgroundColor: backgroundColor,
         borderWidth: 1,
       }}

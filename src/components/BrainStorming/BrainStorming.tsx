@@ -9,47 +9,37 @@ import NavigatorComponent from "../NavigatorComponent.tsx";
 import BrainStormingRenderItem from "./BrainStormingRenderItem.tsx";
 import { SendOutlined } from "@ant-design/icons";
 import api from "../api.ts";
-
 import BrainstormVector from "../../images/BrainstormVector.svg";
+import { useNavigate } from "react-router-dom";
 
 const BrainStorming = () => {
-  // const [selected, setSelected] = useState([]);
-
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   const assignmentID = localStorage.getItem("assignment_id")!;
 
   useEffect(() => {
     const fetchIdeasData = async () => {
-      const author_id = 1;
-      const response = await api.get(
-        `api/brainstorms/?author_id=${author_id}&assignment_id=${assignmentID}`
-      );
-      localStorage.setItem("ideas", JSON.stringify(response.data));
-      console.log(response.data);
-      setData(response.data);
+      try {
+        const author_id = 1;
+        const response = await api.get(
+          `api/brainstorms/?author_id=${author_id}&assignment_id=${assignmentID}`
+        );
+        localStorage.setItem("ideas", JSON.stringify(response.data));
+        console.log(response.data);
+        setData(response.data);
+      } catch (e) {
+        navigate("/login");
+      }
     };
     fetchIdeasData();
   }, [assignmentID]);
 
   const RenderItem = (item, idx) => {
-    return (
-      <BrainStormingRenderItem
-        // selected={selected}
-        // setSelected={setSelected}
-        item={item}
-        idx={idx}
-      />
-    );
+    return <BrainStormingRenderItem item={item} idx={idx} />;
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
 
   const [text, setText] = useState("");
 
@@ -151,25 +141,13 @@ const BrainStorming = () => {
                     onPointerLeaveCapture={undefined}
                   />
                 }
-                style={{
-                  width: "80%",
-                  position: "sticky",
-                  bottom: 15,
-                  borderColor: "black",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  height: 38,
-                }}
+                style={{ width: "80%", height: 38 }}
+                className="sticky bottom-4 border-1 rounded-lg"
               />
             </div>
           </div>
         ) : (
-          <EmptyPage
-            setIsModalOpen={setIsModalOpen}
-            isModalOpen={isModalOpen}
-            handleCancel={handleCancel}
-            handleOk={handleOk}
-          />
+          <EmptyPage setIsModalOpen={setIsModalOpen} />
         )}
       </div>
       <img
@@ -203,12 +181,9 @@ const EmptyPage = ({ setIsModalOpen }) => {
         style={{
           backgroundColor: "#D6E5F5",
           borderColor: "#0066CC",
-          borderWidth: 1,
-          borderRadius: 10,
           height: 40,
-          marginTop: 8,
-          marginBottom: 8,
         }}
+        className="border-1 rounded-lg mt-2 mb-2"
         onClick={() => {
           setIsModalOpen(true);
         }}

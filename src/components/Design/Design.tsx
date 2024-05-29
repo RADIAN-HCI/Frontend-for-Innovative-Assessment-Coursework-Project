@@ -9,15 +9,22 @@ import AddQuestionModal from "./AddQuestionModal.tsx";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
 import NavigatorComponent from "../NavigatorComponent.tsx";
 import api from "../api.ts";
+import { useNavigate } from "react-router-dom";
 
 const Design = () => {
   const [data, setData] = useState([]);
 
+  const navigate = useNavigate();
+
   const fetchIdeasData = async () => {
-    const response = await api.get("api/questions/");
-    localStorage.setItem("questions", JSON.stringify(response.data));
-    console.log(" response: ", response.data);
-    setData(response.data);
+    try {
+      const response = await api.get("api/questions/");
+      localStorage.setItem("questions", JSON.stringify(response.data));
+      console.log(" response: ", response.data);
+      setData(response.data);
+    } catch (e) {
+      navigate("/login");
+    }
   };
 
   useEffect(() => {

@@ -13,22 +13,20 @@ import GenerateEmptyVector from "../../images/GenerateEmptyVector.svg";
 import GenerateRenderItem from "./GenerateRenderItem.tsx";
 import NavigatorComponent from "../NavigatorComponent.tsx";
 import api from "../api.ts";
+import { useNavigate } from "react-router-dom";
 
 const Generate = () => {
   const [selected, setSelected] = useState(-1);
+  const navigate = useNavigate();
 
   const RenderItem = (item, idx) => {
     const [add, setAdd] = useState(true);
-
     const [isEditMode, setIsEditMode] = useState(false);
 
     const editQuestion = async (ideaText) => {
-      const response = await api.patch(`api/questions/${item.id}/`, {
+      await api.patch(`api/questions/${item.id}/`, {
         details_modified: ideaText,
       });
-      // localStorage.setItem("questions", JSON.stringify(response.data));
-      console.log(response.data);
-      // setData(response.data);
     };
 
     return (
@@ -51,10 +49,14 @@ const Generate = () => {
   const [generateData, setGenerateData] = useState([]);
 
   const fetchGenerateData = async () => {
-    const response = await api.get("api/questions/sorted/1");
-    localStorage.setItem("questions", JSON.stringify(response.data));
-    console.log("Generate Data ", response.data);
-    setGenerateData(response.data);
+    try {
+      const response = await api.get("api/questions/sorted/1");
+      localStorage.setItem("questions", JSON.stringify(response.data));
+      console.log("Generate Data ", response.data);
+      setGenerateData(response.data);
+    } catch (e) {
+      navigate("/login");
+    }
   };
 
   useEffect(() => {

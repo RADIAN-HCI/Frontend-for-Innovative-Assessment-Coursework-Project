@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import { Image } from "antd";
 import Kites from "../images/Kites.svg";
 import GeneralList from "./GeneralList.tsx";
-
 import { Button } from "antd";
 import BookIcon from "../images/BookIcon.svg";
 import ProfileIcon from "../images/ProfileIcon.svg";
@@ -14,12 +13,23 @@ import api from "./api.ts";
 import { Dropdown, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import DesignEmptyVector from "../images/DesignEmptyVector.svg";
+import "./AssignmentButtonStyle.css";
 
 import { useNavigate } from "react-router-dom";
 const Assignments = () => {
   const [courseMenuItems, setCourseMenuItems] = useState([]);
 
   const [currentCourse, setCurrentCourse] = useState<any>();
+
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResizeWindow = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResizeWindow);
+    return () => {
+      window.removeEventListener("resize", handleResizeWindow);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchCourseData = async () => {
@@ -45,7 +55,7 @@ const Assignments = () => {
 
   const [data, setData] = useState<any[]>();
   const handleMenuClick = (e) => {
-    const checkAdult = (item) => {
+    const checkAssignments = (item) => {
       if (item?.course === +e.key) {
         return item;
       }
@@ -53,6 +63,7 @@ const Assignments = () => {
 
     const filterCourses = (course) => {
       if (course.id === +e.key) {
+        localStorage.setItem("course_id", course.id);
         return course;
       }
     };
@@ -66,7 +77,7 @@ const Assignments = () => {
       localStorage.getItem("assignments") || "{}"
     );
 
-    const result = allAssignments.filter(checkAdult);
+    const result = allAssignments.filter(checkAssignments);
     setData(result);
   };
 
@@ -78,10 +89,10 @@ const Assignments = () => {
         style={{
           backgroundColor: "#F5F5F5",
           width: "90%",
-          height: "90%",
+          // height: "90%",
           padding: "1%",
         }}
-        className="rounded-l"
+        className="rounded-xl mb-2"
       >
         <div
           style={{
@@ -95,13 +106,7 @@ const Assignments = () => {
           <span style={{ fontWeight: "bolder", fontSize: 40 }}>
             {item.title}
           </span>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
+          <div className="flex flex-row justify-between">
             <div
               style={{
                 display: "flex",
@@ -114,13 +119,7 @@ const Assignments = () => {
               <span>{currentCourse?.name}</span>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                width: "30%",
-              }}
-            >
+            <div style={{ width: "30%" }} className="flex flex-col">
               <Image src={ProfileIcon} width={15} preview={false} />
               <span>Owner</span>
               <span>{currentCourse?.professor_name}</span>
@@ -138,15 +137,9 @@ const Assignments = () => {
               <span>{item?.deadline}</span>
             </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
+          <div className="flex flex-row justify-between mt-1">
             <Button
-              className="rounded-xl bg-blue-600"
+              className="rounded-xl BtnStyle h-auto items-center justify-center"
               style={{
                 color: "#0066CC",
                 backgroundColor: "#D6E5F5",
@@ -162,7 +155,7 @@ const Assignments = () => {
               Brain Storm
             </Button>
             <Button
-              className="w-1/3 rounded-xl"
+              className="rounded-xl BtnStyle h-auto"
               style={{
                 backgroundColor: "#DDCDFF",
                 color: "#7330FF",
@@ -178,7 +171,7 @@ const Assignments = () => {
               Design
             </Button>
             <Button
-              className="w-1/3 rounded-xl bg-blue-600"
+              className="rounded-xl BtnStyle h-auto"
               style={{
                 color: "#D32EFF",
                 backgroundColor: "#F4C6FF",
@@ -244,13 +237,11 @@ const Assignments = () => {
       </span>
       <div
         style={{
-          display: "flex",
-          flexDirection: "row",
           marginLeft: "10%",
           marginTop: "2%",
           marginRight: "10%",
-          alignItems: "center",
         }}
+        className="flex flex-row items-center"
       >
         <span
           style={{
@@ -274,7 +265,11 @@ const Assignments = () => {
         }}
       >
         {data && data.length > 0 ? (
-          <GeneralList data={data} RenderItem={RenderItem} numOfColumn={2} />
+          <GeneralList
+            data={data}
+            RenderItem={RenderItem}
+            numOfColumn={width > 1050 ? 2 : 1}
+          />
         ) : (
           <EmptyPage />
         )}
@@ -285,11 +280,8 @@ const Assignments = () => {
 
 const EmptyPage = () => {
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
+    <div className="flex flex-col items-center">
       <img alt="background" src={DesignEmptyVector} />
-
       <span style={{ color: "#676767" }}>
         <b>No Assignment Yet!</b>
       </span>

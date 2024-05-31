@@ -41,7 +41,6 @@ const BrainStorming = () => {
 
   const sendPrompt = async (text) => {
     try {
-      // const author_id = 1;
       await api.post(`api/brainstorms/`);
       // localStorage.setItem("ideas", JSON.stringify(response.data));
       // console.log(response.data);

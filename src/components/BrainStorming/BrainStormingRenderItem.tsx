@@ -17,20 +17,23 @@ const BrainStormingRenderItem = ({ item, idx }) => {
         width: "90%",
         marginRight: "5%",
         marginLeft: "5%",
-        height: "90%",
       }}
-      className="flex flex-row justify-between rounded-lg p-2 border-4"
+      className="flex flex-row justify-between rounded-lg p-2 border-4 mb-2"
     >
       <div
         style={{ width: "90%" }}
         className="bg-slate-400 rounded-lg p-2 flex flex-col mr-2 ml-2"
       >
         <span>
-          Created At: {new Date(item.created_at).toLocaleDateString()}
+          <b>Created At: </b>
+          {new Date(item.created_at).toLocaleDateString()}
         </span>
-        <span>{item.prompt}</span>
         <span>
-          Related Assignment:{" "}
+          <b>Prompt: </b>
+          {item.prompt}
+        </span>
+        <span>
+          <b>Related Assignment: </b>
           {
             allAssignments.find((x) => {
               if (x.id === item.assignment) {

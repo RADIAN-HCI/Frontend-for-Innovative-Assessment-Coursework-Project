@@ -33,7 +33,7 @@ const BrainStorming = () => {
       }
     };
     fetchIdeasData();
-  }, [assignmentID]);
+  }, [assignmentID, navigate]);
 
   const RenderItem = (item, idx) => {
     return <BrainStormingRenderItem item={item} idx={idx} />;
@@ -42,7 +42,7 @@ const BrainStorming = () => {
   const sendPrompt = async (text) => {
     try {
       // const author_id = 1;
-      const response = await api.post(`api/brainstorms/`);
+      await api.post(`api/brainstorms/`);
       // localStorage.setItem("ideas", JSON.stringify(response.data));
       // console.log(response.data);
       // setData(response.data);
@@ -51,7 +51,7 @@ const BrainStorming = () => {
     }
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [text, setText] = useState("");
 
@@ -158,7 +158,7 @@ const BrainStorming = () => {
             </div>
           </div>
         ) : (
-          <EmptyPage setIsModalOpen={setIsModalOpen} />
+          <EmptyPage />
         )}
       </div>
       <img
@@ -179,7 +179,7 @@ const BrainStorming = () => {
   );
 };
 
-const EmptyPage = ({ setIsModalOpen }) => {
+const EmptyPage = () => {
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
@@ -196,7 +196,7 @@ const EmptyPage = ({ setIsModalOpen }) => {
         }}
         className="border-1 rounded-lg mt-2 mb-2"
         onClick={() => {
-          setIsModalOpen(true);
+          // setIsModalOpen(true);
         }}
       >
         <span

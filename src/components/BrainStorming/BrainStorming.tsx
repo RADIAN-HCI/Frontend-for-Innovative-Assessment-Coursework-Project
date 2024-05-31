@@ -151,7 +151,12 @@ const BrainStorming = () => {
                     onPointerLeaveCapture={undefined}
                   />
                 }
-                style={{ width: "80%", height: 38 }}
+                style={{
+                  width: "65%",
+                  height: 38,
+                  borderWidth: 2,
+                  borderColor: "black",
+                }}
                 className="sticky bottom-4 border-1 rounded-lg"
               />
             </div>
@@ -213,6 +218,7 @@ const EmptyPage = () => {
       <span style={{ color: "#676767" }}>
         or go to <b>Brain Storm</b> and generate some ideas with AI.
       </span>
+
     </div>
   );
 };

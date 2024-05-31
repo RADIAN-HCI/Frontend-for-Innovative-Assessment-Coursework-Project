@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image } from "antd";
+import { Image } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
@@ -41,14 +41,6 @@ const Ideas = () => {
         idx={idx}
       />
     );
-  };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
   };
 
   return (
@@ -136,41 +128,9 @@ const Ideas = () => {
               RenderItem={RenderItem}
               numOfColumn={data.length >= 2 ? 2 : 1}
             />
-
-            {/* <Input
-              placeholder="Please Enter your subject to brainstorm"
-              value={text}
-              onChange={(e) => {
-                setText(e.target.value);
-              }}
-              suffix={
-                <SendOutlined
-                  style={{ color: "blue" }}
-                  onClick={() => {
-                    console.log(text);
-                  }}
-                  onPointerEnterCapture={undefined}
-                  onPointerLeaveCapture={undefined}
-                />
-              }
-              style={{
-                width: "100%",
-                position: "sticky",
-                bottom: 15,
-                borderColor: "black",
-                borderWidth: 1,
-                borderRadius: 10,
-                height: 38,
-              }}
-            /> */}
           </div>
         ) : (
-          <EmptyPage
-            setIsModalOpen={setIsModalOpen}
-            isModalOpen={isModalOpen}
-            handleCancel={handleCancel}
-            handleOk={handleOk}
-          />
+          <EmptyPage />
         )}
       </div>
       <img
@@ -191,43 +151,12 @@ const Ideas = () => {
   );
 };
 
-const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
+const EmptyPage = () => {
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
+    <div className="flex flex-col items-center">
       <img alt="background" src={DesignEmptyVector} />
       <span style={{ color: "#676767" }}>
-        There is no question here but you can
-      </span>
-      <Button
-        style={{
-          backgroundColor: "#D6E5F5",
-          borderColor: "#0066CC",
-          borderWidth: 1,
-          borderRadius: 10,
-          height: 40,
-          marginTop: 8,
-          marginBottom: 8,
-        }}
-        onClick={() => {
-          setIsModalOpen(true);
-        }}
-      >
-        <span
-          style={{
-            fontWeight: "bolder",
-            fontSize: 20,
-            color: "#0066CC",
-            marginBottom: 8,
-          }}
-        >
-          + Add Question
-        </span>
-      </Button>
-
-      <span style={{ color: "#676767" }}>
-        or go to <b>Brain Storm</b> and generate some ideas with AI.
+        <b>No Ideas Yet!</b>
       </span>
     </div>
   );

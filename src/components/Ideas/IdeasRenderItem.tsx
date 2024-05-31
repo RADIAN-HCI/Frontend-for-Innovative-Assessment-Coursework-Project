@@ -138,13 +138,19 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
         />
         {isRemoved ? (
           <Button
-            style={{ backgroundColor: "#D6E5F5", color: "#0066CC" }}
+            style={{
+              backgroundColor: "#D6E5F5",
+              color: "#0066CC",
+              height: "auto",
+            }}
             onClick={() => {
               setSelected([...selected, idx]);
               setIsRemoved(false);
             }}
           >
-            <span style={{ fontWeight: "bolder" }}>+ Add for Design</span>
+            <span style={{ fontWeight: "bolder" }} className="BtnStyle">
+              + Add for Design
+            </span>
           </Button>
         ) : (
           <Button

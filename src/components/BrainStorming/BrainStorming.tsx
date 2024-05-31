@@ -17,11 +17,11 @@ const BrainStorming = () => {
   const navigate = useNavigate();
 
   const assignmentID = localStorage.getItem("assignment_id")!;
+  const courseID = localStorage.getItem("course_id")!;
 
   useEffect(() => {
     const fetchIdeasData = async () => {
       try {
-        // const author_id = 1;
         const response = await api.get(
           `api/brainstorms/?assignment_id=${assignmentID}`
         );
@@ -41,16 +41,16 @@ const BrainStorming = () => {
 
   const sendPrompt = async (text) => {
     try {
-      await api.post(`api/brainstorms/`);
-      // localStorage.setItem("ideas", JSON.stringify(response.data));
-      // console.log(response.data);
-      // setData(response.data);
+      await api.post(`api/brainstorms/`, {
+        prompt: text,
+        course: courseID,
+        lang: "fa",
+        assignment: assignmentID,
+      });
     } catch (e) {
       navigate("/login");
     }
   };
-
-  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [text, setText] = useState("");
 

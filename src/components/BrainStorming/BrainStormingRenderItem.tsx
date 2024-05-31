@@ -3,6 +3,7 @@ import React from "react";
 import "../index.css";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import "../AssignmentButtonStyle.css";
 
 const BrainStormingRenderItem = ({ item, idx }) => {
   const navigate = useNavigate();
@@ -50,12 +51,16 @@ const BrainStormingRenderItem = ({ item, idx }) => {
         className="flex flex-col gap-x-1 gap-y-1 justify-around"
       >
         <Button
-          style={{ backgroundColor: "#D6E5F5", color: "#0066CC" }}
+          style={{
+            backgroundColor: "#D6E5F5",
+            color: "#0066CC",
+            height: "auto",
+          }}
           onClick={() => {
             navigate("/ideas", { state: { brainstormId: item.id } });
           }}
         >
-          <span style={{ fontWeight: "bolder" }}>
+          <span style={{ fontWeight: "bolder" }} className="BtnStyle">
             Go to Correspondent Ideas
           </span>
         </Button>

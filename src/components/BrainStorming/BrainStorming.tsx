@@ -39,6 +39,18 @@ const BrainStorming = () => {
     return <BrainStormingRenderItem item={item} idx={idx} />;
   };
 
+  const sendPrompt = async (text) => {
+    try {
+      // const author_id = 1;
+      const response = await api.post(`api/brainstorms/`);
+      // localStorage.setItem("ideas", JSON.stringify(response.data));
+      // console.log(response.data);
+      // setData(response.data);
+    } catch (e) {
+      navigate("/login");
+    }
+  };
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [text, setText] = useState("");
@@ -115,8 +127,7 @@ const BrainStorming = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                width: "85%",
-                marginLeft: "10%",
+                width: "100%",
               }}
             >
               <GeneralList
@@ -135,7 +146,7 @@ const BrainStorming = () => {
                   <SendOutlined
                     style={{ color: "blue" }}
                     onClick={() => {
-                      console.log(text);
+                      sendPrompt(text);
                     }}
                     onPointerEnterCapture={undefined}
                     onPointerLeaveCapture={undefined}

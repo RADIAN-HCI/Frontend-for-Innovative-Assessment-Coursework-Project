@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image } from "antd";
+import { Button, Image, message } from "antd";
 import CubeIcon from "../../images/CubeIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import GenerateSideIcon from "../../images/GenerateSideIcon.svg";
@@ -14,29 +14,40 @@ import GenerateRenderItem from "./GenerateRenderItem.tsx";
 import NavigatorComponent from "../NavigatorComponent.tsx";
 import api from "../api.ts";
 import { useNavigate } from "react-router-dom";
+import { Spin } from "antd";
 
 const Generate = () => {
-  const [selected, setSelected] = useState(-1);
   const navigate = useNavigate();
+  const [spinning, setSpinning] = useState<boolean>(false);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const RenderItem = (item, idx) => {
     const [add, setAdd] = useState(true);
     const [isEditMode, setIsEditMode] = useState(false);
 
     const editQuestion = async (ideaText) => {
-      await api.patch(`api/questions/${item.id}/`, {
-        details_modified: ideaText,
-      });
+      try {
+        setSpinning(true);
+        await api.patch(`api/questions/${item.id}/`, {
+          details_modified: ideaText,
+        });
+        setSpinning(false);
+        messageApi.open({
+          type: "success",
+          content: "Successfully Edited!",
+        });
+      } catch (e) {
+        messageApi.open({
+          type: "error",
+          content: "Something Went Wrong!",
+        });
+      }
     };
 
     return (
       <GenerateRenderItem
         item={item}
         idx={idx}
-        add={add}
-        setAdd={setAdd}
-        selected={selected}
-        setSelected={setSelected}
         isEditMode={isEditMode}
         setIsEditMode={setIsEditMode}
         data={generateData}
@@ -47,13 +58,15 @@ const Generate = () => {
   };
 
   const [generateData, setGenerateData] = useState([]);
+  const assignmentID = localStorage.getItem("assignment_id");
 
   const fetchGenerateData = async () => {
     try {
-      const response = await api.get("api/questions/sorted/1");
+      setSpinning(true);
+      const response = await api.get(`api/questions/sorted/${assignmentID}/`);
       localStorage.setItem("questions", JSON.stringify(response.data));
-      console.log("Generate Data ", response.data);
       setGenerateData(response.data);
+      setSpinning(false);
     } catch (e) {
       navigate("/login");
     }
@@ -76,6 +89,8 @@ const Generate = () => {
 
   return (
     <>
+      {contextHolder}
+      <Spin spinning={spinning} fullscreen />
       <img
         src={CubeIcon}
         style={{

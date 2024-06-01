@@ -44,11 +44,6 @@ const LoginForm = () => {
       openNotification("top");
     }
   };
-  const [placement, SetPlacement] = useState("TA");
-
-  const placementChange = (e) => {
-    SetPlacement(e.target.value);
-  };
   return (
     <>
       {contextHolder}
@@ -83,7 +78,7 @@ const LoginForm = () => {
           <span className="font-bold text-5xl mb-12 pb-3">Login</span>
         </Form.Item>
 
-        <Form.Item>
+        {/* <Form.Item>
           <span className="mt-8">Role</span>
           <br />
           <Radio.Group value={placement} onChange={placementChange}>
@@ -91,7 +86,7 @@ const LoginForm = () => {
             <Radio.Button value="LeadTA">Lead TA</Radio.Button>
             <Radio.Button value="Lecturer">Lecturer</Radio.Button>
           </Radio.Group>
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item
           name="username"
@@ -110,8 +105,14 @@ const LoginForm = () => {
             onChange={(event) => {
               setUsername(event.target.value);
             }}
-            prefix={<UserOutlined className="site-form-item-icon" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
-            style={{ backgroundColor: authorized ? 'white' : "#E3000025" }}
+            prefix={
+              <UserOutlined
+                className="site-form-item-icon"
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+              />
+            }
+            style={{ backgroundColor: authorized ? "white" : "#E3000025" }}
           />
         </Form.Item>
         <Form.Item
@@ -130,9 +131,15 @@ const LoginForm = () => {
             onChange={(event) => {
               setPassword(event.target.value);
             }}
-            prefix={<LockOutlined className="site-form-item-icon" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
+            prefix={
+              <LockOutlined
+                className="site-form-item-icon"
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+              />
+            }
             type="password"
-            style={{ backgroundColor: authorized ? 'white' : "#E3000025" }}
+            style={{ backgroundColor: authorized ? "white" : "#E3000025" }}
           />
         </Form.Item>
         {authorized ? null : <UnauthorizedMessage />}

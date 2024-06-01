@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image } from "antd";
+import { Button, Image, Spin } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import DesignRenderItem from "./DesignRenderItem.tsx";
@@ -16,15 +16,17 @@ const Design = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const navigate = useNavigate();
+  const [spinning, setSpinning] = useState<boolean>(false);
 
-  const [selected, setSelected] = useState(-1);
+  const navigate = useNavigate();
 
   const fetchDesignData = async () => {
     try {
+      setSpinning(true);
       const response = await api.get("api/questions/");
       localStorage.setItem("questions", JSON.stringify(response.data));
       setData(response.data);
+      setSpinning(false);
     } catch (e) {
       navigate("/login");
     }
@@ -35,7 +37,6 @@ const Design = () => {
   }, []);
 
   const RenderItem = (item, idx) => {
-
     const editQuestion = async (objectData) => {
       await api.patch(
         `api/questions/${item.id}/`,
@@ -51,10 +52,6 @@ const Design = () => {
 
     return (
       <DesignRenderItem
-        // isEditMode={isEditMode}
-        selected={selected}
-        setSelected={setSelected}
-        // setIsEditMode={setIsEditMode}
         item={item}
         idx={idx}
         onClickEdit={async (objectData) => {
@@ -75,6 +72,7 @@ const Design = () => {
 
   return (
     <>
+      <Spin spinning={spinning} fullscreen />
       <img
         src={DesignCloudIcon}
         style={{ top: 250 }}
@@ -196,10 +194,10 @@ const Design = () => {
 };
 
 const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
+  const navigate = useNavigate();
+
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
+    <div className="flex flex-col items-center">
       <img alt="background" src={DesignEmptyVector} />
       <span style={{ color: "#676767" }}>
         There is no question here but you can
@@ -230,7 +228,15 @@ const EmptyPage = ({ setIsModalOpen, isModalOpen, handleCancel, handleOk }) => {
         </span>
       </Button>
       <span style={{ color: "#676767" }}>
-        or go to <b>Brain Storm</b> and generate some ideas with AI.
+        or go to
+        <b
+          onClick={() => {
+            navigate("/brainstorm");
+          }}
+        >
+          Brain Storm
+        </b>
+        and generate some ideas with AI.
       </span>
       <AddQuestionModal
         isModalOpen={isModalOpen}

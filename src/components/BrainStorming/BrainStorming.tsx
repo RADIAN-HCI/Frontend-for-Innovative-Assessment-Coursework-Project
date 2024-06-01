@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image, Input } from "antd";
+import { Button, Image, Input, Spin, message } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
@@ -19,6 +19,20 @@ const BrainStorming = () => {
   const assignmentID = localStorage.getItem("assignment_id")!;
   const courseID = localStorage.getItem("course_id")!;
 
+  const [spinning, setSpinning] = useState<boolean>(false);
+
+  const fetchIdeasData = async () => {
+    try {
+      const response = await api.get(
+        `api/brainstorms/?assignment_id=${assignmentID}`
+      );
+      localStorage.setItem("ideas", JSON.stringify(response.data));
+      setData(response.data);
+    } catch (e) {
+      navigate("/login");
+    }
+  };
+
   useEffect(() => {
     const fetchIdeasData = async () => {
       try {
@@ -26,7 +40,6 @@ const BrainStorming = () => {
           `api/brainstorms/?assignment_id=${assignmentID}`
         );
         localStorage.setItem("ideas", JSON.stringify(response.data));
-        console.log(response.data);
         setData(response.data);
       } catch (e) {
         navigate("/login");
@@ -35,27 +48,40 @@ const BrainStorming = () => {
     fetchIdeasData();
   }, [assignmentID, navigate]);
 
+  const [text, setText] = useState("");
+  const [messageApi, contextHolder] = message.useMessage();
+
   const RenderItem = (item, idx) => {
     return <BrainStormingRenderItem item={item} idx={idx} />;
   };
 
   const sendPrompt = async (text) => {
     try {
+      setSpinning(true);
+
       await api.post(`api/brainstorms/`, {
         prompt: text,
         course: courseID,
         lang: "fa",
         assignment: assignmentID,
       });
+      setSpinning(false);
+      fetchIdeasData();
+
+      messageApi.open({
+        type: "success",
+        content: "New Brainstorm Added!",
+      });
+      setText("");
     } catch (e) {
       navigate("/login");
     }
   };
 
-  const [text, setText] = useState("");
-
   return (
     <>
+      {contextHolder}
+      <Spin spinning={spinning} fullscreen />
       <img
         src={DesignCloudIcon}
         style={{ top: 400 }}
@@ -218,7 +244,6 @@ const EmptyPage = () => {
       <span style={{ color: "#676767" }}>
         or go to <b>Brain Storm</b> and generate some ideas with AI.
       </span>
-
     </div>
   );
 };

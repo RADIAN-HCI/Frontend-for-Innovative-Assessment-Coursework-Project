@@ -5,7 +5,7 @@ import EditIcon from "../../images/EditIcon.svg";
 import NoAttachmentComponent from "../NoAttachmentComponent.tsx";
 import EyeIcon from "../../images/EyeIcon.svg";
 import TextArea from "antd/es/input/TextArea";
-import { Image, Typography } from "antd";
+import { Image, Typography, message } from "antd";
 import ButtonsSideBySide from "../ButtonsSideBySide.tsx";
 import api from "../api.ts";
 import ViewAttachments from "../ViewAttachments.tsx";
@@ -16,10 +16,6 @@ const { Text } = Typography;
 const GenerateRenderItem = ({
   item,
   idx,
-  add,
-  setAdd,
-  selected,
-  setSelected,
   isEditMode,
   setIsEditMode,
   data,
@@ -29,10 +25,11 @@ const GenerateRenderItem = ({
   const [ideaText, setIdeaText] = useState(
     item.details_modified !== "" ? item.details_modified : item.details_original
   );
+  const [isSelected, setIsSelected] = useState(item.is_selected_for_assignment);
+
+  const [messageApi, contextHolder] = message.useMessage();
 
   const [fileName, setFileName] = useState("");
-
-  console.log(fileName);
 
   const swapElements = (arr, pos1, pos2) => {
     const temp = arr[pos1];
@@ -55,121 +52,138 @@ const GenerateRenderItem = ({
     await api.put(`api/questions/order/${assignment_id}/`, sendingData);
   };
 
+  const editQuestion = async () => {
+    try {
+      await api.patch(`api/questions/${item.id}/`, {
+        is_selected_for_assignment: !item.is_selected_for_assignment,
+      });
+    } catch (e) {
+      messageApi.open({
+        type: "error",
+        content: "Something Went Wrong!",
+      });
+    }
+  };
+
   return (
-    <div
-      key={idx}
-      style={{
-        backgroundColor: "#F5F5F5",
-        width: "95%",
-        height: "90%",
-        padding: "1%",
-        borderColor: selected === idx ? "#0066CC" : "#F5F5F5",
-      }}
-      className="rounded-xl justify-between flex flex-row border-2"
-    >
+    <>
+      {contextHolder}
       <div
-        style={{ height: "30%" }}
-        className="flex flex-col mb-3 justify-between items-center self-center"
-      >
-        <UpOutlined
-          onClick={async () => {
-            if (idx !== 0) {
-              await setData(swapElements(data, idx, idx - 1));
-
-              sortAPICall(data);
-            }
-          }}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
-        />
-        <Text code>{idx + 1}</Text>
-        <DownOutlined
-          onClick={async () => {
-            if (idx !== data.length - 1) {
-              await setData(swapElements(data, idx, idx + 1));
-              sortAPICall(data);
-            }
-          }}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
-        />
-      </div>
-
-      <div
+        key={idx}
         style={{
-          display: "flex",
-          flexDirection: "column",
-          marginLeft: "2%",
-          marginRight: "2%",
-          marginBottom: "5%",
+          backgroundColor: "#F5F5F5",
           width: "95%",
+          height: "90%",
+          padding: "1%",
+          borderColor: isSelected === idx ? "#0066CC" : "#F5F5F5",
         }}
-        onClick={() => {
-          setSelected(idx);
-        }}
+        className="rounded-xl justify-between flex flex-row border-2"
       >
-        <div className="flex flex-row justify-between items-center">
-          <div className="flex flex-row items-center">
-            <span style={{ fontWeight: "bolder", fontSize: 40 }}>
-              {item.title}
-            </span>
-            {selected === idx ? <SelectedComponent /> : null}
-          </div>
-          <div className="flex flex-row justify-between">
-            <ButtonsSideBySide
-              isEditMode={isEditMode}
-              setIsEditMode={setIsEditMode}
-              add={add}
-              setAdd={setAdd}
-              ideaText={ideaText}
-              onClickEdit={onClickEdit}
-            />
+        <div
+          style={{ height: "30%" }}
+          className="flex flex-col mb-3 justify-between items-center self-center"
+        >
+          <UpOutlined
+            onClick={async () => {
+              if (idx !== 0) {
+                await setData(swapElements(data, idx, idx - 1));
 
-            {isEditMode ? (
-              item.attachment ? (
+                sortAPICall(data);
+              }
+            }}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          />
+          <Text code>{idx + 1}</Text>
+          <DownOutlined
+            onClick={async () => {
+              if (idx !== data.length - 1) {
+                await setData(swapElements(data, idx, idx + 1));
+                sortAPICall(data);
+              }
+            }}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginLeft: "2%",
+            marginRight: "2%",
+            marginBottom: "5%",
+            width: "95%",
+          }}
+        >
+          <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-row items-center">
+              <span style={{ fontWeight: "bolder", fontSize: 40 }}>
+                {item.title}
+              </span>
+              {isSelected ? <SelectedComponent /> : null}
+            </div>
+            <div className="flex flex-row justify-between">
+              <ButtonsSideBySide
+                isEditMode={isEditMode}
+                setIsEditMode={setIsEditMode}
+                item={item}
+                setSelected={() => {
+                  setIsSelected(!isSelected);
+                  editQuestion();
+                }}
+                selected={isSelected}
+                ideaText={ideaText}
+                onClickEdit={onClickEdit}
+              />
+
+              {isEditMode ? (
+                item.attachment ? (
+                  <ViewAttachments
+                    id={idx}
+                    attachment={item.attachment}
+                    editFunction={onClickEdit}
+                  />
+                ) : (
+                  <DesignUploadComponent setFileName={setFileName} />
+                )
+              ) : item.attachment ? (
                 <ViewAttachments
                   id={idx}
                   attachment={item.attachment}
                   editFunction={onClickEdit}
                 />
               ) : (
-                <DesignUploadComponent setFileName={setFileName} />
-              )
-            ) : item.attachment ? (
-              <ViewAttachments
-                id={idx}
-                attachment={item.attachment}
-                editFunction={onClickEdit}
-              />
-            ) : (
-              <NoAttachmentComponent />
-            )}
+                <NoAttachmentComponent />
+              )}
+            </div>
           </div>
+
+          {isEditMode ? (
+            <div className="flex flex-row items-center">
+              <Image src={EditIcon} preview={false} />
+              <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
+                Editing Mode
+              </span>
+            </div>
+          ) : (
+            <div className="flex flex-row items-center">
+              <Image src={EyeIcon} preview={false} />
+              <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
+                Reading Mode
+              </span>
+            </div>
+          )}
+
+          {isEditMode ? (
+            <TextEditor ideaText={ideaText} setIdeaText={setIdeaText} />
+          ) : (
+            <TextDisplay text={ideaText} />
+          )}
         </div>
-
-        {isEditMode ? (
-          <div className="flex flex-row items-center">
-            <Image src={EditIcon} preview={false} />
-            <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
-              Editing Mode
-            </span>
-          </div>
-        ) : (
-          <div className="flex flex-row items-center">
-            <Image src={EyeIcon} preview={false} />
-            <span style={{ color: "#D32EFF", fontSize: 16, marginLeft: 4 }}>
-              Reading Mode
-            </span>
-          </div>
-        )}
-
-        {isEditMode ? (
-          <TextEditor ideaText={ideaText} setIdeaText={setIdeaText} />
-        ) : (
-          <TextDisplay text={ideaText} />
-        )}
       </div>
-    </div>
+    </>
   );
 };
 

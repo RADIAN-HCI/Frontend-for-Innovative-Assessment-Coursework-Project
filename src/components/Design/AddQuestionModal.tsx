@@ -6,12 +6,7 @@ import api from "../api.ts";
 import { message } from "antd";
 // import DesignUploadComponent from "./DesignUploadComponent.tsx";
 
-const AddQuestionModal = ({
-  isModalOpen,
-  handleOk,
-  handleCancel,
-  fetchDesignData,
-}) => {
+const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
   const [questionText, setQuestionText] = useState("");
   const [questionTitle, setQuestionTitle] = useState("");
 

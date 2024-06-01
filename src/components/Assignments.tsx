@@ -53,7 +53,7 @@ const Assignments = () => {
   const { state } = useLocation();
   const { username } = state;
 
-  const [data, setData] = useState<any[]>();
+  const [data, setData] = useState<any[]>([]);
   const handleMenuClick = (e) => {
     const checkAssignments = (item) => {
       if (item?.course === +e.key) {

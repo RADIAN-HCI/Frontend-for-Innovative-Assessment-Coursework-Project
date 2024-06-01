@@ -1,5 +1,5 @@
 import loginIcon from "../../images/Vector.png";
-import { Form, Input, Button, Radio, Image, notification } from "antd";
+import { Form, Input, Button, Image, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,14 +7,7 @@ import axios from "axios";
 import React from "react";
 
 const LoginForm = () => {
-  const [api, contextHolder] = notification.useNotification();
-  const openNotification = (placement) => {
-    api.error({
-      message: `Notification`,
-      description: "Wrong Credentials",
-      placement,
-    });
-  };
+  const [messageApi, contextHolder] = message.useMessage();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -38,10 +31,11 @@ const LoginForm = () => {
       localStorage.setItem("refreshToken", refresh);
       localStorage.setItem("username", username);
       setAuthorized(true);
+      messageApi.open({ type: "success", content: "Successfully Logged In!" });
 
       navigate("/assignments", { state: { username } });
     } catch (error) {
-      openNotification("top");
+      messageApi.open({ type: "error", content: "Wrong Credentials!" });
     }
   };
   return (

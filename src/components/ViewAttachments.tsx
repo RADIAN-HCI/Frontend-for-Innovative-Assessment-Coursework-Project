@@ -20,21 +20,6 @@ const ViewAttachments = (props) => {
       });
   };
 
-  //   const deleteEachAttachment = async (index) => {
-  //     try {
-  //         await req.delete(`/${user_id}/file/${content_id}/attachment/${index}/`, {headers: {"Authorization": `Token ${token}`}})
-  //         const res = await req.get(`/${user_id}/file/${content_id}/attachment/`, {headers: {"Authorization": `Token ${token}`}})
-  //         setLibListChanged(true)
-  //         localStorage.setItem("all_attachs", JSON.stringify(res.data))
-  //         setLibraryList(JSON.parse(localStorage.getItem("all_attachs")))
-  //         setLibListChanged(false)
-  //         alert.show('پیوست با موفقیت حذف شد', {type: 'success'})
-  //       props.editFunction({ fileName: "DELETE_MODE" });
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
-
   const renderAttachments = (attachment, idx) => {
     return (
       <li

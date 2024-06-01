@@ -89,7 +89,6 @@ const Assignments = () => {
         style={{
           backgroundColor: "#F5F5F5",
           width: "90%",
-          // height: "90%",
           padding: "1%",
         }}
         className="rounded-xl mb-2"

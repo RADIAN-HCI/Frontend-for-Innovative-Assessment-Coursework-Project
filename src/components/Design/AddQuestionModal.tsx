@@ -4,7 +4,6 @@ import EnhanceIcon from "../../images/EnhanceIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 import api from "../api.ts";
 import { message } from "antd";
-// import DesignUploadComponent from "./DesignUploadComponent.tsx";
 
 const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
   const [questionText, setQuestionText] = useState("");
@@ -115,7 +114,6 @@ const ButtonForModal = ({
     <Button
       style={{
         color: mainColor,
-        // height: "40%",
         backgroundColor: backgroundColor,
         borderWidth: 1,
         height: "auto",

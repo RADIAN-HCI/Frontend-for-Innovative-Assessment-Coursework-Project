@@ -1,6 +1,5 @@
 import React from "react";
 import "../index.css";
-// import { useLocation } from "react-router-dom";
 import EditIcon from "../images/EditIcon.svg";
 import PlusIcon from "../images/PlusIcon.svg";
 import TrashIcon from "../images/TrashIcon.svg";

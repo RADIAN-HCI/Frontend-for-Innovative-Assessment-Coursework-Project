@@ -188,7 +188,7 @@ const BrainStorming = () => {
             </div>
           </div>
         ) : (
-          <EmptyPage />
+          <EmptyPage text={text} setText={setText} sendPrompt={sendPrompt} />
         )}
       </div>
       <img
@@ -209,41 +209,39 @@ const BrainStorming = () => {
   );
 };
 
-const EmptyPage = () => {
+const EmptyPage = ({ text, setText, sendPrompt }) => {
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
+    <div className="flex flex-col items-center mb-2">
       <img alt="background" src={DesignEmptyVector} />
       <span style={{ color: "#676767" }}>
-        There is no question here but you can
+        There is no brainstorm here but you can use the following{" "}
+        <b>Text Box</b> and generate some brainstorms with AI.
       </span>
-      <Button
-        style={{
-          backgroundColor: "#D6E5F5",
-          borderColor: "#0066CC",
-          height: 40,
-        }}
-        className="border-1 rounded-lg mt-2 mb-2"
-        onClick={() => {
-          // setIsModalOpen(true);
-        }}
-      >
-        <span
-          style={{
-            fontWeight: "bolder",
-            fontSize: 20,
-            color: "#0066CC",
-            marginBottom: 8,
-          }}
-        >
-          + Add Question
-        </span>
-      </Button>
 
-      <span style={{ color: "#676767" }}>
-        or go to <b>Brain Storm</b> and generate some ideas with AI.
-      </span>
+      <Input
+        placeholder="Please Enter your subject to brainstorm"
+        value={text}
+        onChange={(e) => {
+          setText(e.target.value);
+        }}
+        suffix={
+          <SendOutlined
+            style={{ color: "blue" }}
+            onClick={() => {
+              sendPrompt(text);
+            }}
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          />
+        }
+        style={{
+          width: "65%",
+          height: 38,
+          borderWidth: 2,
+          borderColor: "black",
+        }}
+        className="sticky bottom-4 border-1 rounded-lg"
+      />
     </div>
   );
 };

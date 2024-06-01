@@ -18,7 +18,14 @@ const IdeasInfoComponent = (props) => {
         width: "100%",
       }}
     >
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          padding: 2,
+          width: "auto",
+        }}
+      >
         <Image
           preview={false}
           src={imgSrc}

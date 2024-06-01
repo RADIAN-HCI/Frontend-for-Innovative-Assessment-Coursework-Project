@@ -18,6 +18,9 @@ const Ideas = () => {
   const [data, setData] = useState([]);
 
   const { state } = useLocation();
+
+  const [width, setWidth] = useState(window.innerWidth);
+
   const { brainstormId } = state;
 
   useEffect(() => {
@@ -26,11 +29,19 @@ const Ideas = () => {
         `api/ideas/?brainstorm_id=${brainstormId}`
       );
       localStorage.setItem("ideas", JSON.stringify(response.data));
-      console.log(response.data);
+      console.log("Ideas Data: ", response.data);
       setData(response.data);
     };
     fetchIdeasData();
   }, [brainstormId]);
+
+  useEffect(() => {
+    const handleResizeWindow = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResizeWindow);
+    return () => {
+      window.removeEventListener("resize", handleResizeWindow);
+    };
+  }, []);
 
   const RenderItem = (item, idx) => {
     return (
@@ -126,7 +137,7 @@ const Ideas = () => {
             <GeneralList
               data={data}
               RenderItem={RenderItem}
-              numOfColumn={data.length >= 2 ? 2 : 1}
+              numOfColumn={data.length < 2 ? 1 : width > 1050 ? 2 : 1}
             />
           </div>
         ) : (

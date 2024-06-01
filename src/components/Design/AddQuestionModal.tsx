@@ -1,4 +1,4 @@
-import { Input, Modal, Button, Image } from "antd";
+import { Input, Modal, Button, Image, Spin } from "antd";
 import React, { useState } from "react";
 import EnhanceIcon from "../../images/EnhanceIcon.svg";
 import TextArea from "antd/es/input/TextArea";
@@ -12,7 +12,7 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  // const [fileName, setFileName] = useState(null);
+  const [spinning, setSpinning] = useState<boolean>(false);
 
   const sendAddQuestionRequest = async () => {
     let dataToBeSent = {
@@ -25,29 +25,30 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
     };
 
     try {
+      setSpinning(true);
       const response = await api.post("api/questions/", dataToBeSent);
       if (response.status.toString().startsWith("2")) {
         await handleOk();
+        setSpinning(false);
         messageApi.open({
           type: "success",
           content: "Question Added!",
         });
-        // await fetchDesignData();
       }
     } catch (e) {
-      console.log(e);
-
-      // messageApi.open({
-      //   type: "error",
-      //   content: "Something Went Wrong!",
-      // });
-      // handleOk();
+      messageApi.open({
+        type: "error",
+        content: "Something Went Wrong!",
+      });
+      setSpinning(false);
     }
   };
 
   return (
     <>
       {contextHolder}
+      <Spin spinning={spinning} fullscreen />
+
       <div>
         <Modal
           title="+ Add a Question"
@@ -64,7 +65,6 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
                 value={questionTitle}
                 onChange={(e) => setQuestionTitle(e.target.value)}
                 placeholder="Enter your question title"
-                // style={{ height: "40%" }}
               />
 
               <ButtonForModal
@@ -74,7 +74,8 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
                 mainColor="#FFFFFF"
                 onClick={() => {
                   sendAddQuestionRequest();
-                  // setTimeout(fetchDesignData, 1000);
+                  setQuestionText("");
+                  setQuestionTitle("");
                 }}
               />
             </div>

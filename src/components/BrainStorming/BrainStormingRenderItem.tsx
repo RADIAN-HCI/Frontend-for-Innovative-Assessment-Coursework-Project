@@ -23,7 +23,7 @@ const BrainStormingRenderItem = ({ item, idx }) => {
     >
       <div
         style={{ width: "90%" }}
-        className="bg-slate-400 rounded-lg p-2 flex flex-col mr-2 ml-2"
+        className="bg-slate-300 rounded-lg p-2 flex flex-col mr-2 ml-2"
       >
         <span>
           <b>Created At: </b>

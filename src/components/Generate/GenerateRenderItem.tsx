@@ -80,14 +80,13 @@ const GenerateRenderItem = ({
         className="rounded-xl justify-between flex flex-row border-2"
       >
         <div
-          style={{ height: "30%" }}
+          style={{ height: "30%", width: '3%' }}
           className="flex flex-col mb-3 justify-between items-center self-center"
         >
           <UpOutlined
             onClick={async () => {
               if (idx !== 0) {
                 await setData(swapElements(data, idx, idx - 1));
-
                 sortAPICall(data);
               }
             }}

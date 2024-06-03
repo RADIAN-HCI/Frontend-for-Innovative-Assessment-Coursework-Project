@@ -73,6 +73,13 @@ const Generate = () => {
       setSpinning(true);
       const response = await api.get(`api/questions/sorted/${assignmentID}/`);
       localStorage.setItem("questions", JSON.stringify(response.data));
+      response.data.sort(function (x, y) {
+        return x.is_selected_for_assignment === y.is_selected_for_assignment
+          ? 0
+          : x.is_selected_for_assignment
+            ? -1
+            : 1;
+      });
       setGenerateData(response.data);
       setSpinning(false);
     } catch (e) {

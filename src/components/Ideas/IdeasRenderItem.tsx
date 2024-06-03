@@ -130,7 +130,7 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
           }}
         >
           <span style={{ fontWeight: "bolder" }} className="BtnStyle">
-            + Add to Design Questions
+            + Create Question from This Idea
           </span>
         </Button>
 

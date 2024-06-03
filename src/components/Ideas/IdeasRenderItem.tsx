@@ -1,17 +1,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import "../index.css";
-import { CheckOutlined, DeleteFilled } from "@ant-design/icons";
+import { CheckOutlined } from "@ant-design/icons";
 import IdeasInfoComponent from "./IdeasInfoComponent.tsx";
 import InnovationIcon from "../../images/InnovationIcon.svg";
 import DifficultyIcon from "../../images/DifficultyIcon.svg";
 import { Button } from "antd";
 
 import { Typography } from "antd";
+import AddQuestionModal from "./AddQuestionModal.tsx";
+import { useNavigate } from "react-router-dom";
 const { Paragraph } = Typography;
 
 const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
-  const [isRemoved, setIsRemoved] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const [state, setState] = useState({
     expand: false,
@@ -32,6 +36,14 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
     });
   };
 
+  const handleOk = () => {
+    setIsModalOpen(false);
+    navigate("/design");
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div
       key={idx}
@@ -39,15 +51,12 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
         backgroundColor: "#F5F5F5",
         width: "90%",
         padding: "1%",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
         borderColor: selected.includes(idx) ? "#0066CC" : "#F5F5F5",
         borderWidth: 3,
         borderRadius: 10,
         margin: "2%",
       }}
-      className="rounded-l"
+      className="rounded-l flex flex-row justify-between"
     >
       <div
         style={{
@@ -59,25 +68,13 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
           width: "90%",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
+        <div className="flex flex-row items-center">
           <span style={{ fontWeight: "bolder", fontSize: 40 }}>
             {item.title}
           </span>
           {selected.includes(idx) ? <SelectedComponent /> : null}
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
+        <div className="flex flex-row justify-between">
           <div
             style={{
               display: "flex",
@@ -102,27 +99,12 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
             )}
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingBottom: 10,
-          }}
-        ></div>
+        <div className="flex flex-row justify-between pb-2"></div>
       </div>
 
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "35%",
-          justifyContent: "space-around",
-          columnGap: 2,
-          rowGap: 2,
-          margin: 4,
-          padding: 2,
-        }}
+        style={{ width: "35%" }}
+        className="flex flex-col justify-around m-1 p-1 gap-x-1 gap-y-1"
       >
         <IdeasInfoComponent
           color="#00e15A"
@@ -136,39 +118,29 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
           subtitle="Difficulty"
           imgSrc={DifficultyIcon}
         />
-        {isRemoved ? (
-          <Button
-            style={{
-              backgroundColor: "#D6E5F5",
-              color: "#0066CC",
-              height: "auto",
-            }}
-            onClick={() => {
-              setSelected([...selected, idx]);
-              setIsRemoved(false);
-            }}
-          >
-            <span style={{ fontWeight: "bolder" }} className="BtnStyle">
-              + Add for Design
-            </span>
-          </Button>
-        ) : (
-          <Button
-            style={{ backgroundColor: "#FFF2F4", color: "#E72424" }}
-            icon={
-              <DeleteFilled
-                onPointerEnterCapture={undefined}
-                onPointerLeaveCapture={undefined}
-              />
-            }
-            onClick={() => {
-              setSelected(selected.filter((a) => a !== idx));
-              setIsRemoved(true);
-            }}
-          >
-            <span style={{ fontWeight: "bolder" }}>Remove</span>
-          </Button>
-        )}
+        <Button
+          style={{
+            backgroundColor: "#D6E5F5",
+            color: "#0066CC",
+            height: "auto",
+          }}
+          onClick={() => {
+            setSelected([...selected, idx]);
+            setIsModalOpen(true);
+          }}
+        >
+          <span style={{ fontWeight: "bolder" }} className="BtnStyle">
+            + Add for Design
+          </span>
+        </Button>
+
+        <AddQuestionModal
+          isModalOpen={isModalOpen}
+          handleCancel={handleCancel}
+          handleOk={handleOk}
+          title={item.title}
+          text={item.details}
+        />
       </div>
     </div>
   );
@@ -180,14 +152,10 @@ const SelectedComponent = () => {
       style={{
         borderColor: "#0066CC",
         borderWidth: 1,
-        display: "flex",
-        flexDirection: "row",
         borderRadius: 5,
         height: "40%",
-        padding: 4,
-        alignItems: "center",
-        marginLeft: 4,
       }}
+      className="flex flex-row p-1 ml-1 items-center"
     >
       <CheckOutlined
         style={{ color: "#0066CC" }}

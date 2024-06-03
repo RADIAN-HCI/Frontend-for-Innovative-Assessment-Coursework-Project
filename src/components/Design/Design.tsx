@@ -163,7 +163,6 @@ const Design = () => {
               isModalOpen={isModalOpen}
               handleCancel={handleCancel}
               handleOk={handleOk}
-              fetchDesignData={fetchDesignData}
             />
           </div>
         ) : (

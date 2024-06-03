@@ -153,14 +153,7 @@ const DesignRenderItem = ({ item, idx, onClickEdit }) => {
 const TextDisplay = ({ text }) => {
   return (
     <div className="flex flex-row justify-between">
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "95%",
-          height: "100%",
-        }}
-      >
+      <div style={{ width: "95%" }} className="flex flex-col h-full">
         <TextArea value={text} disabled autoSize style={{ color: "black" }} />
       </div>
     </div>
@@ -169,13 +162,7 @@ const TextDisplay = ({ text }) => {
 
 const TextEditor = ({ ideaText, setIdeaText }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-      }}
-    >
+    <div className="flex flex-row justify-between">
       <div
         style={{
           display: "flex",

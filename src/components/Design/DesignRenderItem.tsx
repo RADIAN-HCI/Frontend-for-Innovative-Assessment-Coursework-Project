@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import "../index.css";
 import { Image, message } from "antd";
 import EditIcon from "../../images/EditIcon.svg";
 import TextArea from "antd/es/input/TextArea";
-
-import "../index.css";
 import { CheckOutlined } from "@ant-design/icons";
 import NoAttachmentComponent from "../NoAttachmentComponent.tsx";
 import EyeIcon from "../../images/EyeIcon.svg";
 import CheckIcon from "../../images/CheckIcon.svg";
-
 import IconButton from "../IconButton.tsx";
 import DesignUploadComponent from "./DesignUploadComponent.tsx";
 import ViewAttachments from "../ViewAttachments.tsx";

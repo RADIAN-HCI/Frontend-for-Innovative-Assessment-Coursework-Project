@@ -7,15 +7,12 @@ const DesignInfoComponent = (props) => {
     <div
       style={{
         height: "50%",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
         borderRadius: 7,
         borderColor: color,
         borderWidth: 1,
-        padding: 4,
         ...props.infoStyle,
       }}
+      className="flex flex-row items-center p-1"
     >
       <div style={{ display: "flex", flexDirection: "row" }}>
         <Image preview={false} src={imgSrc} style={{ marginTop: 6 }} />
@@ -25,7 +22,14 @@ const DesignInfoComponent = (props) => {
           </span>
         ) : null}
       </div>
-      <span style={{ fontSize: 24, color: color, fontWeight: "bold", marginLeft: 4 }}>
+      <span
+        style={{
+          fontSize: 24,
+          color: color,
+          fontWeight: "bold",
+          marginLeft: 4,
+        }}
+      >
         {title}
       </span>
     </div>

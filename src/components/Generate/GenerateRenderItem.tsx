@@ -46,7 +46,7 @@ const GenerateRenderItem = ({
     const assignment_id = localStorage.getItem("assignment_id");
 
     for (let i = 0; i < data.length; i++) {
-      sendingData.push({ order: i + 1, id: data[i].id });
+      sendingData.push({ order: i + 1, id: data[i]["id"] });
     }
 
     await api.put(`api/questions/order/${assignment_id}/`, sendingData);
@@ -80,7 +80,7 @@ const GenerateRenderItem = ({
         className="rounded-xl justify-between flex flex-row border-2"
       >
         <div
-          style={{ height: "30%", width: '3%' }}
+          style={{ height: "30%", width: "3%" }}
           className="flex flex-col mb-3 justify-between items-center self-center"
         >
           <UpOutlined

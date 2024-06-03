@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Logo from "../images/Logo.svg";
 import "./index.css";
 import { useLocation } from "react-router-dom";
-import { Image, message } from "antd";
+import { Image } from "antd";
 import Kites from "../images/Kites.svg";
 import GeneralList from "./GeneralList.tsx";
 import { Button } from "antd";

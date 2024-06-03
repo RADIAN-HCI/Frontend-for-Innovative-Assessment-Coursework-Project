@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Logo from "../images/Logo.svg";
 import "./index.css";
 import { useLocation } from "react-router-dom";
-import { Image } from "antd";
+import { Image, message } from "antd";
 import Kites from "../images/Kites.svg";
 import GeneralList from "./GeneralList.tsx";
 import { Button } from "antd";
@@ -23,6 +23,8 @@ const Assignments = () => {
 
   const [width, setWidth] = useState(window.innerWidth);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResizeWindow);
@@ -34,24 +36,42 @@ const Assignments = () => {
   useEffect(() => {
     const fetchCourseData = async () => {
       const response = await api.get("api/courses/");
-      localStorage.setItem("courses", JSON.stringify(response.data));
-      const mapperFunction = (obj) => {
-        return { label: obj.name, key: obj.id };
-      };
-      const courseItemsFromBackend = response.data.map(mapperFunction);
-      setCourseMenuItems(courseItemsFromBackend);
+      if (response.status.toString().startsWith("4")) {
+        navigate("/login");
+      } else {
+        localStorage.setItem("courses", JSON.stringify(response.data));
+        const mapperFunction = (obj) => {
+          return { label: obj.name, key: obj.id };
+        };
+        const courseItemsFromBackend = response.data.map(mapperFunction);
+        setCourseMenuItems(courseItemsFromBackend);
+      }
     };
-    fetchCourseData();
+    if (localStorage.getItem("token")) {
+      fetchCourseData();
+    } else {
+      navigate("/login");
+    }
 
     const fetchAssignmentData = async () => {
       const response = await api.get("api/assignments/");
-      localStorage.setItem("assignments", JSON.stringify(response.data));
+      console.log(response.status);
+      console.log(response.status === 401);
+      if (response.status.toString().startsWith("4")) {
+        navigate("/login");
+      } else {
+        localStorage.setItem("assignments", JSON.stringify(response.data));
+      }
     };
-    fetchAssignmentData();
+    if (localStorage.getItem("token")) {
+      fetchAssignmentData();
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   const { state } = useLocation();
-  const { username } = state;
+  const username = state?.username;
 
   const [data, setData] = useState<any[]>([]);
   const handleMenuClick = (e) => {
@@ -82,7 +102,6 @@ const Assignments = () => {
   };
 
   const RenderItem = (item, idx) => {
-    const navigate = useNavigate();
     return (
       <div
         key={idx}

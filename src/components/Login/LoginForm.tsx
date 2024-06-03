@@ -14,6 +14,8 @@ const LoginForm = () => {
   const [authorized, setAuthorized] = useState(true);
   const navigate = useNavigate();
 
+  const sleep = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms));
+
   const login = async () => {
     if (username === "" || password === "") {
       setAuthorized(false);
@@ -24,15 +26,13 @@ const LoginForm = () => {
         "http://127.0.0.1:8000/auth/jwt/create/",
         { username, password }
       );
-
+      localStorage.setItem("username", username);
       const { access, refresh } = response.data;
-
       localStorage.setItem("token", access);
       localStorage.setItem("refreshToken", refresh);
-      localStorage.setItem("username", username);
       setAuthorized(true);
-      messageApi.open({ type: "success", content: "Successfully Logged In!" });
-
+      messageApi.open({ type: "success", content: "Successfully Logged In!"});
+      await sleep(1500);
       navigate("/assignments", { state: { username } });
     } catch (error) {
       messageApi.open({ type: "error", content: "Wrong Credentials!" });
@@ -71,16 +71,6 @@ const LoginForm = () => {
 
           <span className="font-bold text-5xl mb-12 pb-3">Login</span>
         </Form.Item>
-
-        {/* <Form.Item>
-          <span className="mt-8">Role</span>
-          <br />
-          <Radio.Group value={placement} onChange={placementChange}>
-            <Radio.Button value="TA">TA</Radio.Button>
-            <Radio.Button value="LeadTA">Lead TA</Radio.Button>
-            <Radio.Button value="Lecturer">Lecturer</Radio.Button>
-          </Radio.Group>
-        </Form.Item> */}
 
         <Form.Item
           name="username"

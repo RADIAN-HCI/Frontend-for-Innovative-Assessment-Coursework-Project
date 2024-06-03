@@ -6,7 +6,7 @@ import TrashIcon from "../images/TrashIcon.svg";
 import CheckIcon from "../images/CheckIcon.svg";
 import IconButton from "./IconButton.tsx";
 
-const ButtonsSideBySide = ({ isEditMode, setIsEditMode, item, selected, setSelected, onClickEdit, ideaText }) => {
+const ButtonsSideBySide = ({ isEditMode, setIsEditMode, selected, setSelected, onClickEdit, objectData }) => {
   return (
     <div
       style={{
@@ -24,7 +24,7 @@ const ButtonsSideBySide = ({ isEditMode, setIsEditMode, item, selected, setSelec
           mainColor="#D32EFF"
           onClick={() => {
             setIsEditMode(false);
-            onClickEdit(ideaText);
+            onClickEdit(objectData);
           }}
         />
       ) : (

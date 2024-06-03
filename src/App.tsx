@@ -9,21 +9,16 @@ import React from "react";
 import Ideas from "./components/Ideas/Ideas.tsx";
 
 function App() {
-  const isLoggedIn = localStorage.getItem("username") !== null ? true : false;
   return (
     <BrowserRouter>
       <Routes>
         <Route index element={<AccountForm />} />
         <Route path="login" element={<AccountForm />} />
-        {isLoggedIn ? (
-          <>
-            <Route path="assignments" element={<Assignments />} />
-            <Route path="generate" element={<Generate />} />
-            <Route path="design" element={<Design />} />
-            <Route path="brainstorm" element={<BrainStorming />} />
-            <Route path="ideas" element={<Ideas />} />
-          </>
-        ) : null}
+        <Route path="assignments" element={<Assignments />} />
+        <Route path="generate" element={<Generate />} />
+        <Route path="design" element={<Design />} />
+        <Route path="brainstorm" element={<BrainStorming />} />
+        <Route path="ideas" element={<Ideas />} />
       </Routes>
     </BrowserRouter>
   );

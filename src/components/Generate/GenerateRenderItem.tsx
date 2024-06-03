@@ -128,13 +128,12 @@ const GenerateRenderItem = ({
               <ButtonsSideBySide
                 isEditMode={isEditMode}
                 setIsEditMode={setIsEditMode}
-                item={item}
                 setSelected={() => {
                   setIsSelected(!isSelected);
                   editQuestion();
                 }}
                 selected={isSelected}
-                ideaText={ideaText}
+                objectData={{ ideaText, fileName }}
                 onClickEdit={onClickEdit}
               />
 

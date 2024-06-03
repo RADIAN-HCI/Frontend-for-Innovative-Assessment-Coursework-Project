@@ -7,7 +7,6 @@ import CubeIcon from "../../images/CubeIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import GenerateSideIcon from "../../images/GenerateSideIcon.svg";
 import GenerateLeftVector from "../../images/GenerateLeftVector.svg";
-
 import GenerateEmptyVector from "../../images/GenerateEmptyVector.svg";
 
 import GenerateRenderItem from "./GenerateRenderItem.tsx";
@@ -22,15 +21,21 @@ const Generate = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const RenderItem = (item, idx) => {
-    const [add, setAdd] = useState(true);
     const [isEditMode, setIsEditMode] = useState(false);
 
-    const editQuestion = async (ideaText) => {
+    const editQuestion = async (objectData) => {
       try {
         setSpinning(true);
-        await api.patch(`api/questions/${item.id}/`, {
-          details_modified: ideaText,
-        });
+        await api.patch(
+          `api/questions/${item.id}/`,
+          objectData.fileName
+            ? {
+                details_modified: objectData.ideaText,
+                attachment: objectData.fileName,
+              }
+            : { details_modified: objectData.ideaText },
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
         setSpinning(false);
         messageApi.open({
           type: "success",
@@ -52,7 +57,10 @@ const Generate = () => {
         setIsEditMode={setIsEditMode}
         data={generateData}
         setData={setGenerateData}
-        onClickEdit={editQuestion}
+        onClickEdit={async (objectData) => {
+          await editQuestion(objectData);
+          fetchGenerateData();
+        }}
       />
     );
   };

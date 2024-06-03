@@ -22,11 +22,15 @@ const Design = () => {
 
   const fetchDesignData = async () => {
     try {
-      setSpinning(true);
-      const response = await api.get("api/questions/");
-      localStorage.setItem("questions", JSON.stringify(response.data));
-      setData(response.data);
-      setSpinning(false);
+      if (localStorage.getItem("token")) {
+        setSpinning(true);
+        const response = await api.get("api/questions/");
+        localStorage.setItem("questions", JSON.stringify(response.data));
+        setData(response.data);
+        setSpinning(false);
+      } else {
+        navigate("/login");
+      }
     } catch (e) {
       navigate("/login");
     }

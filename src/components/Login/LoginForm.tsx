@@ -23,7 +23,7 @@ const LoginForm = () => {
     }
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/auth/jwt/create/",
+        "http://82.115.20.169:80/auth/jwt/create/",
         { username, password }
       );
       localStorage.setItem("username", username);
@@ -31,7 +31,7 @@ const LoginForm = () => {
       localStorage.setItem("token", access);
       localStorage.setItem("refreshToken", refresh);
       setAuthorized(true);
-      messageApi.open({ type: "success", content: "Successfully Logged In!"});
+      messageApi.open({ type: "success", content: "Successfully Logged In!" });
       await sleep(1500);
       navigate("/assignments", { state: { username } });
     } catch (error) {

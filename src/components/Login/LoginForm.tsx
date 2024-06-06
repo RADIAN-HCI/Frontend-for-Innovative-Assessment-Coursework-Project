@@ -23,7 +23,7 @@ const LoginForm = () => {
     }
     try {
       const response = await axios.post(
-        "http://82.115.20.169:80/auth/jwt/create/",
+        "http://82.115.20.169:8000/auth/jwt/create/",
         { username, password }
       );
       localStorage.setItem("username", username);

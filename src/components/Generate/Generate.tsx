@@ -69,8 +69,8 @@ const Generate = () => {
   const assignmentID = localStorage.getItem("assignment_id");
 
   const fetchGenerateData = async () => {
+    setSpinning(true);
     try {
-      setSpinning(true);
       const response = await api.get(`api/questions/sorted/${assignmentID}/`);
       localStorage.setItem("questions", JSON.stringify(response.data));
       response.data.sort(function (x, y) {
@@ -81,9 +81,10 @@ const Generate = () => {
             : 1;
       });
       setGenerateData(response.data);
-      setSpinning(false);
     } catch (e) {
       navigate("/login");
+    } finally {
+      setSpinning(false);
     }
   };
 
@@ -95,8 +96,7 @@ const Generate = () => {
     try {
       const objectData = new FormData();
       objectData.append("assignment_id", assignment_id);
-      const response = await api.post("generate_pdf/", objectData);
-      console.log(response.data);
+      await api.post("generate_pdf/", objectData);
     } catch (e) {
       console.log("Error 500");
     }
@@ -218,20 +218,36 @@ const Generate = () => {
 };
 
 const EmptyPage = () => {
+  const navigate = useNavigate();
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <img alt="background" src={GenerateEmptyVector} />
       <span style={{ color: "#676767" }}>
-        There is no question here. you can either design
+        There is no question here. You can design
       </span>
       <span style={{ color: "#676767" }}>
-        your own question in <b>Design/Brain storm</b>
+        your own questions in{" "}
+        <b
+          onClick={() => {
+            navigate("/design");
+          }}
+          style={{ cursor: "pointer" }}
+        >
+          Design Page
+        </b>{" "}
+        and{" "}
+        <b
+          onClick={() => {
+            navigate("/brainstorm");
+          }}
+          style={{ cursor: "pointer" }}
+        >
+          Brainstorm Page
+        </b>
       </span>
-      <span style={{ color: "#676767" }}>
-        section or Ask you assistants to do it.
-      </span>
+      <span style={{ color: "#676767" }}>or ask you assistants to do it.</span>
     </div>
   );
 };

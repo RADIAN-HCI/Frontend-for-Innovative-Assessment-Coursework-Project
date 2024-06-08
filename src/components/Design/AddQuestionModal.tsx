@@ -19,12 +19,11 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
       lang: "fa",
       title: questionTitle,
       assignment: localStorage.getItem("assignment_id"),
-      author: 1,
       details_modified: "",
     };
 
+    setSpinning(true);
     try {
-      setSpinning(true);
       const response = await api.post("api/questions/", dataToBeSent);
       if (response.status.toString().startsWith("2")) {
         await handleOk();
@@ -39,6 +38,7 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
         type: "error",
         content: "Something Went Wrong!",
       });
+    } finally {
       setSpinning(false);
     }
   };
@@ -47,7 +47,6 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
     <>
       {contextHolder}
       <Spin spinning={spinning} fullscreen />
-
       <div>
         <Modal
           title="+ Add a Question"

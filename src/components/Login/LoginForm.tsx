@@ -1,5 +1,5 @@
 import loginIcon from "../../images/Vector.png";
-import { Form, Input, Button, Image, message } from "antd";
+import { Form, Input, Button, Image, message, Spin } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import React from "react";
 
 const LoginForm = () => {
   const [messageApi, contextHolder] = message.useMessage();
+  const [spinning, setSpinning] = useState(false);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -21,9 +22,12 @@ const LoginForm = () => {
       setAuthorized(false);
       return;
     }
+    setSpinning(true);
     try {
       const response = await axios.post(
         "http://82.115.20.169:8000/auth/jwt/create/",
+        // "http://127.0.0.1:8000/auth/jwt/create/",
+
         { username, password }
       );
       localStorage.setItem("username", username);
@@ -35,12 +39,16 @@ const LoginForm = () => {
       await sleep(1500);
       navigate("/assignments", { state: { username } });
     } catch (error) {
+      setAuthorized(false);
       messageApi.open({ type: "error", content: "Wrong Credentials!" });
+    } finally {
+      setSpinning(false);
     }
   };
   return (
     <>
       {contextHolder}
+      <Spin spinning={spinning} fullscreen />
 
       <Form
         name="normal_login"
@@ -61,7 +69,7 @@ const LoginForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your Username!",
+              message: "Please enter your Username!",
             },
           ]}
           className="w-4/5 align-middle"
@@ -77,7 +85,7 @@ const LoginForm = () => {
           rules={[
             {
               required: true,
-              message: "Please input your Username!",
+              message: "Please enter your Username!",
             },
           ]}
           className="w-4/5"

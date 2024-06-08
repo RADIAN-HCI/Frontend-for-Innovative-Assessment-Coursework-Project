@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Logo from "../images/Logo.svg";
 import "./index.css";
 import { useLocation } from "react-router-dom";
-import { Image } from "antd";
+import { Image, Spin } from "antd";
 import Kites from "../images/Kites.svg";
 import GeneralList from "./GeneralList.tsx";
 import { Button } from "antd";
@@ -20,6 +20,8 @@ const Assignments = () => {
   const [courseMenuItems, setCourseMenuItems] = useState([]);
 
   const [currentCourse, setCurrentCourse] = useState<any>();
+
+  const [spinning, setSpinning] = useState(false);
 
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -48,7 +50,14 @@ const Assignments = () => {
       }
     };
     if (localStorage.getItem("token")) {
-      fetchCourseData();
+      setSpinning(true);
+      try {
+        fetchCourseData();
+      } catch (e) {
+        console.log(e)
+      } finally {
+        setSpinning(false);
+      }
     } else {
       navigate("/login");
     }
@@ -211,88 +220,92 @@ const Assignments = () => {
   };
 
   return (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        marginBottom: "4%",
-      }}
-    >
-      <Image
-        src={Logo}
-        preview={false}
-        style={{
-          marginLeft: "10%",
-          marginTop: "5%",
-          marginRight: "10%",
-          width: "10%",
-          height: "10%",
-        }}
-      />
-      <div style={{ width: "22%", alignSelf: "center" }}>
-        <Dropdown menu={{ items: courseMenuItems, onClick: handleMenuClick }}>
-          <Button>
-            <Space>
-              Select Your Course to View its Assignments
-              <DownOutlined
-                onPointerEnterCapture={undefined}
-                onPointerLeaveCapture={undefined}
-              />
-            </Space>
-          </Button>
-        </Dropdown>
-      </div>
-      <span
-        style={{
-          marginLeft: "10%",
-          marginTop: "2%",
-          marginRight: "10%",
-          fontSize: 24,
-        }}
-      >
-        Welcome <b>{username}</b>, here is your:
-      </span>
+    <>
+      <Spin spinning={spinning} fullscreen />
+
       <div
         style={{
-          marginLeft: "10%",
-          marginTop: "2%",
-          marginRight: "10%",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          marginBottom: "4%",
         }}
-        className="flex flex-row items-center"
       >
+        <Image
+          src={Logo}
+          preview={false}
+          style={{
+            marginLeft: "10%",
+            marginTop: "5%",
+            marginRight: "10%",
+            width: "10%",
+            height: "10%",
+          }}
+        />
+        <div style={{ width: "22%", alignSelf: "center" }}>
+          <Dropdown menu={{ items: courseMenuItems, onClick: handleMenuClick }}>
+            <Button>
+              <Space>
+                Select Your Course to View its Assignments
+                <DownOutlined
+                  onPointerEnterCapture={undefined}
+                  onPointerLeaveCapture={undefined}
+                />
+              </Space>
+            </Button>
+          </Dropdown>
+        </div>
         <span
           style={{
-            fontWeight: "bolder",
-            fontSize: 64,
+            marginLeft: "10%",
+            marginTop: "2%",
+            marginRight: "10%",
+            fontSize: 24,
           }}
         >
-          Assignments
+          Welcome <b>{username}</b>, here is your:
         </span>
-        <Image
-          src={Kites}
-          preview={false}
-          style={{ marginLeft: "5%", marginTop: "2%", width: "88%" }}
-        />
-      </div>
-      <div
-        style={{
-          marginLeft: "10%",
-          marginTop: "3%",
-          marginRight: "10%",
-        }}
-      >
-        {data && data.length > 0 ? (
-          <GeneralList
-            data={data}
-            RenderItem={RenderItem}
-            numOfColumn={width > 1050 ? 2 : 1}
+        <div
+          style={{
+            marginLeft: "10%",
+            marginTop: "2%",
+            marginRight: "10%",
+          }}
+          className="flex flex-row items-center"
+        >
+          <span
+            style={{
+              fontWeight: "bolder",
+              fontSize: 64,
+            }}
+          >
+            Assignments
+          </span>
+          <Image
+            src={Kites}
+            preview={false}
+            style={{ marginLeft: "5%", marginTop: "2%", width: "88%" }}
           />
-        ) : (
-          <EmptyPage />
-        )}
+        </div>
+        <div
+          style={{
+            marginLeft: "10%",
+            marginTop: "3%",
+            marginRight: "10%",
+          }}
+        >
+          {data && data.length > 0 ? (
+            <GeneralList
+              data={data}
+              RenderItem={RenderItem}
+              numOfColumn={width > 1050 ? 2 : 1}
+            />
+          ) : (
+            <EmptyPage />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

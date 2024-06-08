@@ -26,7 +26,7 @@ const NavigatorComponent = ({ firstText, secondText, thirdText }) => {
       }}
     >
       <span
-        style={{ color: "#676767", fontSize: 18 }}
+        style={{ color: "#676767", fontSize: 18, cursor: "pointer" }}
         onClick={() => navigationFunction(firstText)}
       >
         {firstText}
@@ -35,7 +35,7 @@ const NavigatorComponent = ({ firstText, secondText, thirdText }) => {
       <RightOutlined />
 
       <span
-        style={{ color: "#676767", fontSize: 18 }}
+        style={{ color: "#676767", fontSize: 18, cursor: "pointer" }}
         onClick={() => navigationFunction(secondText)}
       >
         {secondText}
@@ -45,7 +45,7 @@ const NavigatorComponent = ({ firstText, secondText, thirdText }) => {
         <>
           <RightOutlined />
           <span
-            style={{ color: "#676767", fontSize: 18 }}
+            style={{ color: "#676767", fontSize: 18, cursor: "pointer" }}
             onClick={() => navigationFunction(thirdText)}
           ></span>
         </>

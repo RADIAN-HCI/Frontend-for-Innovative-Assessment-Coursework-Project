@@ -21,9 +21,9 @@ const Design = () => {
   const navigate = useNavigate();
 
   const fetchDesignData = async () => {
+    setSpinning(true);
     try {
       if (localStorage.getItem("token")) {
-        setSpinning(true);
         const response = await api.get("api/questions/");
         localStorage.setItem("questions", JSON.stringify(response.data));
         response.data.sort(function (x, y) {
@@ -34,12 +34,13 @@ const Design = () => {
               : 1;
         });
         setData(response.data);
-        setSpinning(false);
       } else {
         navigate("/login");
       }
     } catch (e) {
       navigate("/login");
+    } finally {
+      setSpinning(false);
     }
   };
 

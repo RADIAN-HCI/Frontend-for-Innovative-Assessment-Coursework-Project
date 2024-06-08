@@ -28,8 +28,8 @@ const AddQuestionModal = ({
       details_modified: "",
     };
 
+    setSpinning(true);
     try {
-      setSpinning(true);
       const response = await api.post("api/questions/", dataToBeSent);
       if (response.status.toString().startsWith("2")) {
         await handleOk();
@@ -44,6 +44,7 @@ const AddQuestionModal = ({
         type: "error",
         content: "Something Went Wrong!",
       });
+    } finally {
       setSpinning(false);
     }
   };

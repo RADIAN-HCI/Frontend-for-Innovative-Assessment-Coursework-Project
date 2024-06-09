@@ -54,7 +54,7 @@ const Assignments = () => {
       try {
         fetchCourseData();
       } catch (e) {
-        console.log(e)
+        console.log(e);
       } finally {
         setSpinning(false);
       }
@@ -64,8 +64,6 @@ const Assignments = () => {
 
     const fetchAssignmentData = async () => {
       const response = await api.get("api/assignments/");
-      console.log(response.status);
-      console.log(response.status === 401);
       if (response.status.toString().startsWith("4")) {
         navigate("/login");
       } else {

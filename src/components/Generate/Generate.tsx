@@ -20,6 +20,10 @@ const Generate = () => {
   const [spinning, setSpinning] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
 
+  const openInNewTab = (url) => {
+    window.open(url, "_blank", "noreferrer");
+  };
+
   const RenderItem = (item, idx) => {
     const [isEditMode, setIsEditMode] = useState(false);
 
@@ -97,6 +101,7 @@ const Generate = () => {
       const objectData = new FormData();
       objectData.append("assignment_id", assignment_id);
       await api.post("generate_pdf/", objectData);
+      openInNewTab("http://82.115.20.169:8001/assignment_pdf.pdf");
     } catch (e) {
       console.log("Error 500");
     }

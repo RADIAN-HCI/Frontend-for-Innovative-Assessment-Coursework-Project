@@ -199,7 +199,7 @@ const Generate = () => {
                 marginLeft: "40%",
               }}
               onClick={() => {
-                handleGeneratePDF(2);
+                handleGeneratePDF(assignmentID);
               }}
             >
               <span

@@ -62,7 +62,7 @@ const BrainStorming = () => {
       await api.post(`api/brainstorms/`, {
         prompt: text,
         course: courseID,
-        lang: "fa",
+        lang: "en",
         assignment: assignmentID,
       });
       setSpinning(false);

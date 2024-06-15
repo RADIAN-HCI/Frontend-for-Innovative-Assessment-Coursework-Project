@@ -22,7 +22,7 @@ const AddQuestionModal = ({
   const sendAddQuestionRequest = async () => {
     let dataToBeSent = {
       details_original: questionText,
-      lang: "fa",
+      lang: "en",
       title: questionTitle,
       assignment: localStorage.getItem("assignment_id"),
       details_modified: "",

@@ -152,29 +152,55 @@ const Design = () => {
             }}
           >
             <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
-            <Button
-              style={{
-                backgroundColor: "#D6E5F5",
-                borderColor: "#0066CC",
-                borderWidth: 1,
-                borderRadius: 10,
-                height: 40,
-              }}
-              onClick={() => {
-                setIsModalOpen(true);
-              }}
-            >
-              <span
+            <div className="flex flex-row justify-between items-center mr-12">
+              <Button
                 style={{
-                  fontWeight: "bolder",
-                  fontSize: 20,
-                  color: "#0066CC",
-                  marginBottom: 8,
+                  backgroundColor: "#D6E5F5",
+                  borderColor: "#0066CC",
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  height: 40,
+                }}
+                onClick={() => {
+                  setIsModalOpen(true);
                 }}
               >
-                + Add Question
-              </span>
-            </Button>
+                <span
+                  style={{
+                    fontWeight: "bolder",
+                    fontSize: 20,
+                    color: "#0066CC",
+                    marginBottom: 8,
+                  }}
+                >
+                  + Add Question
+                </span>
+              </Button>
+              <Button
+                style={{
+                  backgroundColor: "#98FFC1",
+                  borderColor: "#00C850",
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  height: 40,
+                  marginLeft: 6,
+                }}
+                onClick={() => {
+                  navigate("/generate");
+                }}
+              >
+                <span
+                  style={{
+                    fontWeight: "bolder",
+                    fontSize: 20,
+                    color: "#00C850",
+                    marginBottom: 8,
+                  }}
+                >
+                  Go To Generate
+                </span>
+              </Button>
+            </div>
             <AddQuestionModal
               isModalOpen={isModalOpen}
               handleCancel={handleCancel}

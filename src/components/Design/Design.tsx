@@ -20,11 +20,13 @@ const Design = () => {
 
   const navigate = useNavigate();
 
+  const assignmentID = localStorage.getItem('assignment_id')
+
   const fetchDesignData = async () => {
     setSpinning(true);
     try {
       if (localStorage.getItem("token")) {
-        const response = await api.get("api/questions/");
+        const response = await api.get(`api/questions/${assignmentID}`);
         localStorage.setItem("questions", JSON.stringify(response.data));
         response.data.sort(function (x, y) {
           return x.is_selected_for_assignment === y.is_selected_for_assignment

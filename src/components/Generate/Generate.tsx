@@ -97,6 +97,7 @@ const Generate = () => {
   }, []);
 
   const handleGeneratePDF = async (assignment_id) => {
+    setSpinning(true);
     try {
       const objectData = new FormData();
       const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -106,6 +107,8 @@ const Generate = () => {
       openInNewTab(`${baseUrl}/assignment_pdf.pdf`);
     } catch (e) {
       console.log("Error 500");
+    } finally {
+      setSpinning(false);
     }
   };
 

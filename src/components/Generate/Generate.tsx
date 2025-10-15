@@ -99,9 +99,11 @@ const Generate = () => {
   const handleGeneratePDF = async (assignment_id) => {
     try {
       const objectData = new FormData();
+      const baseUrl = process.env.REACT_APP_BASE_URL;
+
       objectData.append("assignment_id", assignment_id);
       await api.post("generate_pdf/", objectData);
-      openInNewTab("http://82.115.20.169:8001/assignment_pdf.pdf");
+      openInNewTab(`${baseUrl}/assignment_pdf.pdf`);
     } catch (e) {
       console.log("Error 500");
     }

@@ -15,6 +15,8 @@ const LoginForm = () => {
   const [authorized, setAuthorized] = useState(true);
   const navigate = useNavigate();
 
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
   const sleep = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const login = async () => {
@@ -25,8 +27,7 @@ const LoginForm = () => {
     setSpinning(true);
     try {
       const response = await axios.post(
-        "http://82.115.20.169:8000/auth/jwt/create/",
-        // "http://127.0.0.1:8000/auth/jwt/create/",
+        `${baseUrl}/auth/jwt/create/`,
 
         { username, password }
       );

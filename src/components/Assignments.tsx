@@ -278,9 +278,17 @@ const Assignments = () => {
         </div>
         <div style={{ width: "22%", alignSelf: "center" }}>
           <Dropdown menu={{ items: courseMenuItems, onClick: handleMenuClick }}>
-            <Button type="primary" danger={!currentCourse}>
+            <Button
+              className="rounded-xl BtnStyle h-auto"
+              style={{
+                backgroundColor: currentCourse ? "#D6E5F5" : "#E6F4FF",
+                color: currentCourse ? "#0066CC" : "#1677FF",
+                borderColor: currentCourse ? "#0066CC" : "#91Caff",
+                borderWidth: 1,
+              }}
+            >
               <Space>
-                {currentCourse ? currentCourse.name : "Select Your Course to View its Assignments"}
+                {currentCourse ? currentCourse.name : "Select Your Course"}
                 <DownOutlined
                   onPointerEnterCapture={undefined}
                   onPointerLeaveCapture={undefined}
@@ -290,10 +298,10 @@ const Assignments = () => {
           </Dropdown>
           {!currentCourse ? (
             <Alert
-              type="warning"
+              type="info"
               showIcon
               style={{ marginTop: 8 }}
-              message="Please select a course from the dropdown to view its assignments."
+              message="Select a course from the dropdown to view its assignments."
             />
           ) : null}
         </div>

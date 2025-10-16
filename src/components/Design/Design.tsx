@@ -18,7 +18,7 @@ const Design = () => {
 
   const [spinning, setSpinning] = useState<boolean>(false);
   const [searchText, setSearchText] = useState("");
-  const [mineOnly, setMineOnly] = useState(false);
+  const [mineOnly, setMineOnly] = useState(true);
   const username = localStorage.getItem("username");
 
   const navigate = useNavigate();

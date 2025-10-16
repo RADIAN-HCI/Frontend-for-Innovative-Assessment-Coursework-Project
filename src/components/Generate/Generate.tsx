@@ -20,7 +20,7 @@ const Generate = () => {
   const [spinning, setSpinning] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
   const [searchText, setSearchText] = useState("");
-  const [mineOnly, setMineOnly] = useState(false);
+  const [mineOnly, setMineOnly] = useState(true);
   const username = localStorage.getItem("username");
 
   const openInNewTab = (url) => {

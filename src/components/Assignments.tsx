@@ -37,16 +37,20 @@ const Assignments = () => {
 
   useEffect(() => {
     const fetchCourseData = async () => {
-      const response = await api.get("api/courses/");
-      if (response.status.toString().startsWith("4")) {
-        navigate("/login");
-      } else {
-        localStorage.setItem("courses", JSON.stringify(response.data));
-        const mapperFunction = (obj) => {
-          return { label: obj.name, key: obj.id };
-        };
-        const courseItemsFromBackend = response.data.map(mapperFunction);
-        setCourseMenuItems(courseItemsFromBackend);
+      try {
+        const response = await api.get("api/courses/");
+        if (response.status.toString().startsWith("4")) {
+          navigate("/login");
+        } else {
+          localStorage.setItem("courses", JSON.stringify(response.data));
+          const mapperFunction = (obj) => {
+            return { label: obj.name, key: obj.id };
+          };
+          const courseItemsFromBackend = response.data.map(mapperFunction);
+          setCourseMenuItems(courseItemsFromBackend);
+        }
+      } catch (e) {
+        console.log(e);
       }
     };
     if (localStorage.getItem("token")) {
@@ -63,11 +67,15 @@ const Assignments = () => {
     }
 
     const fetchAssignmentData = async () => {
-      const response = await api.get("api/assignments/");
-      if (response.status.toString().startsWith("4")) {
-        navigate("/login");
-      } else {
-        localStorage.setItem("assignments", JSON.stringify(response.data));
+      try {
+        const response = await api.get("api/assignments/");
+        if (response.status.toString().startsWith("4")) {
+          navigate("/login");
+        } else {
+          localStorage.setItem("assignments", JSON.stringify(response.data));
+        }
+      } catch (e) {
+        console.log(e);
       }
     };
     if (localStorage.getItem("token")) {

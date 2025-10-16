@@ -27,7 +27,10 @@ const BrainStorming = () => {
         `api/brainstorms/?assignment_id=${assignmentID}`
       );
       localStorage.setItem("ideas", JSON.stringify(response.data));
-      setData(response.data);
+      const filtered = (response.data || []).filter(
+        (b) => String(b?.assignment) === String(assignmentID)
+      );
+      setData(filtered);
     } catch (e) {
       navigate("/login");
     }
@@ -40,7 +43,10 @@ const BrainStorming = () => {
           `api/brainstorms/?assignment_id=${assignmentID}`
         );
         localStorage.setItem("ideas", JSON.stringify(response.data));
-        setData(response.data);
+        const filtered = (response.data || []).filter(
+          (b) => String(b?.assignment) === String(assignmentID)
+        );
+        setData(filtered);
       } catch (e) {
         navigate("/login");
       }

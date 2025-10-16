@@ -6,6 +6,7 @@ import NoAttachmentComponent from "../NoAttachmentComponent.tsx";
 import EyeIcon from "../../images/EyeIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 import { Image, Typography, message } from "antd";
+import ReactMarkdown from "react-markdown";
 import ButtonsSideBySide from "../ButtonsSideBySide.tsx";
 import api from "../api.ts";
 import ViewAttachments from "../ViewAttachments.tsx";
@@ -202,7 +203,9 @@ const TextDisplay = ({ text }) => {
           height: "100%",
         }}
       >
-        <TextArea value={text} disabled autoSize style={{ color: "black" }} />
+        <div style={{ backgroundColor: "white", padding: 8, borderRadius: 6 }}>
+          <ReactMarkdown>{text || ""}</ReactMarkdown>
+        </div>
       </div>
     </div>
   );

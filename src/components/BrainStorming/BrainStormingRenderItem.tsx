@@ -15,9 +15,9 @@ const BrainStormingRenderItem = ({ item, idx }) => {
       key={idx}
       style={{
         backgroundColor: "#F5F5F5",
-        width: "100%",
-        marginRight: 0,
-        marginLeft: 0,
+        width: "75%",
+        marginRight: "12%",
+        marginLeft: "12%",
       }}
       className="flex flex-row justify-between rounded-lg p-2 border-4 mb-2"
     >

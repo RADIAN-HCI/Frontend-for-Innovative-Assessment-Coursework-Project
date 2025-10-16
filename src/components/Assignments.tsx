@@ -11,6 +11,7 @@ import ProfileIcon from "../images/ProfileIcon.svg";
 import CalendarIcon from "../images/CalendarIcon.svg";
 import api from "./api.ts";
 import { Dropdown, Space } from "antd";
+import { Alert } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import DesignEmptyVector from "../images/DesignEmptyVector.svg";
 import "./AssignmentButtonStyle.css";
@@ -277,9 +278,9 @@ const Assignments = () => {
         </div>
         <div style={{ width: "22%", alignSelf: "center" }}>
           <Dropdown menu={{ items: courseMenuItems, onClick: handleMenuClick }}>
-            <Button>
+            <Button type="primary" danger={!currentCourse}>
               <Space>
-                Select Your Course to View its Assignments
+                {currentCourse ? currentCourse.name : "Select Your Course to View its Assignments"}
                 <DownOutlined
                   onPointerEnterCapture={undefined}
                   onPointerLeaveCapture={undefined}
@@ -287,6 +288,14 @@ const Assignments = () => {
               </Space>
             </Button>
           </Dropdown>
+          {!currentCourse ? (
+            <Alert
+              type="warning"
+              showIcon
+              style={{ marginTop: 8 }}
+              message="Please select a course from the dropdown to view its assignments."
+            />
+          ) : null}
         </div>
         <span
           style={{

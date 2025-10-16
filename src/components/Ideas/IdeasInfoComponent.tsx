@@ -10,11 +10,14 @@ const IdeasInfoComponent = (props) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        borderRadius: 8,
+        borderRadius: 10,
         borderColor: color,
-        borderWidth: 1,
-        marginTop: 4,
-        marginBottom: 4,
+        borderWidth: 2,
+        backgroundColor: "#ffffff",
+        boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+        padding: 8,
+        marginTop: 6,
+        marginBottom: 6,
         width: "100%",
       }}
     >
@@ -33,8 +36,8 @@ const IdeasInfoComponent = (props) => {
         />
         <span
           style={{
-            marginLeft: 4,
-            fontSize: 20,
+            marginLeft: 6,
+            fontSize: 16,
             color: color,
             fontWeight: "bold",
           }}
@@ -42,9 +45,9 @@ const IdeasInfoComponent = (props) => {
           {subtitle}
         </span>
       </div>
-      <span style={{ fontSize: 24, color: color, fontWeight: "bold" }}>
-        <Rate disabled defaultValue={score} />
-      </span>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Rate disabled value={score} style={{ color: color }} />
+      </div>
     </div>
   );
 };

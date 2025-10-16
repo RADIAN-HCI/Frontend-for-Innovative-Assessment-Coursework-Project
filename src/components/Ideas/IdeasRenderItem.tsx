@@ -104,7 +104,7 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
 
       <div
         style={{ width: "35%" }}
-        className="flex flex-col justify-around m-1 p-1 gap-x-1 gap-y-1"
+        className="flex flex-col justify-around m-1 p-1 gap-x-1 gap-y-2"
       >
         <IdeasInfoComponent
           color="#00e15A"
@@ -122,15 +122,20 @@ const IdeasRenderItem = ({ item, idx, selected, setSelected }) => {
           style={{
             backgroundColor: "#D6E5F5",
             color: "#0066CC",
-            height: "auto",
+            height: 40,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            borderRadius: 10,
           }}
+          className="BtnStyle"
           onClick={() => {
             setSelected([...selected, idx]);
             setIsModalOpen(true);
           }}
         >
-          <span style={{ fontWeight: "bolder" }} className="BtnStyle">
-            + Create Question from This Idea
+          <span style={{ fontWeight: "bolder", fontSize: 16 }}>
+            + Create Question
           </span>
         </Button>
 

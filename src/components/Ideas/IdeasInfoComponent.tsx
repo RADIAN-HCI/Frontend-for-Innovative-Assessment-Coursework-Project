@@ -42,9 +42,9 @@ const IdeasInfoComponent = (props) => {
           {subtitle}
         </span>
       </div>
-      <span style={{ fontSize: 24, color: color, fontWeight: "bold" }}>
-        <Rate disabled defaultValue={score} />
-      </span>
+      <div style={{ display: "flex", alignItems: "center", whiteSpace: "nowrap" }}>
+        <Rate disabled defaultValue={score} style={{ fontSize: 16 }} />
+      </div>
     </div>
   );
 };

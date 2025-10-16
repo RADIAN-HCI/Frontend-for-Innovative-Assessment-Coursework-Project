@@ -87,6 +87,20 @@ const Assignments = () => {
 
   const { state } = useLocation();
   const username = state?.username;
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("courses");
+      localStorage.removeItem("assignments");
+      localStorage.removeItem("course_id");
+      localStorage.removeItem("assignment_id");
+      localStorage.removeItem("username");
+    } finally {
+      navigate("/login");
+    }
+  };
+
 
   const [data, setData] = useState<any[]>([]);
   const handleMenuClick = (e) => {
@@ -237,17 +251,30 @@ const Assignments = () => {
           marginBottom: "4%",
         }}
       >
-        <Image
-          src={Logo}
-          preview={false}
+        <div
           style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
             marginLeft: "10%",
             marginTop: "5%",
             marginRight: "10%",
-            width: "10%",
-            height: "10%",
           }}
-        />
+        >
+          <Image
+            src={Logo}
+            preview={false}
+            style={{ width: "10%", height: "10%" }}
+          />
+          <Button
+            className="rounded-xl BtnStyle h-auto"
+            style={{ backgroundColor: "#fdecea", color: "#d32f2f" }}
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        </div>
         <div style={{ width: "22%", alignSelf: "center" }}>
           <Dropdown menu={{ items: courseMenuItems, onClick: handleMenuClick }}>
             <Button>

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image, message } from "antd";
+import { Button, Image, Input, message } from "antd";
 import CubeIcon from "../../images/CubeIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import GenerateSideIcon from "../../images/GenerateSideIcon.svg";
@@ -19,6 +19,7 @@ const Generate = () => {
   const navigate = useNavigate();
   const [spinning, setSpinning] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [searchText, setSearchText] = useState("");
 
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noreferrer");
@@ -175,6 +176,22 @@ const Generate = () => {
             style={{ marginLeft: "5%", marginTop: "5%" }}
           />
         </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginLeft: "10%",
+            marginTop: 8,
+            marginRight: "10%",
+          }}
+        >
+          <Input
+            placeholder="Search questions"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            style={{ width: 320 }}
+          />
+        </div>
         <img
           src={GenerateLeftVector}
           alt="Generate Left Icon"
@@ -190,7 +207,13 @@ const Generate = () => {
             }}
           >
             <GeneralList
-              data={generateData}
+              data={generateData.filter((q) =>
+                (
+                  (q?.title || "") + " " + (q?.details_modified || q?.details_original || "")
+                )
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase())
+              )}
               RenderItem={RenderItem}
               numOfColumn={1}
             />

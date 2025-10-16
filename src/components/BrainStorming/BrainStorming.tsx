@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image, Input, Spin, message } from "antd";
+import { Button, Image, Input, Spin, message, Switch } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
@@ -18,18 +18,21 @@ const BrainStorming = () => {
 
   const assignmentID = localStorage.getItem("assignment_id")!;
   const courseID = localStorage.getItem("course_id")!;
+  const username = localStorage.getItem("username")!;
 
   const [spinning, setSpinning] = useState<boolean>(false);
+  const [searchText, setSearchText] = useState("");
+  const [mineOnly, setMineOnly] = useState(true);
 
   const fetchIdeasData = async () => {
     try {
       const response = await api.get(
-        `api/brainstorms/?assignment_id=${assignmentID}`
+        `api/brainstorms/?assignment_id=${assignmentID}${mineOnly ? `&created_by=${username}` : ""}`
       );
       localStorage.setItem("ideas", JSON.stringify(response.data));
-      const filtered = (response.data || []).filter(
-        (b) => String(b?.assignment) === String(assignmentID)
-      );
+      const filtered = (response.data || [])
+        .filter((b) => String(b?.assignment) === String(assignmentID))
+        .filter((b) => (mineOnly ? String(b?.created_by) === String(username) : true));
       setData(filtered);
     } catch (e) {
       navigate("/login");
@@ -40,19 +43,19 @@ const BrainStorming = () => {
     const fetchIdeasData = async () => {
       try {
         const response = await api.get(
-          `api/brainstorms/?assignment_id=${assignmentID}`
+          `api/brainstorms/?assignment_id=${assignmentID}${mineOnly ? `&created_by=${username}` : ""}`
         );
         localStorage.setItem("ideas", JSON.stringify(response.data));
-        const filtered = (response.data || []).filter(
-          (b) => String(b?.assignment) === String(assignmentID)
-        );
+        const filtered = (response.data || [])
+          .filter((b) => String(b?.assignment) === String(assignmentID))
+          .filter((b) => (mineOnly ? String(b?.created_by) === String(username) : true));
         setData(filtered);
       } catch (e) {
         navigate("/login");
       }
     };
     fetchIdeasData();
-  }, [assignmentID, navigate]);
+  }, [assignmentID, navigate, username, mineOnly]);
 
   const [text, setText] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
@@ -144,6 +147,18 @@ const BrainStorming = () => {
           >
             Brain Storming
           </span>
+          <div className="flex flex-row items-center ml-6" style={{ gap: 12 }}>
+            <Input
+              placeholder="Search brainstorms"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              style={{ width: 280 }}
+            />
+            <div className="flex flex-row items-center" style={{ gap: 6 }}>
+              <Switch checked={mineOnly} onChange={setMineOnly} />
+              <span>Mine only</span>
+            </div>
+          </div>
         </div>
         {data && data.length > 0 ? (
           <div
@@ -162,7 +177,9 @@ const BrainStorming = () => {
               }}
             >
               <GeneralList
-                data={data}
+                data={data.filter((d) =>
+                  (d?.prompt || "").toLowerCase().includes(searchText.toLowerCase())
+                )}
                 RenderItem={RenderItem}
                 numOfColumn={1}
               />

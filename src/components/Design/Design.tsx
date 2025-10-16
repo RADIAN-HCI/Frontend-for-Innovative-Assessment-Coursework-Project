@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image, Spin } from "antd";
+import { Button, Image, Input, Spin } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import DesignRenderItem from "./DesignRenderItem.tsx";
@@ -17,6 +17,7 @@ const Design = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [spinning, setSpinning] = useState<boolean>(false);
+  const [searchText, setSearchText] = useState("");
 
   const navigate = useNavigate();
 
@@ -78,9 +79,13 @@ const Design = () => {
     );
   };
 
-  const handleOk = () => {
+  const handleOk = (newQuestion?: any) => {
     setIsModalOpen(false);
-    fetchDesignData();
+    if (newQuestion) {
+      setData((prev) => [newQuestion, ...prev]);
+    } else {
+      fetchDesignData();
+    }
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -140,6 +145,23 @@ const Design = () => {
             Design
           </span>
         </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginLeft: "10%",
+            marginTop: 8,
+            marginRight: "10%",
+            alignItems: "center",
+          }}
+        >
+          <Input
+            placeholder="Search questions"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            style={{ width: 320 }}
+          />
+        </div>
         {data && data.length > 0 ? (
           <div
             style={{
@@ -151,7 +173,17 @@ const Design = () => {
               width: "85%",
             }}
           >
-            <GeneralList data={data} RenderItem={RenderItem} numOfColumn={1} />
+            <GeneralList
+              data={data.filter((q) =>
+                (
+                  (q?.title || "") + " " + (q?.details_modified || q?.details_original || "")
+                )
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase())
+              )}
+              RenderItem={RenderItem}
+              numOfColumn={1}
+            />
             <div className="flex flex-row justify-between items-center mr-12">
               <Button
                 style={{

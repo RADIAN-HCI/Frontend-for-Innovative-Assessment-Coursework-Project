@@ -26,7 +26,7 @@ const AddQuestionModal = ({ isModalOpen, handleOk, handleCancel }) => {
     try {
       const response = await api.post("api/questions/", dataToBeSent);
       if (response.status.toString().startsWith("2")) {
-        await handleOk();
+        await handleOk(response.data);
         setSpinning(false);
         messageApi.open({
           type: "success",

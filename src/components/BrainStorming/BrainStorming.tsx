@@ -249,6 +249,9 @@ const BrainStorming = () => {
                 onChange={(e) => {
                   setText(e.target.value);
                 }}
+                onPressEnter={() => {
+                  sendPrompt(text);
+                }}
                 suffix={
                   <SendOutlined
                     style={{ color: "blue" }}
@@ -260,7 +263,8 @@ const BrainStorming = () => {
                   />
                 }
                 style={{
-                  width: "65%",
+                  width: "75%",
+                  alignSelf: "center",
                   height: 38,
                   borderWidth: 2,
                   borderColor: "black",

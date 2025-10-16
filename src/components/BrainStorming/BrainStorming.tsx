@@ -19,6 +19,16 @@ const BrainStorming = () => {
   const assignmentID = localStorage.getItem("assignment_id")!;
   const courseID = localStorage.getItem("course_id")!;
   const username = localStorage.getItem("username")!;
+  const token = localStorage.getItem("token") || "";
+  let currentUserId: string | undefined;
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1] || ""));
+    currentUserId = String(
+      payload?.user_id ?? payload?.userId ?? payload?.id ?? payload?.sub
+    );
+  } catch (e) {
+    currentUserId = undefined;
+  }
 
   const [spinning, setSpinning] = useState<boolean>(false);
   const [searchText, setSearchText] = useState("");
@@ -29,9 +39,36 @@ const BrainStorming = () => {
         `api/brainstorms/?assignment_id=${assignmentID}&created_by=${username}`
       );
       localStorage.setItem("ideas", JSON.stringify(response.data));
+      const belongsToCurrentUser = (b: any) => {
+        const possibleUsernameMatches = [
+          b?.created_by_username,
+          b?.owner_username,
+          b?.user_username,
+          b?.creator_username,
+          b?.created_by?.username,
+          b?.owner?.username,
+          b?.user?.username,
+          b?.creator?.username,
+        ].filter(Boolean);
+        const possibleIdMatches = [
+          b?.created_by,
+          b?.owner,
+          b?.user,
+          b?.creator,
+          b?.created_by?.id,
+          b?.owner?.id,
+          b?.user?.id,
+          b?.creator?.id,
+        ].filter((v) => v !== undefined && v !== null);
+        return (
+          possibleUsernameMatches.map(String).includes(String(username)) ||
+          (currentUserId !== undefined &&
+            possibleIdMatches.map(String).includes(String(currentUserId)))
+        );
+      };
       const filtered = (response.data || [])
         .filter((b) => String(b?.assignment) === String(assignmentID))
-        .filter((b) => String(b?.created_by) === String(username));
+        .filter(belongsToCurrentUser);
       setData(filtered);
     } catch (e) {
       navigate("/login");
@@ -45,9 +82,36 @@ const BrainStorming = () => {
           `api/brainstorms/?assignment_id=${assignmentID}&created_by=${username}`
         );
         localStorage.setItem("ideas", JSON.stringify(response.data));
+        const belongsToCurrentUser = (b: any) => {
+          const possibleUsernameMatches = [
+            b?.created_by_username,
+            b?.owner_username,
+            b?.user_username,
+            b?.creator_username,
+            b?.created_by?.username,
+            b?.owner?.username,
+            b?.user?.username,
+            b?.creator?.username,
+          ].filter(Boolean);
+          const possibleIdMatches = [
+            b?.created_by,
+            b?.owner,
+            b?.user,
+            b?.creator,
+            b?.created_by?.id,
+            b?.owner?.id,
+            b?.user?.id,
+            b?.creator?.id,
+          ].filter((v) => v !== undefined && v !== null);
+          return (
+            possibleUsernameMatches.map(String).includes(String(username)) ||
+            (currentUserId !== undefined &&
+              possibleIdMatches.map(String).includes(String(currentUserId)))
+          );
+        };
         const filtered = (response.data || [])
           .filter((b) => String(b?.assignment) === String(assignmentID))
-          .filter((b) => String(b?.created_by) === String(username));
+          .filter(belongsToCurrentUser);
         setData(filtered);
       } catch (e) {
         navigate("/login");

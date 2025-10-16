@@ -3,7 +3,6 @@ import { Image, message } from "antd";
 import EditIcon from "../../images/EditIcon.svg";
 import TextArea from "antd/es/input/TextArea";
 import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import { CheckOutlined } from "@ant-design/icons";
 import NoAttachmentComponent from "../NoAttachmentComponent.tsx";
 import EyeIcon from "../../images/EyeIcon.svg";
@@ -153,7 +152,7 @@ const TextDisplay = ({ text }) => {
     <div className="flex flex-row justify-between">
       <div style={{ width: "95%" }} className="flex flex-col h-full">
         <div style={{ backgroundColor: "white", padding: 8, borderRadius: 6 }}>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <ReactMarkdown>
             {text || ""}
           </ReactMarkdown>
         </div>

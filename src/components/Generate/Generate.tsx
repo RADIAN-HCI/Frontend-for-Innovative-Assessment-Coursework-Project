@@ -27,7 +27,7 @@ const Generate = () => {
     window.open(url, "_blank", "noreferrer");
   };
 
-  const RenderItem = (item, idx) => {
+  const GenerateListItem = ({ item, idx }) => {
     const [isEditMode, setIsEditMode] = useState(false);
 
     const editQuestion = async (objectData) => {
@@ -70,6 +70,10 @@ const Generate = () => {
         }}
       />
     );
+  };
+
+  const RenderItem = (item, idx) => {
+    return <GenerateListItem item={item} idx={idx} />;
   };
 
   const [generateData, setGenerateData] = useState([]);

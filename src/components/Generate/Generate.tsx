@@ -23,6 +23,48 @@ const Generate = () => {
   const [mineOnly, setMineOnly] = useState(true);
   const username = localStorage.getItem("username");
 
+  const token = localStorage.getItem("token") || "";
+  let currentUserId: string | undefined;
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1] || ""));
+    currentUserId = String(
+      payload?.user_id ?? payload?.userId ?? payload?.id ?? payload?.sub
+    );
+  } catch (e) {
+    currentUserId = undefined;
+  }
+
+  const isCreatedByMe = (q: any) => {
+    const possibleUsernameMatches = [
+      q?.created_by_username,
+      q?.owner_username,
+      q?.user_username,
+      q?.creator_username,
+      q?.created_by?.username,
+      q?.owner?.username,
+      q?.user?.username,
+      q?.creator?.username,
+      q?.author_username,
+    ].filter(Boolean);
+    const possibleIdMatches = [
+      q?.created_by,
+      q?.owner,
+      q?.user,
+      q?.creator,
+      q?.author,
+      q?.created_by?.id,
+      q?.owner?.id,
+      q?.user?.id,
+      q?.creator?.id,
+      q?.author?.id,
+    ].filter((v) => v !== undefined && v !== null);
+    return (
+      possibleUsernameMatches.map(String).includes(String(username)) ||
+      (currentUserId !== undefined &&
+        possibleIdMatches.map(String).includes(String(currentUserId)))
+    );
+  };
+
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noreferrer");
   };
@@ -225,7 +267,7 @@ const Generate = () => {
                     .toLowerCase()
                     .includes(searchText.toLowerCase())
                 )
-                .filter((q) => (mineOnly ? String(q?.created_by) === String(username) : true))}
+                .filter((q) => (mineOnly ? isCreatedByMe(q) : true))}
               RenderItem={RenderItem}
               numOfColumn={1}
             />

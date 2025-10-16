@@ -28,6 +28,33 @@ const Assignments = () => {
 
   const navigate = useNavigate();
 
+  const restoreSelection = () => {
+    try {
+      const storedCourseId = localStorage.getItem("course_id");
+      if (!storedCourseId) return;
+      const allCourses = JSON.parse(localStorage.getItem("courses") || "[]");
+      const allAssignments = JSON.parse(
+        localStorage.getItem("assignments") || "[]"
+      );
+
+      if (Array.isArray(allCourses)) {
+        const selectedCourse = allCourses.find(
+          (c) => String(c.id) === String(storedCourseId)
+        );
+        if (selectedCourse) setCurrentCourse(selectedCourse);
+      }
+
+      if (Array.isArray(allAssignments)) {
+        const result = allAssignments.filter(
+          (item) => String(item?.course) === String(storedCourseId)
+        );
+        if (result) setData(result);
+      }
+    } catch (e) {
+      // no-op
+    }
+  };
+
   useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResizeWindow);
@@ -49,6 +76,7 @@ const Assignments = () => {
           };
           const courseItemsFromBackend = response.data.map(mapperFunction);
           setCourseMenuItems(courseItemsFromBackend);
+          restoreSelection();
         }
       } catch (e) {
         console.log(e);
@@ -74,6 +102,7 @@ const Assignments = () => {
           navigate("/login");
         } else {
           localStorage.setItem("assignments", JSON.stringify(response.data));
+          restoreSelection();
         }
       } catch (e) {
         console.log(e);
@@ -84,6 +113,11 @@ const Assignments = () => {
     } else {
       navigate("/login");
     }
+  }, []);
+
+  // On initial mount, attempt to restore from any existing localStorage values
+  useEffect(() => {
+    restoreSelection();
   }, []);
 
   const { state } = useLocation();

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Image, message } from "antd";
 import EditIcon from "../../images/EditIcon.svg";
 import TextArea from "antd/es/input/TextArea";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { CheckOutlined } from "@ant-design/icons";
 import NoAttachmentComponent from "../NoAttachmentComponent.tsx";
 import EyeIcon from "../../images/EyeIcon.svg";
@@ -150,7 +152,11 @@ const TextDisplay = ({ text }) => {
   return (
     <div className="flex flex-row justify-between">
       <div style={{ width: "95%" }} className="flex flex-col h-full">
-        <TextArea value={text} disabled autoSize style={{ color: "black" }} />
+        <div style={{ backgroundColor: "white", padding: 8, borderRadius: 6 }}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {text || ""}
+          </ReactMarkdown>
+        </div>
       </div>
     </div>
   );

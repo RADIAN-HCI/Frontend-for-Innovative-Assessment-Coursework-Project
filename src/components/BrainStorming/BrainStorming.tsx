@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image, Input, Spin, message, Switch } from "antd";
+import { Button, Image, Input, Spin, message } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import DesignEmptyVector from "../../images/DesignEmptyVector.svg";
@@ -22,17 +22,16 @@ const BrainStorming = () => {
 
   const [spinning, setSpinning] = useState<boolean>(false);
   const [searchText, setSearchText] = useState("");
-  const [mineOnly, setMineOnly] = useState(true);
 
   const fetchIdeasData = async () => {
     try {
       const response = await api.get(
-        `api/brainstorms/?assignment_id=${assignmentID}${mineOnly ? `&created_by=${username}` : ""}`
+        `api/brainstorms/?assignment_id=${assignmentID}&created_by=${username}`
       );
       localStorage.setItem("ideas", JSON.stringify(response.data));
       const filtered = (response.data || [])
         .filter((b) => String(b?.assignment) === String(assignmentID))
-        .filter((b) => (mineOnly ? String(b?.created_by) === String(username) : true));
+        .filter((b) => String(b?.created_by) === String(username));
       setData(filtered);
     } catch (e) {
       navigate("/login");
@@ -43,19 +42,19 @@ const BrainStorming = () => {
     const fetchIdeasData = async () => {
       try {
         const response = await api.get(
-          `api/brainstorms/?assignment_id=${assignmentID}${mineOnly ? `&created_by=${username}` : ""}`
+          `api/brainstorms/?assignment_id=${assignmentID}&created_by=${username}`
         );
         localStorage.setItem("ideas", JSON.stringify(response.data));
         const filtered = (response.data || [])
           .filter((b) => String(b?.assignment) === String(assignmentID))
-          .filter((b) => (mineOnly ? String(b?.created_by) === String(username) : true));
+          .filter((b) => String(b?.created_by) === String(username));
         setData(filtered);
       } catch (e) {
         navigate("/login");
       }
     };
     fetchIdeasData();
-  }, [assignmentID, navigate, username, mineOnly]);
+  }, [assignmentID, navigate, username]);
 
   const [text, setText] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
@@ -154,10 +153,6 @@ const BrainStorming = () => {
               onChange={(e) => setSearchText(e.target.value)}
               style={{ width: 280 }}
             />
-            <div className="flex flex-row items-center" style={{ gap: 6 }}>
-              <Switch checked={mineOnly} onChange={setMineOnly} />
-              <span>Mine only</span>
-            </div>
           </div>
         </div>
         {data && data.length > 0 ? (

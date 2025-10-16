@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image, Input, message } from "antd";
+import { Button, Image, Input, message, Switch } from "antd";
 import CubeIcon from "../../images/CubeIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import GenerateSideIcon from "../../images/GenerateSideIcon.svg";
@@ -20,6 +20,8 @@ const Generate = () => {
   const [spinning, setSpinning] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
   const [searchText, setSearchText] = useState("");
+  const [mineOnly, setMineOnly] = useState(false);
+  const username = localStorage.getItem("username");
 
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noreferrer");
@@ -191,6 +193,10 @@ const Generate = () => {
             onChange={(e) => setSearchText(e.target.value)}
             style={{ width: 320 }}
           />
+          <div className="flex flex-row items-center" style={{ gap: 6, marginLeft: 12 }}>
+            <Switch checked={mineOnly} onChange={setMineOnly} />
+            <span>Mine only</span>
+          </div>
         </div>
         <img
           src={GenerateLeftVector}
@@ -207,13 +213,15 @@ const Generate = () => {
             }}
           >
             <GeneralList
-              data={generateData.filter((q) =>
-                (
-                  (q?.title || "") + " " + (q?.details_modified || q?.details_original || "")
+              data={generateData
+                .filter((q) =>
+                  (
+                    (q?.title || "") + " " + (q?.details_modified || q?.details_original || "")
+                  )
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase())
                 )
-                  .toLowerCase()
-                  .includes(searchText.toLowerCase())
-              )}
+                .filter((q) => (mineOnly ? String(q?.created_by) === String(username) : true))}
               RenderItem={RenderItem}
               numOfColumn={1}
             />

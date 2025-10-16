@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../images/Logo.svg";
 import "../index.css";
-import { Button, Image, Input, Spin } from "antd";
+import { Button, Image, Input, Spin, Switch } from "antd";
 import DesignCloudIcon from "../../images/DesignCloudIcon.svg";
 import GeneralList from "../GeneralList.tsx";
 import DesignRenderItem from "./DesignRenderItem.tsx";
@@ -18,6 +18,8 @@ const Design = () => {
 
   const [spinning, setSpinning] = useState<boolean>(false);
   const [searchText, setSearchText] = useState("");
+  const [mineOnly, setMineOnly] = useState(false);
+  const username = localStorage.getItem("username");
 
   const navigate = useNavigate();
 
@@ -161,6 +163,10 @@ const Design = () => {
             onChange={(e) => setSearchText(e.target.value)}
             style={{ width: 320 }}
           />
+          <div className="flex flex-row items-center" style={{ gap: 6, marginLeft: 12 }}>
+            <Switch checked={mineOnly} onChange={setMineOnly} />
+            <span>Mine only</span>
+          </div>
         </div>
         {data && data.length > 0 ? (
           <div
@@ -174,13 +180,15 @@ const Design = () => {
             }}
           >
             <GeneralList
-              data={data.filter((q) =>
-                (
-                  (q?.title || "") + " " + (q?.details_modified || q?.details_original || "")
+              data={data
+                .filter((q) =>
+                  (
+                    (q?.title || "") + " " + (q?.details_modified || q?.details_original || "")
+                  )
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase())
                 )
-                  .toLowerCase()
-                  .includes(searchText.toLowerCase())
-              )}
+                .filter((q) => (mineOnly ? String(q?.created_by) === String(username) : true))}
               RenderItem={RenderItem}
               numOfColumn={1}
             />

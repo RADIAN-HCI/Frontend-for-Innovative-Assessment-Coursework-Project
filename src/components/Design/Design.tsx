@@ -195,7 +195,7 @@ const Design = () => {
             justifyContent: "space-between",
             marginLeft: "10%",
             marginTop: 8,
-            marginRight: "20%",
+            marginRight: "15%",
           }}
         >
           <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>

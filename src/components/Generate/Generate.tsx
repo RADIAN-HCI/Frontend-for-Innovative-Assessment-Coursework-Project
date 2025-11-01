@@ -255,9 +255,9 @@ const Generate = () => {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
-            marginLeft: "20%",
+            marginLeft: "10%",
             marginTop: 8,
-            marginRight: "10%",
+            marginRight: "20%",
           }}
         >
           <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>

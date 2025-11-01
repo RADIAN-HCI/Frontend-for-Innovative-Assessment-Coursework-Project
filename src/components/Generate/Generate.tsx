@@ -152,8 +152,20 @@ const Generate = () => {
       const baseUrl = process.env.REACT_APP_BASE_URL;
 
       objectData.append("assignment_id", assignment_id);
-      await api.post("generate_pdf/", objectData);
-      openInNewTab(`${baseUrl}/assignment_pdf.pdf`);
+      // Pre-open tab to avoid popup blockers, then navigate when URL is ready
+      const pendingTab = window.open("", "_blank", "noreferrer");
+      const { data } = await api.post("generate_pdf/", objectData);
+      const base = String(baseUrl || "").replace(/\/$/, "");
+      const targetUrl = data?.pdf_url
+        ? data.pdf_url
+        : data?.pdf_path
+          ? `${base}/${String(data.pdf_path).replace(/^\//, "")}`
+          : `${base}/assignment_pdf.pdf`;
+      if (pendingTab && !pendingTab.closed) {
+        pendingTab.location.href = targetUrl;
+      } else {
+        openInNewTab(targetUrl);
+      }
     } catch (e) {
       console.log("Error 500");
     } finally {

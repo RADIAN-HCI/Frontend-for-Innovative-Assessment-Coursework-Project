@@ -28,9 +28,10 @@
 
   /* Make the Switch (used as a radio) handle visible on white background */
   .mine-only-switch:not(.ant-switch-checked) .ant-switch-handle::before {
-    box-shadow: 0 0 0 1.5px #bfbfbf inset !important; /* grey ring */
+    box-shadow: 0 0 0 2px #8c8c8c inset !important; /* darker grey ring */
   }
-  /* Slightly grey off-track so outline is clearer */
+  /* Slightly darker off-track and subtle inset border for clarity */
   .mine-only-switch:not(.ant-switch-checked) {
-    background-color: #f3f3f3 !important;
+    background-color: #e6e6e6 !important; /* a bit more grey */
+    box-shadow: inset 0 0 0 1px #bfbfbf !important;
   }

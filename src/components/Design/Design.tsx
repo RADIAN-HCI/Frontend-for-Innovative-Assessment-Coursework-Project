@@ -18,7 +18,7 @@ const Design = () => {
 
   const [spinning, setSpinning] = useState<boolean>(false);
   const [searchText, setSearchText] = useState("");
-  const [mineOnly, setMineOnly] = useState(true);
+  const [mineOnly, setMineOnly] = useState(false);
   const username = localStorage.getItem("username");
   const token = localStorage.getItem("token") || "";
   let currentUserId: string | undefined;

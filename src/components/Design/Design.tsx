@@ -191,21 +191,70 @@ const Design = () => {
           style={{
             display: "flex",
             flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
             marginLeft: "10%",
             marginTop: 8,
             marginRight: "10%",
-            alignItems: "center",
           }}
         >
-          <Input
-            placeholder="Search questions"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            style={{ width: 320 }}
-          />
-          <div className="flex flex-row items-center" style={{ gap: 6, marginLeft: 12 }}>
-            <Switch className="mine-only-switch" checked={mineOnly} onChange={setMineOnly} />
-            <span>Mine only</span>
+          <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+            <Input
+              placeholder="Search questions"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              style={{ width: 320 }}
+            />
+            <div className="flex flex-row items-center" style={{ gap: 6, marginLeft: 12 }}>
+              <Switch className="mine-only-switch" checked={mineOnly} onChange={setMineOnly} />
+              <span>Mine only</span>
+            </div>
+          </div>
+          <div className="flex flex-row items-center" style={{ gap: 8 }}>
+            <Button
+              style={{
+                backgroundColor: "#D6E5F5",
+                borderColor: "#0066CC",
+                borderWidth: 1,
+                borderRadius: 10,
+                height: 40,
+              }}
+              onClick={() => {
+                setIsModalOpen(true);
+              }}
+            >
+              <span
+                style={{
+                  fontWeight: "bolder",
+                  fontSize: 16,
+                  color: "#0066CC",
+                }}
+              >
+                + Add Question
+              </span>
+            </Button>
+            <Button
+              style={{
+                backgroundColor: "#98FFC1",
+                borderColor: "#00C850",
+                borderWidth: 1,
+                borderRadius: 10,
+                height: 40,
+              }}
+              onClick={() => {
+                navigate("/generate");
+              }}
+            >
+              <span
+                style={{
+                  fontWeight: "bolder",
+                  fontSize: 16,
+                  color: "#00C850",
+                }}
+              >
+                Go To Generate
+              </span>
+            </Button>
           </div>
         </div>
         {data && data.length > 0 ? (
@@ -232,55 +281,7 @@ const Design = () => {
               RenderItem={RenderItem}
               numOfColumn={1}
             />
-            <div className="flex flex-row justify-between items-center mr-12">
-              <Button
-                style={{
-                  backgroundColor: "#D6E5F5",
-                  borderColor: "#0066CC",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  height: 40,
-                }}
-                onClick={() => {
-                  setIsModalOpen(true);
-                }}
-              >
-                <span
-                  style={{
-                    fontWeight: "bolder",
-                    fontSize: 20,
-                    color: "#0066CC",
-                    marginBottom: 8,
-                  }}
-                >
-                  + Add Question
-                </span>
-              </Button>
-              <Button
-                style={{
-                  backgroundColor: "#98FFC1",
-                  borderColor: "#00C850",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  height: 40,
-                  marginLeft: 6,
-                }}
-                onClick={() => {
-                  navigate("/generate");
-                }}
-              >
-                <span
-                  style={{
-                    fontWeight: "bolder",
-                    fontSize: 20,
-                    color: "#00C850",
-                    marginBottom: 8,
-                  }}
-                >
-                  Go To Generate
-                </span>
-              </Button>
-            </div>
+            
             <AddQuestionModal
               isModalOpen={isModalOpen}
               handleCancel={handleCancel}

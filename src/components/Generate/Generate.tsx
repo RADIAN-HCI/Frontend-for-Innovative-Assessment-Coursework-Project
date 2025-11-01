@@ -253,21 +253,47 @@ const Generate = () => {
           style={{
             display: "flex",
             flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
             marginLeft: "10%",
             marginTop: 8,
             marginRight: "10%",
           }}
         >
-          <Input
-            placeholder="Search questions"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            style={{ width: 320 }}
-          />
-          <div className="flex flex-row items-center" style={{ gap: 6, marginLeft: 12 }}>
-            <Switch className="mine-only-switch" checked={mineOnly} onChange={setMineOnly} />
-            <span>Mine only</span>
+          <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+            <Input
+              placeholder="Search questions"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              style={{ width: 320 }}
+            />
+            <div className="flex flex-row items-center" style={{ gap: 6, marginLeft: 12 }}>
+              <Switch className="mine-only-switch" checked={mineOnly} onChange={setMineOnly} />
+              <span>Mine only</span>
+            </div>
           </div>
+          <Button
+            style={{
+              backgroundColor: "#98FFC1",
+              borderColor: "#00C850",
+              borderWidth: 1,
+              borderRadius: 10,
+              height: 40,
+            }}
+            onClick={() => {
+              handleGeneratePDF(assignmentID);
+            }}
+          >
+            <span
+              style={{
+                fontWeight: "bolder",
+                fontSize: 16,
+                color: "#00C850",
+              }}
+            >
+              Generate PDF
+            </span>
+          </Button>
         </div>
         <img
           src={GenerateLeftVector}
@@ -296,30 +322,6 @@ const Generate = () => {
               RenderItem={RenderItem}
               numOfColumn={1}
             />
-            <Button
-              style={{
-                backgroundColor: "#98FFC1",
-                borderColor: "#00C850",
-                borderWidth: 1,
-                borderRadius: 10,
-                height: 40,
-                marginLeft: "40%",
-              }}
-              onClick={() => {
-                handleGeneratePDF(assignmentID);
-              }}
-            >
-              <span
-                style={{
-                  fontWeight: "bolder",
-                  fontSize: 20,
-                  color: "#00C850",
-                  marginBottom: 8,
-                }}
-              >
-                Generate PDF
-              </span>
-            </Button>
           </div>
         ) : (
           <EmptyPage />

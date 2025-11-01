@@ -155,19 +155,39 @@ const Generate = () => {
       // Pre-open tab to avoid popup blockers, then navigate when URL is ready
       const pendingTab = window.open("", "_blank", "noreferrer");
       const { data } = await api.post("generate_pdf/", objectData);
-      const base = String(baseUrl || "").replace(/\/$/, "");
-      const targetUrl = data?.pdf_url
-        ? data.pdf_url
-        : data?.pdf_path
-          ? `${base}/${String(data.pdf_path).replace(/^\//, "")}`
-          : `${base}/assignment_pdf.pdf`;
+      const toAbsoluteUrl = (u) => {
+        if (!u) return undefined;
+        if (/^https?:\/\//i.test(String(u))) return String(u);
+        const base = String(
+          (api?.defaults?.baseURL || baseUrl || window.location.origin || "")
+        ).replace(/\/$/, "");
+        const path = String(u).startsWith("/") ? String(u) : `/${String(u)}`;
+        return `${base}${path}`;
+      };
+
+      const candidate = data?.pdf_url || data?.url || data?.view_url || data?.download_url;
+      let targetUrl = toAbsoluteUrl(candidate);
+      if (!targetUrl && data?.pdf_path) {
+        targetUrl = toAbsoluteUrl(data.pdf_path);
+      }
+      if (!targetUrl) {
+        // Fallback to a stable view endpoint if provided by backend config
+        targetUrl = toAbsoluteUrl("/assignment_pdf/");
+      }
       if (pendingTab && !pendingTab.closed) {
         pendingTab.location.href = targetUrl;
       } else {
         openInNewTab(targetUrl);
       }
     } catch (e) {
-      console.log("Error 500");
+      try {
+        // Close the pre-opened blank tab if we failed to navigate
+        const opened = window.open("", "_blank");
+        if (opened && opened.location && opened.location.href === "about:blank") {
+          opened.close();
+        }
+      } catch (_) {}
+      messageApi.open({ type: "error", content: "Failed to generate or open PDF." });
     } finally {
       setSpinning(false);
     }

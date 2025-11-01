@@ -152,12 +152,10 @@ const Generate = () => {
       const baseUrl = process.env.REACT_APP_BASE_URL;
 
       objectData.append("assignment_id", assignment_id);
-      // Pre-open tab to avoid popup blockers
-      const pendingTab = window.open("about:blank", "_blank");
+      // Generate on server while showing spinner; open only when ready
       const { data } = await api.post("generate_pdf/", objectData);
       const pdfUrlFromServer = data?.pdf_url;
       if (!pdfUrlFromServer) {
-        if (pendingTab && !pendingTab.closed) pendingTab.close();
         messageApi.open({ type: "error", content: "PDF URL missing from server response." });
         return;
       }
@@ -169,23 +167,19 @@ const Generate = () => {
         const base = String(api?.defaults?.baseURL || baseUrl || window.location.origin || "").replace(/\/$/, "");
         absoluteUrl = `${base}/${String(pdfUrlFromServer).replace(/^\//, "")}`;
       }
-      if (pendingTab && !pendingTab.closed) {
-        try {
-          pendingTab.location.replace(absoluteUrl);
-        } catch (_) {
-          pendingTab.location.href = absoluteUrl;
-        }
-      } else {
-        openInNewTab(absoluteUrl);
+      // Open the PDF tab now that URL is ready
+      const opened = window.open(absoluteUrl, "_blank");
+      if (!opened || opened.closed) {
+        // Fallback for popup blockers
+        const a = document.createElement("a");
+        a.href = absoluteUrl;
+        a.target = "_blank";
+        a.rel = "noopener";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
       }
     } catch (e) {
-      try {
-        // Close the pre-opened blank tab if we failed to navigate
-        const opened = window.open("", "_blank");
-        if (opened && opened.location && opened.location.href === "about:blank") {
-          opened.close();
-        }
-      } catch (_) {}
       messageApi.open({ type: "error", content: "Failed to generate or open PDF." });
     } finally {
       setSpinning(false);

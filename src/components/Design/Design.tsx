@@ -193,7 +193,7 @@ const Design = () => {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
-            marginLeft: "10%",
+            marginLeft: "12%",
             marginTop: 8,
             marginRight: "10%",
           }}
@@ -210,7 +210,7 @@ const Design = () => {
               <span>Mine only</span>
             </div>
           </div>
-          <div className="flex flex-row items-center" style={{ gap: 8 }}>
+          <div className="flex flex-row items-center" style={{ gap: 10 }}>
             <Button
               style={{
                 backgroundColor: "#D6E5F5",
@@ -218,6 +218,9 @@ const Design = () => {
                 borderWidth: 1,
                 borderRadius: 10,
                 height: 40,
+                minWidth: 180,
+                paddingLeft: 16,
+                paddingRight: 16,
               }}
               onClick={() => {
                 setIsModalOpen(true);
@@ -240,6 +243,9 @@ const Design = () => {
                 borderWidth: 1,
                 borderRadius: 10,
                 height: 40,
+                minWidth: 180,
+                paddingLeft: 16,
+                paddingRight: 16,
               }}
               onClick={() => {
                 navigate("/generate");

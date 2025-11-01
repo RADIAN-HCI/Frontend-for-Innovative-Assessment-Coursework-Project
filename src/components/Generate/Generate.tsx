@@ -255,7 +255,7 @@ const Generate = () => {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
-            marginLeft: "10%",
+            marginLeft: "12%",
             marginTop: 8,
             marginRight: "10%",
           }}
@@ -279,6 +279,9 @@ const Generate = () => {
               borderWidth: 1,
               borderRadius: 10,
               height: 40,
+              minWidth: 180,
+              paddingLeft: 16,
+              paddingRight: 16,
             }}
             onClick={() => {
               handleGeneratePDF(assignmentID);

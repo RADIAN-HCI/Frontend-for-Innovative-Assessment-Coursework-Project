@@ -152,22 +152,8 @@ const Generate = () => {
       const baseUrl = process.env.REACT_APP_BASE_URL;
 
       objectData.append("assignment_id", assignment_id);
-      // Open a tab immediately to avoid popup blockers (Safari/Chrome)
-      const pendingTab = window.open("", "_blank", "noreferrer");
-      const { data } = await api.post("generate_pdf/", objectData);
-
-      // Prefer absolute URL from backend; fallback to path, then legacy fixed name
-      const preferredUrl =
-        data?.pdf_url ||
-        (data?.pdf_path
-          ? `${String(baseUrl).replace(/\/$/, "")}/${String(data.pdf_path).replace(/^\//, "")}`
-          : `${baseUrl}/assignment_pdf.pdf`);
-
-      if (pendingTab && !pendingTab.closed) {
-        pendingTab.location.href = preferredUrl;
-      } else {
-        openInNewTab(preferredUrl);
-      }
+      await api.post("generate_pdf/", objectData);
+      openInNewTab(`${baseUrl}/assignment_pdf.pdf`);
     } catch (e) {
       console.log("Error 500");
     } finally {

@@ -25,3 +25,12 @@
     /* width: '30%'; */
     backdrop-filter: "blur(4px)";
   }
+
+  /* Make the Switch (used as a radio) handle visible on white background */
+  .mine-only-switch:not(.ant-switch-checked) .ant-switch-handle::before {
+    box-shadow: 0 0 0 1.5px #bfbfbf inset !important; /* grey ring */
+  }
+  /* Slightly grey off-track so outline is clearer */
+  .mine-only-switch:not(.ant-switch-checked) {
+    background-color: #f3f3f3 !important;
+  }

@@ -265,7 +265,7 @@ const Generate = () => {
             style={{ width: 320 }}
           />
           <div className="flex flex-row items-center" style={{ gap: 6, marginLeft: 12 }}>
-            <Switch checked={mineOnly} onChange={setMineOnly} />
+            <Switch className="mine-only-switch" checked={mineOnly} onChange={setMineOnly} />
             <span>Mine only</span>
           </div>
         </div>

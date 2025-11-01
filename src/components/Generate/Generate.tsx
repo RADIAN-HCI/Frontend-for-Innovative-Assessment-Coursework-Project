@@ -152,32 +152,31 @@ const Generate = () => {
       const baseUrl = process.env.REACT_APP_BASE_URL;
 
       objectData.append("assignment_id", assignment_id);
-      // Pre-open tab to avoid popup blockers, then navigate when URL is ready
-      const pendingTab = window.open("", "_blank", "noreferrer");
+      // Pre-open tab to avoid popup blockers
+      const pendingTab = window.open("about:blank", "_blank");
       const { data } = await api.post("generate_pdf/", objectData);
-      const toAbsoluteUrl = (u) => {
-        if (!u) return undefined;
-        if (/^https?:\/\//i.test(String(u))) return String(u);
-        const base = String(
-          (api?.defaults?.baseURL || baseUrl || window.location.origin || "")
-        ).replace(/\/$/, "");
-        const path = String(u).startsWith("/") ? String(u) : `/${String(u)}`;
-        return `${base}${path}`;
-      };
-
-      const candidate = data?.pdf_url || data?.url || data?.view_url || data?.download_url;
-      let targetUrl = toAbsoluteUrl(candidate);
-      if (!targetUrl && data?.pdf_path) {
-        targetUrl = toAbsoluteUrl(data.pdf_path);
+      const pdfUrlFromServer = data?.pdf_url;
+      if (!pdfUrlFromServer) {
+        if (pendingTab && !pendingTab.closed) pendingTab.close();
+        messageApi.open({ type: "error", content: "PDF URL missing from server response." });
+        return;
       }
-      if (!targetUrl) {
-        // Fallback to a stable view endpoint if provided by backend config
-        targetUrl = toAbsoluteUrl("/assignment_pdf/");
+      let absoluteUrl = "";
+      try {
+        const base = api?.defaults?.baseURL || baseUrl || window.location.origin || "";
+        absoluteUrl = new URL(String(pdfUrlFromServer), String(base)).toString();
+      } catch (_) {
+        const base = String(api?.defaults?.baseURL || baseUrl || window.location.origin || "").replace(/\/$/, "");
+        absoluteUrl = `${base}/${String(pdfUrlFromServer).replace(/^\//, "")}`;
       }
       if (pendingTab && !pendingTab.closed) {
-        pendingTab.location.href = targetUrl;
+        try {
+          pendingTab.location.replace(absoluteUrl);
+        } catch (_) {
+          pendingTab.location.href = absoluteUrl;
+        }
       } else {
-        openInNewTab(targetUrl);
+        openInNewTab(absoluteUrl);
       }
     } catch (e) {
       try {
